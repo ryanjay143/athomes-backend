@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\BrokerAgentController;
+use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\ProjectDetailsController;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /*
@@ -41,7 +43,7 @@ Route::middleware(['auth.jwt'])->group(function () {
     */
    
     Route::apiResource('developers', DeveloperController::class);
-        
+    Route::post('upload/image', [ImageUploadController::class, 'upload']);    
 
 
     /*
