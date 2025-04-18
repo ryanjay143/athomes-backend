@@ -7,6 +7,8 @@ use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\BrokerAgentController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\ProjectDetailsController;
+use App\Http\Controllers\SalesEncodingController;
+use App\Http\Controllers\PropertyListingController;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /*
@@ -33,7 +35,11 @@ Route::middleware(['auth.jwt'])->group(function () {
     | Routes accessible only to users with the 'admin' role.
     */
     Route::apiResource('agent-broker', BrokerAgentController::class);
-
+    Route::post('upload/image', [ImageUploadController::class, 'upload']);    
+    Route::apiResource('projects', ProjectDetailsController::class);
+    Route::apiResource('sales-encoding', SalesEncodingController::class);
+    Route::apiResource('developers', DeveloperController::class);
+    Route::apiResource('property-listings', PropertyListingController::class);
 
     /*
     |--------------------------------------------------------------------------
@@ -42,10 +48,8 @@ Route::middleware(['auth.jwt'])->group(function () {
     | Routes accessible only to users with the 'agent-broker' role.
     */
    
-    Route::apiResource('developers', DeveloperController::class);
-    Route::post('upload/image', [ImageUploadController::class, 'upload']);    
-
-
+   
+    
     /*
     |--------------------------------------------------------------------------
     | Authenticated User Routes

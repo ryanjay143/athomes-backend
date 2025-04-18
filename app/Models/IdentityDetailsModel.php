@@ -25,4 +25,9 @@ class IdentityDetailsModel extends Model
     {
         return $this->belongsTo(PersonalInfoModel::class, 'user_id', 'user_id');
     }
+
+    public function salesEncoding()
+    {
+        return $this->belongsTo(SakesEncodingModel::class, 'agent_id');
+    }
 }
