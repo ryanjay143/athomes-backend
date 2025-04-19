@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PropertyListing; 
 use Illuminate\Support\Str;
-use App\Models\PropertyImage;
+use App\Models\PropertyImages;
 
 class PropertyListingController extends Controller
 {
@@ -168,6 +168,12 @@ class PropertyListingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $propertyImage = PropertyImages::findOrFail($id);
+        $propertyImage->delete();
+
+        return response()->json([
+            'message' => 'Property listing deleted successfully.',
+            'property' => $propertyImage,
+        ], 200);
     }
 }

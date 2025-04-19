@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PropertyImages extends Model
 {
     protected $primaryKey = 'id';
+    protected $table = 'property_images';
 
     /**
      * The attributes that are mass assignable.

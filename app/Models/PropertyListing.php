@@ -12,6 +12,7 @@ class PropertyListing extends Model
      * @var string
      */
     protected $primaryKey = 'id';
+    protected $table = 'property_listings';
 
     /**
      * The attributes that are mass assignable.
