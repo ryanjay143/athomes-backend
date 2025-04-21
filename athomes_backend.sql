@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2025 at 01:08 AM
+-- Generation Time: Apr 22, 2025 at 12:33 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,11 +38,10 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('DFvxpdmOwVT77HBC', 's:7:\"forever\";', 2059055403),
-('lPADxarUX8M9RD7R', 's:7:\"forever\";', 2058596273),
-('nbyXUmWT1r0azASo', 's:7:\"forever\";', 2058837818),
-('Yl1hXZHIMR9rdwYs', 's:7:\"forever\";', 2058837607),
-('zks8aWEIoLkZUYg2', 's:7:\"forever\";', 2058837768);
+('93aYkhaj7izoo9eK', 's:7:\"forever\";', 2060395462),
+('Lu78OsykogzPSzAx', 's:7:\"forever\";', 2060389622),
+('M4yUfaUY8KYISdzC', 's:7:\"forever\";', 2060367972),
+('xI2fOeRxoAmSzX9E', 's:7:\"forever\";', 2060390213);
 
 -- --------------------------------------------------------
 
@@ -224,7 +223,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (31, '2025_02_08_043459_create_personal_access_tokens_table', 5),
 (32, '2025_03_26_163357_create_developer_table', 5),
 (33, '2025_03_26_164320_create_project_details_table', 6),
-(34, '2025_04_01_022743_create_developer_images_table', 7);
+(34, '2025_04_01_022743_create_developer_images_table', 7),
+(35, '2025_04_17_043139_create_sales_encodings_table', 8),
+(36, '2025_04_18_135213_create_property_listings_table', 9),
+(37, '2025_04_18_135912_create_property_images_table', 10);
 
 -- --------------------------------------------------------
 
@@ -310,6 +312,107 @@ INSERT INTO `project_details` (`id`, `project_name`, `project_location`, `projec
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `property_images`
+--
+
+CREATE TABLE `property_images` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `property_id` bigint(20) UNSIGNED NOT NULL,
+  `images` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `property_images`
+--
+
+INSERT INTO `property_images` (`id`, `property_id`, `images`, `created_at`, `updated_at`) VALUES
+(1, 1, 'property_images/KB2X6ILZmZc7YOUnpJrwtck3czLREuoDxep9dgKE.png', '2025-04-18 06:26:58', '2025-04-18 06:26:58'),
+(2, 1, 'property_images/T5DnicpGDBMva6loRLXE930KxcOLsvxqK8SEYjIw.webp', '2025-04-18 06:26:58', '2025-04-18 06:26:58'),
+(3, 1, 'property_images/6qVZXjUboY91L3cICGRncCd5sdM441BRWlNBX8vr.jpg', '2025-04-18 06:26:58', '2025-04-18 06:26:58'),
+(4, 2, 'property_images/kZx67buFVbTlysp4N4Lj9SxS9yacJDqVNXZX8lrN.png', '2025-04-18 06:40:40', '2025-04-18 06:40:40'),
+(5, 2, 'property_images/yHu9uGd8eQi2LycaHQcnsoNXPVunbqBmbd8paWmb.webp', '2025-04-18 06:40:40', '2025-04-18 06:40:40'),
+(6, 2, 'property_images/eI2zs845jcMaHEW2HmiNaYfkCgrMZI54llZq6Snw.jpg', '2025-04-18 06:40:40', '2025-04-18 06:40:40'),
+(7, 3, 'property_images/5he6jMkq8TaBGImrIomsmbf6mhhiZPndmp2uxzqz.jpg', '2025-04-18 06:50:27', '2025-04-18 06:50:27'),
+(8, 3, 'property_images/ABRC2R0DKDWbJUvKSOWNngHlZLOTwLSfQLfRFHys.png', '2025-04-18 06:50:27', '2025-04-18 06:50:27'),
+(9, 3, 'property_images/882n7NsKn40izsECttYhAGUAob8yBm3H7Q1Bgy0z.jpg', '2025-04-18 06:50:27', '2025-04-18 06:50:27'),
+(10, 4, 'property_images/g4zl3uk5FM2YBPC9eel6Q3SngAb2jDIQLNMBuyCG.jpg', '2025-04-18 06:52:44', '2025-04-18 06:52:44'),
+(11, 4, 'property_images/Lo8xUctVJrd472bEeX0U51HVU7zklFZWaAfU3ERU.jpg', '2025-04-18 06:52:44', '2025-04-18 06:52:44'),
+(15, 6, 'property_images/odALYqa2MhDpJ0Gc3z9GvBWKg8PuElzyc6GwH8vs.png', '2025-04-18 07:13:49', '2025-04-18 07:13:49'),
+(16, 6, 'property_images/ohoGCEFIc6cKzprJgTE1WNXWnaUq0SdAxROi8gYl.png', '2025-04-18 07:13:49', '2025-04-18 07:13:49'),
+(17, 7, 'property_images/Dg5Qnthp5ahHrlqHyvKEgmblwCaby065eX2cLYf1.jpg', '2025-04-18 07:15:01', '2025-04-18 07:15:01'),
+(18, 7, 'property_images/b5nTQy1J45p2fqkScxCiaTvsQHIxYuqDBfJ1e4xV.webp', '2025-04-18 07:15:01', '2025-04-18 07:15:01'),
+(19, 8, 'property_images/NKH8A2RhcwQnc0EoeDl94142D80Ir1QTQiWsiOd5.jpg', '2025-04-18 07:49:30', '2025-04-18 07:49:30'),
+(20, 8, 'property_images/dG62FpvsZ2TvthQ90qJF1CEWUHKap9fjRMomqkau.jpg', '2025-04-18 07:49:30', '2025-04-18 07:49:30'),
+(21, 8, 'property_images/ji2wm9CdnmdMWfZFJUtqUlFJcseZghKvJTUaUlIx.jpg', '2025-04-18 07:49:30', '2025-04-18 07:49:30'),
+(25, 11, 'property_images/RHSruV1t8yDemgJ4HfWd5zpEJYhYrLRWMnaHeMh8.jpg', '2025-04-18 09:09:29', '2025-04-18 09:09:29'),
+(26, 12, 'property_images/Yi7nSkUlSXd8TIBfrK7vLOsNmT5JldimY1CCq2YZ.png', '2025-04-18 09:17:30', '2025-04-18 09:17:30'),
+(81, 5, 'property_images/OMiBBW7cMRQOuSV41g5RAtFVTKwA8LVAyw7ACRRj.jpg', '2025-04-18 11:43:00', '2025-04-18 11:43:00'),
+(82, 5, 'property_images/3YkBZI5fSN2nWMCJnMRzWNOVOIn1CSx5afJS6pvJ.jpg', '2025-04-18 11:43:00', '2025-04-18 11:43:00'),
+(83, 5, 'property_images/uQlUV92jTYr88gsVC2YPT3SfKdb8puHnyQedk8q8.jpg', '2025-04-18 11:43:00', '2025-04-18 11:43:00'),
+(118, 9, 'property_images/vkHGapupfgcs9cH36EeU3fxENIMsUDcVggVYZweX.jpg', '2025-04-18 12:17:23', '2025-04-18 12:17:23'),
+(131, 13, 'property_images/inc3k0jsngYnrCFn5atTIa4qjNZ4PHmuHGYew8Jn.jpg', '2025-04-18 12:22:13', '2025-04-18 12:22:13'),
+(150, 14, 'property_images/vHrVMA8h9kIxfuTnjcqZoT8H54oIMAyv6y5POeqk.jpg', '2025-04-18 18:17:24', '2025-04-18 18:17:24'),
+(156, 10, 'property_images/BFagdwteHPaxnVFfpf1buHkOOF1ntrUuoDLJy3Xb.jpg', '2025-04-18 18:47:55', '2025-04-18 18:47:55'),
+(157, 10, 'property_images/J4f0bj1Ml268zcipD0Ho8NiknuqavAszU175RtfV.png', '2025-04-18 18:47:55', '2025-04-18 18:47:55'),
+(159, 5, 'property_images/l5pcq8bPMjlMb36xIWL0OuVKnoYkF38GXBuODHPt.jpg', '2025-04-18 18:52:41', '2025-04-18 18:52:41'),
+(160, 5, 'property_images/ja8keEXWfTx9hHwPJVYrp67yZvQLyIeUaiA4u3Zt.png', '2025-04-18 18:52:41', '2025-04-18 18:52:41'),
+(162, 9, 'property_images/SN7qbtca7mKiGTAFlawsvkevLJ0iHzIkL5eXA0GG.jpg', '2025-04-18 19:11:24', '2025-04-18 19:11:24'),
+(163, 9, 'property_images/08Smea5L0DIjGjvJJRTARWEhKX4pFFv8MjngSMnY.jpg', '2025-04-18 19:11:24', '2025-04-18 19:11:24'),
+(164, 9, 'property_images/ulpwydstHVfyZiUMmmii5FeUSrpPA7MhzTndR8VU.jpg', '2025-04-18 19:11:24', '2025-04-18 19:11:24'),
+(165, 15, 'property_images/X4ucjvecVqCYxmlwMgcSOanQtJsAClGtbGLQEaV3.jpg', '2025-04-18 19:16:35', '2025-04-18 19:16:35'),
+(166, 13, 'property_images/CKAUKXmVw2Rfib7BrMMC70x723YOaIf1FCUjAkD6.jpg', '2025-04-18 19:28:55', '2025-04-18 19:28:55'),
+(167, 13, 'property_images/YxlVZwed49dudlofFyv77uPeTMiZrqI5fBXlrLA1.png', '2025-04-18 19:28:56', '2025-04-18 19:28:56'),
+(168, 13, 'property_images/U5RX8kVA8ghFEfmOeg9mEoTlFUV2D1TDrZ2ff06g.jpg', '2025-04-18 19:28:56', '2025-04-18 19:28:56'),
+(169, 6, 'property_images/ndxqJb5A8hYR3ZWXYcG25OaA3HCMdF1mYwl65JGE.jpg', '2025-04-18 19:31:25', '2025-04-18 19:31:25'),
+(170, 6, 'property_images/7Utli5BVYf546LNE9RXdEI1kAaNSHJhNrfvMffCO.jpg', '2025-04-18 19:31:25', '2025-04-18 19:31:25'),
+(171, 6, 'property_images/2fuo0mNawe3RTeLivCKKWa47zrQTpSTq947DVRF0.jpg', '2025-04-18 19:31:25', '2025-04-18 19:31:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `property_listings`
+--
+
+CREATE TABLE `property_listings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `date_listed` date NOT NULL,
+  `lot_area` varchar(255) NOT NULL,
+  `floor_area` varchar(255) NOT NULL,
+  `details` varchar(255) DEFAULT NULL,
+  `location` varchar(255) NOT NULL,
+  `type_of_listing` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `property_listings`
+--
+
+INSERT INTO `property_listings` (`id`, `category`, `date_listed`, `lot_area`, `floor_area`, `details`, `location`, `type_of_listing`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'House and lot', '2025-04-18', '100', '100', '2 Bedrooms, 2 Bathrooms, Carport', 'CDO', 'Exclusive', 'Sold', '2025-04-18 06:26:58', '2025-04-18 06:26:58'),
+(2, 'Lot only', '2025-04-18', '100', '100', '2 Bedrooms, 2 Bathrooms, Carport', 'CDO', 'Non-Exclusive', 'Not Sold', '2025-04-18 06:40:40', '2025-04-18 06:40:40'),
+(3, 'Lot only', '2025-04-18', '100', '100', '2 Bedrooms, 2 Bathrooms, Carport', 'CDO', 'Exclusive', 'Sold', '2025-04-18 06:50:27', '2025-04-18 06:50:27'),
+(4, 'Condominium/Apartment', '2025-04-18', '200', '200', 'Sample details', 'Tagoloan', 'Exclusive', 'Not Sold', '2025-04-18 06:52:44', '2025-04-18 06:52:44'),
+(5, 'Commercial Properties', '2025-04-18', '300', '150', '2 Bedrooms, 2 Bathrooms, Carport', 'Villanueva', 'Exclusive', 'Not Sold', '2025-04-18 06:55:08', '2025-04-18 06:55:08'),
+(6, 'Rental Properties', '2025-04-18', '250', '120', 'Sample Details', 'Claveria', 'Non-Exclusive', 'Not Sold', '2025-04-18 07:13:48', '2025-04-18 07:13:48'),
+(7, 'Farm Lot', '2025-04-18', '150', '100', '2 Bedrooms, 2 Bathrooms, Carport', 'CDO', 'Exclusive', 'Not Sold', '2025-04-18 07:15:01', '2025-04-18 07:15:01'),
+(8, 'Rental Properties', '2025-04-18', '145', '136', 'Sample details', 'CDO', 'Non-Exclusive', 'Sold', '2025-04-18 07:49:30', '2025-04-18 07:49:30'),
+(9, 'Commercial Properties', '2025-04-19', '125', '105', '3 bedrom', 'Villanueva', 'Exclusive', 'Sold', '2025-04-18 07:52:31', '2025-04-18 11:43:51'),
+(10, 'House and lot', '2025-04-18', '146', '135', '2 bedrooms, 1 CR,', 'CDO', 'Non-Exclusive', 'Not Sold', '2025-04-18 09:07:49', '2025-04-18 09:07:49'),
+(11, 'Condominium/Apartment', '2025-04-18', '178', '45', '2 bedroom, 1 CR, and 1 extra room', 'CDO', 'Exclusive', 'Not Sold', '2025-04-18 09:09:29', '2025-04-18 09:09:29'),
+(12, 'Commercial Properties', '2025-04-18', '123', '143', '2 bedroom, 1 CR, 1 swimming pool', 'Claveria', 'Exclusive', 'Not Sold', '2025-04-18 09:17:30', '2025-04-18 09:17:30'),
+(13, 'Commercial Properties', '2025-04-18', '125', '105', '3 bedrom', 'Villanueva, Misamis Oriental', 'Exclusive', 'Not Sold', '2025-04-18 09:18:49', '2025-04-18 18:51:16'),
+(14, 'House and lot', '2025-04-19', '400', '100', '2 bedrooms,', 'Bugo, Cagayan de Oro', 'Exclusive', 'Pre-Selling', '2025-04-18 18:17:24', '2025-04-18 19:22:43'),
+(15, 'Commercial Properties', '2025-04-19', '748', '145', '2 bedroom', 'Cagayan de Oro', 'Non-Exclusive', 'RFO', '2025-04-18 19:16:35', '2025-04-18 19:32:08');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `p_info`
 --
 
@@ -355,6 +458,48 @@ INSERT INTO `p_info` (`id`, `user_id`, `first_name`, `middle_name`, `last_name`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sales_encodings`
+--
+
+CREATE TABLE `sales_encodings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `agent_id` bigint(20) UNSIGNED NOT NULL,
+  `client_name` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `date_on_sale` date NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `remarks` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sales_encodings`
+--
+
+INSERT INTO `sales_encodings` (`id`, `agent_id`, `client_name`, `category`, `date_on_sale`, `amount`, `location`, `remarks`, `image`, `created_at`, `updated_at`) VALUES
+(2, 18, 'Ryan Reyes', 'House and lot', '2025-04-20', 1000.00, 'opol misamis oriental', 'Full Payment', 'images/hCyUrrHWyvKROdMGTRMcqtMYyLbhxMghhx4nSXpy.png', '2025-04-16 22:49:59', '2025-04-16 22:49:59'),
+(3, 18, 'Ryan Reyes', 'Rental Properties', '2025-04-29', 1000.00, 'Lumia CDO', 'Partial Payment', 'images/RTn9Z65EWJ6PaQRwNLQJrKePuENsrF4tkTK4d9CB.png', '2025-04-16 22:59:31', '2025-04-16 22:59:31'),
+(4, 18, 'Ryan Reyes', 'House and lot', '2025-04-17', 1000.00, 'Lumia CDO', 'Partial Payment', 'images/krIGVysULzkSwC4i4MkDvU02UbCf51u6jxaeTLi7.png', '2025-04-16 23:14:24', '2025-04-16 23:14:24'),
+(5, 18, 'Ryan Reyes', 'Farm Lot', '2025-04-17', 1000.00, 'Lumia CDO', 'Full Payment', 'images/vkT80EJuPKanh2yc3KP6qjVTOlXwLx3IMQCZZPGH.png', '2025-04-16 23:19:35', '2025-04-16 23:19:35'),
+(6, 18, 'Ryan Reyes', 'Farm Lot', '2025-04-17', 1000.00, 'Lumia CDO', 'Full Payment', 'images/8t6gQh5cqwzSEDNRhH7PsEfZK1Poub81BkGPFnpO.png', '2025-04-16 23:21:42', '2025-04-16 23:21:42'),
+(7, 18, 'Ryan Reyes', 'Farm Lot', '2025-04-17', 1000.00, 'Lumia CDO', 'Full Payment', 'images/w2uJOieBefj7xyuipq0gC1dwMXXsBziJbP3S5nil.png', '2025-04-16 23:21:49', '2025-04-16 23:21:49'),
+(8, 18, 'Ryan Reyes', 'Farm Lot', '2025-04-17', 1000.00, 'Lumia CDO', 'Full Payment', 'images/9n1RSDf03b7yU3HO1vCn8ZHnQPcKnaAh1vbhh8FS.png', '2025-04-16 23:22:34', '2025-04-16 23:22:34'),
+(9, 18, 'Ryan Reyes', 'Condominium/Apartment', '2025-04-17', 1000.00, 'Lumbia CDO', 'Full Payment', 'images/NCIH1dMpsba9zQdhWWN4tK4j4WmylSSsPtFMeN5f.png', '2025-04-16 23:25:46', '2025-04-16 23:25:46'),
+(10, 18, 'Ryan Reyes', 'Rental Properties', '2025-04-17', 1000.00, 'Lumbia CDO', 'Full Payment', 'images/OfkHPkWrHQ5gGiO4DpJwVMp7YBZfKjvLSVAYPg4v.png', '2025-04-17 00:20:15', '2025-04-17 00:20:15'),
+(11, 18, 'Ryan Reyes', 'Commercial Properties', '2025-04-17', 1000.00, 'Lumbia CDO', 'Partial Payment', 'images/9LlclrFmN6WoURTgUuD19aicuGfZfVHunqeZwSod.png', '2025-04-17 00:24:09', '2025-04-17 00:24:09'),
+(12, 18, 'Ryan Reyes', 'Lot only', '2025-04-17', 1000.00, 'Lumbia CDO', 'Partial Payment', 'images/hYEvRLQLu2AUIwpQHdEwI3vpDrWwi8Whs7G8z5QV.png', '2025-04-17 00:24:50', '2025-04-17 00:24:50'),
+(14, 18, 'Ryan Reyes', 'House and lot', '2025-04-17', 1000.00, 'Opol misamis oriental', 'Full Payment', 'images/VzxO6UrH94lBqlI43v9gSFRV4Sg12VXVddW5LXGU.jpg', '2025-04-17 02:44:22', '2025-04-17 21:09:54'),
+(22, 18, 'Ryan Reyes', 'House and lot', '2025-04-18', 2200000.00, 'Tagoloan', 'Partial Payment', 'images/MC2qs2NCHcCVVX7XAtnSfAckgpcDcPLZUOZeuLyB.png', '2025-04-18 03:38:03', '2025-04-18 03:38:03'),
+(23, 1, 'Ryan Reyes 143', 'Condominium/Apartment', '2025-04-17', 3000.00, 'Opol misamis oriental', 'Full Payment', 'images/VtT0pWQ1Orgad66pXg5Gcf98iOTfg6MXE9bHYam9.jpg', '2025-04-18 04:54:42', '2025-04-18 05:18:51'),
+(24, 1, 'Paula\'s Hotel', 'Condominium/Apartment', '2025-04-19', 5000000.00, 'cagayan de  oro', 'Full Payment', 'images/7UbHaAIX955FiRhvFjJPekAyMk5JJJDK7nwHqYhB.jpg', '2025-04-18 18:32:01', '2025-04-18 20:03:20'),
+(25, 18, 'Paulas', 'Condominium/Apartment', '2025-04-19', 10000000.00, 'Opol misamis oriental', 'Partial Payment', 'images/zxkMxME7lnUQ8VnK2skByoNiNLAadsg808DM1YfW.jpg', '2025-04-18 19:45:05', '2025-04-18 20:01:45');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sessions`
 --
 
@@ -372,6 +517,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('eTT8NAe68xDrAjCa1aPuHFiZM8va1texrbhd5aQl', NULL, '192.168.254.108', 'PostmanRuntime/7.43.3', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicDFJTzExOWFxYU1MTm94SEgxT0ZEMnJCU3ZLeWJSWWR2dVlidU1pSiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xOTIuMTY4LjI1NC4xMDg6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1744899828),
 ('GbT2CK67jKBHma1C2fqiFliWoOtCwOhbfKxW2syc', NULL, '192.168.18.12', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSUtqM2JhNWtkSlNNbjJVdlM3WnJXSDBxRGlMWUhvbTI0UFVWV3F0NCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjU6Imh0dHA6Ly8xOTIuMTY4LjE4LjEyOjgwMDAiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1743746756),
 ('tScZTYewsYfpQiu5ybyGAqEb9lgJL8AN2iaaEpZB', NULL, '192.168.18.130', 'PostmanRuntime/7.43.2', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRFhOQmRNOHJNZG1aQ1R6NjJpcmVFSjhtWXFXbm93MmpINVY2ZENpaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xOTIuMTY4LjE4LjEzMDo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1742455307),
 ('vJeR2yZsSfj8gSjya1N2u3ybREKD8gUY5NWfVUGZ', NULL, '192.168.254.111', 'PostmanRuntime/7.43.3', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ1NXVE5DaGJ6NjlNbkpSTkJ5ajFybmU4b21XZ3BPYW56M2pwVXZ0UiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xOTIuMTY4LjI1NC4xMTE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1743339047);
@@ -402,7 +548,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `acct_number`, `email_verified_at`, `password`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (2, 'ryanreyes143', 'ryan.reyes@dict.gov.ph', 'Acc-022ZZ1WZ1', NULL, '$2y$12$LD1GXzvpjU9i9DDsDVFIc.a6g6/Ffr3XzqXgk11XI9NbUVHkY9Oo.', 0, 0, NULL, '2025-03-19 22:59:06', '2025-03-19 22:59:06'),
-(5, 'john_doe', 'john.doe12345@example.com', 'Acc-mwdwmk2ee', NULL, '$2y$12$1gVHDiUnh1VkcLB/O3QKt.as/Uj1kjD1i3Suv2YdZcvxepmJCTNKu', 1, 1, NULL, '2025-03-19 23:24:29', '2025-03-19 23:24:29'),
+(5, 'john_doe', 'john.doe12345@example.com', 'Acc-mwdwmk2ee', NULL, '$2y$12$1gVHDiUnh1VkcLB/O3QKt.as/Uj1kjD1i3Suv2YdZcvxepmJCTNKu', 1, 0, NULL, '2025-03-19 23:24:29', '2025-03-19 23:24:29'),
 (6, 'sample_123', 'ryanjaytagolimotreyes@gmail.com', 'Acc-3ABY7FBZ2', NULL, '$2y$12$zBS4P3VbEmVwGWq6neY/guU6ymTSInNCHU66aXW2pivOj3NYWrJXG', 1, 1, NULL, '2025-03-19 23:32:10', '2025-03-19 23:32:10'),
 (7, 'venus123', 'venus@gmail.com', 'Acc-HLSVI8350', NULL, '$2y$12$j1HZcZOgOTP3pNZkzriEcu1pPT3UJG9ZrjyHZnBj64Fjm/caD8icS', 1, 1, NULL, '2025-03-19 23:56:36', '2025-03-19 23:56:36'),
 (8, 'aldin123', 'aldin@gmail.com', 'Acc-XATMH48PY', NULL, '$2y$12$1tYNQ6cOX9vIrnvruP6qL.NPdZvaLxReDNLVwhgjFFoeT4KjL6j3a', 1, 1, NULL, '2025-03-20 00:09:49', '2025-03-20 00:09:49'),
@@ -491,11 +637,31 @@ ALTER TABLE `project_details`
   ADD KEY `project_details_developer_id_foreign` (`developer_id`);
 
 --
+-- Indexes for table `property_images`
+--
+ALTER TABLE `property_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `property_images_property_id_foreign` (`property_id`);
+
+--
+-- Indexes for table `property_listings`
+--
+ALTER TABLE `property_listings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `p_info`
 --
 ALTER TABLE `p_info`
   ADD PRIMARY KEY (`id`),
   ADD KEY `p_info_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `sales_encodings`
+--
+ALTER TABLE `sales_encodings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sales_encodings_agent_id_foreign` (`agent_id`);
 
 --
 -- Indexes for table `sessions`
@@ -544,7 +710,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `project_details`
@@ -553,10 +719,28 @@ ALTER TABLE `project_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
+-- AUTO_INCREMENT for table `property_images`
+--
+ALTER TABLE `property_images`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+
+--
+-- AUTO_INCREMENT for table `property_listings`
+--
+ALTER TABLE `property_listings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `p_info`
 --
 ALTER TABLE `p_info`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `sales_encodings`
+--
+ALTER TABLE `sales_encodings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -581,10 +765,22 @@ ALTER TABLE `project_details`
   ADD CONSTRAINT `project_details_developer_id_foreign` FOREIGN KEY (`developer_id`) REFERENCES `developer` (`id`);
 
 --
+-- Constraints for table `property_images`
+--
+ALTER TABLE `property_images`
+  ADD CONSTRAINT `property_images_property_id_foreign` FOREIGN KEY (`property_id`) REFERENCES `property_listings` (`id`);
+
+--
 -- Constraints for table `p_info`
 --
 ALTER TABLE `p_info`
   ADD CONSTRAINT `p_info_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `sales_encodings`
+--
+ALTER TABLE `sales_encodings`
+  ADD CONSTRAINT `sales_encodings_agent_id_foreign` FOREIGN KEY (`agent_id`) REFERENCES `identity_details` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
