@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('client_name');
             $table->date('date_on_sale');
-            $table->decimal('amount');
+            $table->decimal('amount', 10, 2);
             $table->string('location');
             $table->string('remarks');
             $table->string('image');

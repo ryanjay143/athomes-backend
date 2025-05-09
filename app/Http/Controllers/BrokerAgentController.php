@@ -27,11 +27,14 @@ class BrokerAgentController extends Controller
         ->whereHas('user', function($query) {
             $query->where('status', 0);
         })
+        ->whereHas('user', function($query) {
+            $query->whereIn('role', [1, 2]);
+        })
         ->orderBy('created_at', 'desc')
         ->get();
 
         return response()->json([
-            $agents,
+            "agent" => $agents,
             "agentList" => $agentsList
         ]);
    
