@@ -15,7 +15,11 @@ class DeveloperController extends Controller
      */
     public function index()
     {
-        $developers = DeveloperModel::with('projects')->get();
+        $developers = DeveloperModel::with('projects')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+
         return response()->json([
             'developers' => $developers,
         ]);
@@ -35,11 +39,7 @@ class DeveloperController extends Controller
             'dev_email' => 'required|email|unique:developer,dev_email|max:255',
             'dev_phone' => 'required|string|max:15',
             'dev_location' => 'required|string|max:255',
-            'projects' => 'required|array',
             'image' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
-            'projects.*.project_name' => 'required|string|max:255',
-            'projects.*.project_location' => 'required|string|max:255',
-            'projects.*.project_contact_person' => 'required|string|max:255',
         ]);
 
         $path = $request->file('image')->store('images', 'public');
@@ -53,15 +53,34 @@ class DeveloperController extends Controller
             'image' => $path,
         ]);
 
-        // Create associated projects
-        foreach ($validatedData['projects'] as $projectData) {
-            $developer->projects()->create($projectData);
-        }
-
         return response()->json([
-            'message' => 'Developer and projects created successfully',
-            'developer' => $developer->load('projects'),
+            'message' => 'Developer created successfully',
+            'developer' => $developer,
             'filePath' => Storage::url($path),
+        ], 201);
+    }
+
+    public function addProjects(Request $request)
+    {
+        $validatedData = $request->validate([
+            'projects' => 'required|array',
+            'projects.*.developer_id' => 'required|exists:developer,id',
+            'projects.*.project_name' => 'required|string|max:255',
+            'projects.*.project_location' => 'required|string|max:255',
+            'projects.*.project_category' => 'required|string|max:255',
+            'projects.*.status' => 'required|string|max:255',
+            'projects.*.total_units' => 'required|numeric',
+        ]);
+    
+        $projects = [];
+        foreach ($validatedData['projects'] as $projectData) {
+            $projectData['available_units'] = $projectData['total_units'];
+            $projects[] = ProjectDetailsModel::create($projectData);
+        }
+    
+        return response()->json([
+            'message' => 'Projects added successfully',
+            'projects' => $projects,
         ], 201);
     }
 

@@ -40,6 +40,7 @@ Route::middleware(['auth.jwt'])->group(function () {
     Route::apiResource('sales-encoding', SalesEncodingController::class);
     Route::apiResource('developers', DeveloperController::class);
     Route::apiResource('property-listings', PropertyListingController::class);
+    Route::post('admin/addProject', [DeveloperController::class, 'addProjects']);    
 
     /*
     |--------------------------------------------------------------------------
