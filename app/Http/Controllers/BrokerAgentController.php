@@ -20,6 +20,13 @@ class BrokerAgentController extends Controller
             })
             ->orderBy('created_at', 'desc')
             ->get();
+
+        $pendingAgentsCount = IdentityDetailsModel::with('user', 'personalInfo')
+            ->whereHas('user', function($query) {
+                $query->where('status', 1);
+            })
+            ->orderBy('created_at', 'desc')
+            ->count();
        
 
 
@@ -33,6 +40,16 @@ class BrokerAgentController extends Controller
         ->orderBy('updated_at', 'desc')
         ->get();
 
+        $agentsListCount = IdentityDetailsModel::with('user', 'personalInfo')
+        ->whereHas('user', function($query) {
+            $query->where('status', 0);
+        })
+        ->whereHas('user', function($query) {
+            $query->whereIn('role', [1, 2]);
+        })
+        ->orderBy('updated_at', 'desc')
+        ->count();
+
         $agentsLicensed = IdentityDetailsModel::with('user', 'personalInfo')
             ->whereHas('user', function($query) {
                 $query->where('status', 0);
@@ -43,6 +60,17 @@ class BrokerAgentController extends Controller
             ->where('prc_liscence_number', '!=', '') 
             ->orderBy('updated_at', 'desc')
             ->get();
+
+        $agentsLicensedCount = IdentityDetailsModel::with('user', 'personalInfo')
+            ->whereHas('user', function($query) {
+                $query->where('status', 0);
+            })
+            ->whereHas('user', function($query) {
+                $query->whereIn('role', [1, 2]);
+            })
+            ->where('prc_liscence_number', '!=', '') 
+            ->orderBy('updated_at', 'desc')
+            ->count();
 
         $agentsUnlicensed = IdentityDetailsModel::with('user', 'personalInfo')
             ->whereHas('user', function($query) {
@@ -58,13 +86,31 @@ class BrokerAgentController extends Controller
             ->orderBy('updated_at', 'desc')
             ->get();
 
+            $agentsUnlicensedCount = IdentityDetailsModel::with('user', 'personalInfo')
+            ->whereHas('user', function($query) {
+                $query->where('status', 0);
+            })
+            ->whereHas('user', function($query) {
+                $query->whereIn('role', [1, 2]);
+            })
+            ->where(function($query) {
+                $query->whereNull('prc_liscence_number') // Ensures the field is null
+                    ->orWhere('prc_liscence_number', ''); // Ensures the field is empty
+            })
+            ->orderBy('updated_at', 'desc')
+            ->count();
+
 
 
         return response()->json([
             "pendingAgents" => $pendingAgents,
             "agentList" => $agentsList,
             "agentsLicensed" => $agentsLicensed,
-            "unlicensed" => $agentsUnlicensed
+            "unlicensed" => $agentsUnlicensed,
+            "agentsListCount" => $agentsListCount,
+            "pendingAgentsCount" => $pendingAgentsCount,
+            "agentsLicensedCount" => $agentsLicensedCount,
+            "agentsUnlicensedCount" => $agentsUnlicensedCount
         ]);
    
     }
