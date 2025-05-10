@@ -17,7 +17,7 @@ class SalesEncodingController extends Controller
     {
         $agents = IdentityDetailsModel::with('user', 'personalInfo')
             ->whereHas('user', function ($query) {
-                $query->where('status', 0)->where('role', 1);
+                $query->where('status', 0)->whereIn('role', [1,2]);
             })
             ->orderBy('created_at', 'desc')
             ->get();
@@ -66,13 +66,14 @@ class SalesEncodingController extends Controller
         $salesEncoding->date_on_sale = $validatedData['date_on_sale'];
         $salesEncoding->remarks = $validatedData['remarks'];
 
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images', 'public');
-            $salesEncoding->image = $path;
-        }
 
-        $salesEncoding->save(); // <-- Use save() for new records
+        $image = $request->file('image');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->move(public_path('images'), $imageName);
+        $validatedData['image'] = 'images/' . $imageName;
+
+
+        $salesEncoding->save(); // Use save() for new records
 
         return response()->json(
             ['message' => 'Sales encoding created successfully', 'data' => $salesEncoding],
@@ -99,7 +100,7 @@ class SalesEncodingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-     public function update(Request $request, string $id)
+     public function updateSalesEncoding(Request $request, string $id)
     {
         try {
             // Validate incoming JSON data and image
@@ -111,10 +112,25 @@ class SalesEncodingController extends Controller
                 'client_name' => 'required|string',
                 'remarks' => 'nullable|string',
                 'agent_id' => 'required|exists:identity_details,id',
+                'image' => 'nullable|image|max:2048',
             ]);
 
             // Find the SalesEncoding record or fail
             $salesEncoding = SalesEncoding::findOrFail($id);
+
+            // Handle image upload if present
+            if ($request->hasFile('image')) {
+                // Remove old image if exists
+                if ($salesEncoding->image && file_exists(public_path($salesEncoding->image))) {
+                    unlink(public_path($salesEncoding->image));
+                }
+
+                // Upload new image
+                $image = $request->file('image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('images'), $imageName);
+                $validatedData['image'] = 'images/' . $imageName;
+            }
 
             // Update using fill() and save
             $salesEncoding->fill($validatedData)->save();

@@ -35,7 +35,9 @@ Route::middleware(['auth.jwt'])->group(function () {
     | Routes accessible only to users with the 'admin' role.
     */
     Route::apiResource('agent-broker', BrokerAgentController::class);
-    Route::post('upload/image', [ImageUploadController::class, 'upload']);    
+    Route::post('upload/image', [ImageUploadController::class, 'upload']);  
+    Route::put('editLicense/{id}', [BrokerAgentController::class, 'editLicense']);
+    Route::post('updateSalesEncoding/{id}', [SalesEncodingController::class, 'updateSalesEncoding']);
     Route::apiResource('projects', ProjectDetailsController::class);
     Route::apiResource('sales-encoding', SalesEncodingController::class);
     Route::apiResource('developers', DeveloperController::class);

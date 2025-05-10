@@ -14,7 +14,7 @@ class BrokerAgentController extends Controller
      */
     public function index()
     {
-        $agents = IdentityDetailsModel::with('user', 'personalInfo')
+        $pendingAgents = IdentityDetailsModel::with('user', 'personalInfo')
             ->whereHas('user', function($query) {
                 $query->where('status', 1);
             })
@@ -30,12 +30,41 @@ class BrokerAgentController extends Controller
         ->whereHas('user', function($query) {
             $query->whereIn('role', [1, 2]);
         })
-        ->orderBy('created_at', 'desc')
+        ->orderBy('updated_at', 'desc')
         ->get();
 
+        $agentsLicensed = IdentityDetailsModel::with('user', 'personalInfo')
+            ->whereHas('user', function($query) {
+                $query->where('status', 0);
+            })
+            ->whereHas('user', function($query) {
+                $query->whereIn('role', [1, 2]);
+            })
+            ->where('prc_liscence_number', '!=', '') 
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        $agentsUnlicensed = IdentityDetailsModel::with('user', 'personalInfo')
+            ->whereHas('user', function($query) {
+                $query->where('status', 0);
+            })
+            ->whereHas('user', function($query) {
+                $query->whereIn('role', [1, 2]);
+            })
+            ->where(function($query) {
+                $query->whereNull('prc_liscence_number') // Ensures the field is null
+                    ->orWhere('prc_liscence_number', ''); // Ensures the field is empty
+            })
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+
+
         return response()->json([
-            "agent" => $agents,
-            "agentList" => $agentsList
+            "pendingAgents" => $pendingAgents,
+            "agentList" => $agentsList,
+            "agentsLicensed" => $agentsLicensed,
+            "unlicensed" => $agentsUnlicensed
         ]);
    
     }
@@ -67,9 +96,33 @@ class BrokerAgentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function editLicense(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'prc_liscence_number' => 'required|string|max:255',
+            'dhsud_registration_number' => 'required|string|max:255',
+            'validation_date' => 'required|date',
+            'role' => 'required|in:1,2',
+        ]);
+
+        $updateLicense = IdentityDetailsModel::findOrFail($id);
+        $updateLicense->prc_liscence_number = $request->prc_liscence_number;
+        $updateLicense->dhsud_registration_number = $request->dhsud_registration_number;
+        $updateLicense->validation_date = $request->validation_date;
+
+        // Update the role in the related User model
+        $user = $updateLicense->user; // Assuming 'user' is the relationship name
+        if ($user) {
+            $user->role = $request->role;
+            $user->save();
+        }
+
+        $updateLicense->save();
+
+        return response()->json([
+            "updateLicense" => $updateLicense,
+            "message" => "License Updated Successfully"
+        ]);
     }
 
     /**
