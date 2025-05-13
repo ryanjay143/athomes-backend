@@ -94,42 +94,47 @@ class AuthController extends Controller
     }
 
     public function login(Request $request)
-    {
-        // Validate the incoming request
-        $credentials = $request->validate([
-            'credential' => 'required|string', // Can be email or username
-            'password' => 'required|string|min:8',
-        ]);
+{
+    // Validate the incoming request
+    $credentials = $request->validate([
+        'credential' => 'required|string', // Can be email or username
+        'password' => 'required|string|min:8',
+    ]);
 
-        // Determine if the credential is an email or username
-        $fieldType = filter_var($credentials['credential'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    // Determine if the credential is an email or username
+    $fieldType = filter_var($credentials['credential'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        // Find the user by email or username
-        $user = User::where($fieldType, $credentials['credential'])->first();
+    // Find the user by email or username
+    $user = User::where($fieldType, $credentials['credential'])->first();
 
-        // Check if the user exists and the password is correct
-        if (!$user || !Hash::check($credentials['password'], $user->password)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
-        }
-
-        // Check if the user's status is 1 (pending approval)
-        if ($user->status == 1) {
-            return response()->json(['message' => 'Your account is still in process. Please wait for approval.'], 403);
-        }
-
-        try {
-            // Generate a JWT token for the user
-            $token = JWTAuth::fromUser($user);
-
-            return response()->json([
-                'message' => 'Login successful',
-                'user' => $user,
-                'access_token' => $token,
-            ], 200);
-        } catch (JWTException $e) {
-            return response()->json(['message' => 'Could not create token'], 500);
-        }
+    // Check if the user exists
+    if (!$user) {
+        return response()->json(['message' => $fieldType === 'email' ? 'Email is invalid' : 'Username is invalid'], 401);
     }
+
+    // Check if the password is correct
+    if (!Hash::check($credentials['password'], $user->password)) {
+        return response()->json(['message' => 'Password is incorrect'], 401);
+    }
+
+    // Check if the user's status is 1 (pending approval)
+    if ($user->status == 1) {
+        return response()->json(['message' => 'Your account is still in process. Please wait for approval.'], 403);
+    }
+
+    try {
+        // Generate a JWT token for the user
+        $token = JWTAuth::fromUser($user);
+
+        return response()->json([
+            'message' => 'Login successful',
+            'user' => $user,
+            'access_token' => $token,
+        ], 200);
+    } catch (JWTException $e) {
+        return response()->json(['message' => 'Could not create token'], 500);
+    }
+}
 
     public function logout()
     {

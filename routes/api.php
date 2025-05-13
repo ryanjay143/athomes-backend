@@ -9,6 +9,8 @@ use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\ProjectDetailsController;
 use App\Http\Controllers\SalesEncodingController;
 use App\Http\Controllers\PropertyListingController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\ResetPasswordController; // Ensure this is the correct namespace
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /*
@@ -19,6 +21,9 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 */
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+    ->middleware('guest')
+    ->name('password.email');
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +33,7 @@ Route::post('/login', [AuthController::class, 'login']);
 */
 Route::middleware(['auth.jwt'])->group(function () {
 
-     /*
+    /*
     |--------------------------------------------------------------------------
     | Admin Routes
     |--------------------------------------------------------------------------
@@ -44,15 +49,6 @@ Route::middleware(['auth.jwt'])->group(function () {
     Route::apiResource('property-listings', PropertyListingController::class);
     Route::post('admin/addProject', [DeveloperController::class, 'addProjects']);    
 
-    /*
-    |--------------------------------------------------------------------------
-    | Agent-Broker Routes
-    |--------------------------------------------------------------------------
-    | Routes accessible only to users with the 'agent-broker' role.
-    */
-   
-   
-    
     /*
     |--------------------------------------------------------------------------
     | Authenticated User Routes
