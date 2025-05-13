@@ -25,10 +25,15 @@ class SalesEncodingController extends Controller
         $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
             ->orderBy('created_at', 'desc')
             ->get();
+
+        $salesEncodingReports = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+            ->orderBy('created_at', 'asc')
+            ->get();
             
         return response()->json([
             'agents' => $agents, 
-            'salesEncoding' => $salesEncoding
+            'salesEncoding' => $salesEncoding,
+            'salesEncodingReports' => $salesEncodingReports,
         ], 200);
     }
 
