@@ -171,6 +171,32 @@ class BrokerAgentController extends Controller
         ]);
     }
 
+   
+    public function editType(Request $request, string $id)
+    {
+        $validatedData = $request->validate([
+            'role' => 'required|in:1,2',
+        ]);
+
+        // Find the user by ID
+        $user = User::find($id); // Assuming User model is used
+
+        if ($user) {
+            $user->role = $validatedData['role'];
+            $user->save();
+
+            return response()->json([
+                "user" => $user,
+                "message" => "Role Updated Successfully"
+            ]);
+        }
+
+        return response()->json([
+            "message" => "User not found"
+        ], 404);
+    }
+
+
     /**
      * Update the specified resource in storage.
      */

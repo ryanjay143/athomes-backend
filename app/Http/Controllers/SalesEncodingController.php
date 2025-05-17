@@ -7,6 +7,8 @@ use App\Models\SalesEncoding;
 use App\Models\IdentityDetailsModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Collection;
+use Carbon\Carbon;
 
 class SalesEncodingController extends Controller
 {
@@ -29,13 +31,53 @@ class SalesEncodingController extends Controller
         $salesEncodingReports = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
             ->orderBy('created_at', 'asc')
             ->get();
+
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        $salesdashboard = SalesEncoding::select('id', 'category', 'created_at')
+            ->whereMonth('created_at', $currentMonth)
+            ->whereYear('created_at', $currentYear)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        // Group by category and merge entries
+        $mergedSales = $salesdashboard->groupBy('category')->map(function (Collection $group) {
+            return [
+                'category' => $group->first()->category,
+                'totalReserved' => $group->count() // Count the number of merged entries
+            ];
+        });
             
-        return response()->json([
-            'agents' => $agents, 
-            'salesEncoding' => $salesEncoding,
-            'salesEncodingReports' => $salesEncodingReports,
-        ], 200);
-    }
+        $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+            ->get()
+            ->groupBy(function ($item) {
+                return $item->agent->personalInfo->first_name . ' ' .
+                       $item->agent->personalInfo->middle_name . ' ' .
+                       $item->agent->personalInfo->last_name . ' ' .
+                       $item->agent->personalInfo->extension_name;
+            })
+            ->map(function (Collection $group) {
+                return [
+                    'first_name' => $group->first()->agent->personalInfo->first_name,
+                    'middle_name' => $group->first()->agent->personalInfo->middle_name,
+                    'last_name' => $group->first()->agent->personalInfo->last_name,
+                    'extension_name' => $group->first()->agent->personalInfo->extension_name,
+                    'totalReserved' => $group->count(),
+                    'totalSales' => $group->sum('amount') // Calculate total sales for each agent
+                ];
+            })
+            ->sortByDesc('totalReserved');
+
+            return response()->json([
+                'agents' => $agents, 
+                'salesEncoding' => $salesEncoding,
+                'salesEncodingReports' => $salesEncodingReports,
+                'salesdashboard' => $mergedSales->values(),
+                'topPerformers' => $topPerformers->values()
+            
+            ], 200);
+        }
 
     /**
      * Show the form for creating a new resource.

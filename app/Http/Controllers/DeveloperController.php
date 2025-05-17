@@ -42,7 +42,10 @@ class DeveloperController extends Controller
             'image' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $path = $request->file('image')->store('images', 'public');
+        // Move the image to the public/developer_images directory
+        $image = $request->file('image');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->move(public_path('developer_images'), $imageName);
 
         // Create the developer
         $developer = DeveloperModel::create([
@@ -50,13 +53,13 @@ class DeveloperController extends Controller
             'dev_email' => $validatedData['dev_email'],
             'dev_phone' => $validatedData['dev_phone'],
             'dev_location' => $validatedData['dev_location'],
-            'image' => $path,
+            'image' => 'developer_images/' . $imageName,
         ]);
 
         return response()->json([
             'message' => 'Developer created successfully',
             'developer' => $developer,
-            'filePath' => Storage::url($path),
+            'filePath' => url('developer_images/' . $imageName),
         ], 201);
     }
 
@@ -103,10 +106,48 @@ class DeveloperController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateDeveloper(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'dev_name' => 'required|string|max:255',
+            'dev_email' => 'required|email|unique:developer,dev_email,' . $id . '|max:255',
+            'dev_phone' => 'required|string|max:15',
+            'dev_location' => 'required|string|max:255',
+            'image' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $developer = DeveloperModel::find($id);
+        if (!$developer) {
+            return response()->json(['message' => 'Developer not found'], 404);
+        }
+
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($developer->image && file_exists(public_path($developer->image))) {
+                unlink(public_path($developer->image));
+            }
+
+            // Move the new image to the public/developer_images directory
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('developer_images'), $imageName);
+            $developer->image = 'developer_images/' . $imageName;
+        }
+
+        $developer->dev_name = $validatedData['dev_name'];
+        $developer->dev_email = $validatedData['dev_email'];
+        $developer->dev_phone = $validatedData['dev_phone'];
+        $developer->dev_location = $validatedData['dev_location'];
+        $developer->save();
+
+        return response()->json([
+            'message' => 'Developer updated successfully',
+            'developer' => $developer,
+        ], 200);
     }
+        
+
+    
 
     /**
      * Remove the specified resource from storage.
