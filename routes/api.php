@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PropertyListingController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\BrokerController;
 use Illuminate\Http\Request;
 
 
@@ -78,6 +79,10 @@ Route::middleware(['throttle:api'])->group(function () {
         */
         Route::middleware(['role:1'])->group(function () {
             Route::apiResource('user/agent-broker', UserController::class);
+        });
+
+        Route::middleware(['role:2'])->group(function () {
+            Route::apiResource('user/broker', BrokerController::class);
         });
     });
 });
