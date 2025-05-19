@@ -14,7 +14,16 @@ class BrokerAgentController extends Controller
      */
     public function index()
     {
-        $pendingAgents = IdentityDetailsModel::with('user', 'personalInfo')
+        $user = auth()->user();
+
+       if (!$user) {
+        return response()->json(['error' => 'User not authenticated'], 401);
+        }
+
+        $personalInfo = PersonalInfoModel::where('user_id', $user->id)->first();
+        $identityDetails = IdentityDetailsModel::where('user_id', $user->id)->first();
+
+          $pendingAgents = IdentityDetailsModel::with('user', 'personalInfo')
             ->whereHas('user', function($query) {
                 $query->where('status', 1);
             })
@@ -100,8 +109,6 @@ class BrokerAgentController extends Controller
             ->orderBy('updated_at', 'desc')
             ->count();
 
-
-
         return response()->json([
             "pendingAgents" => $pendingAgents,
             "agentList" => $agentsList,
@@ -110,7 +117,11 @@ class BrokerAgentController extends Controller
             "agentsListCount" => $agentsListCount,
             "pendingAgentsCount" => $pendingAgentsCount,
             "agentsLicensedCount" => $agentsLicensedCount,
-            "agentsUnlicensedCount" => $agentsUnlicensedCount
+            "agentsUnlicensedCount" => $agentsUnlicensedCount,
+
+            'user' => $user,
+            'personalInfo' => $personalInfo,
+            'identityDetails' => $identityDetails,
         ]);
    
     }
@@ -118,10 +129,26 @@ class BrokerAgentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function updateRole($id, Request $request)
     {
-        //
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        $user->role = $request->role;
+        $user->save();
+
+        // Create a new token for the user
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'Switch Account Successfully',
+            'token' => $token
+        ]);
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -144,6 +171,7 @@ class BrokerAgentController extends Controller
      */
     public function editLicense(Request $request, string $id)
     {
+        // Validate the incoming request data
         $validatedData = $request->validate([
             'prc_liscence_number' => 'required|string|max:255',
             'dhsud_registration_number' => 'required|string|max:255',
@@ -151,20 +179,26 @@ class BrokerAgentController extends Controller
             'role' => 'required|in:1,2',
         ]);
 
+        // Find the license record by ID or fail
         $updateLicense = IdentityDetailsModel::findOrFail($id);
-        $updateLicense->prc_liscence_number = $request->prc_liscence_number;
-        $updateLicense->dhsud_registration_number = $request->dhsud_registration_number;
-        $updateLicense->validation_date = $request->validation_date;
+        $updateLicense->prc_liscence_number = $validatedData['prc_liscence_number'];
+        $updateLicense->dhsud_registration_number = $validatedData['dhsud_registration_number'];
+        $updateLicense->validation_date = $validatedData['validation_date'];
 
         // Update the role in the related User model
         $user = $updateLicense->user; // Assuming 'user' is the relationship name
         if ($user) {
-            $user->role = $request->role;
+            // Optionally disable timestamps if you don't want to update the updated_at field
+            $user->timestamps = false;
+            $user->role = $validatedData['role'];
             $user->save();
+            $user->timestamps = true; // Re-enable timestamps
         }
 
+        // Save the updated license details
         $updateLicense->save();
 
+        // Return a JSON response
         return response()->json([
             "updateLicense" => $updateLicense,
             "message" => "License Updated Successfully"
@@ -182,8 +216,14 @@ class BrokerAgentController extends Controller
         $user = User::find($id); // Assuming User model is used
 
         if ($user) {
+            // Temporarily disable timestamps
+            $user->timestamps = false;
+
             $user->role = $validatedData['role'];
             $user->save();
+
+            // Re-enable timestamps
+            $user->timestamps = true;
 
             return response()->json([
                 "user" => $user,

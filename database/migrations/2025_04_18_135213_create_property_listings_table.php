@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('property_listings', function (Blueprint $table) {
             $table->id();
             $table->string('category');
+            $table->double('price_and_rate', 10, 2)->nullable();
             $table->date('date_listed');
             $table->string('lot_area');
             $table->string('floor_area');

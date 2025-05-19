@@ -21,6 +21,7 @@ class PropertyListing extends Model
      */
     protected $fillable = [
         'category',
+        'price_and_rate',
         'date_listed',
         'lot_area',
         'floor_area',

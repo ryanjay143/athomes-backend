@@ -7,6 +7,7 @@ use App\Http\Controllers\BrokerAgentController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\ProjectDetailsController;
 use App\Http\Controllers\SalesEncodingController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PropertyListingController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -54,6 +55,7 @@ Route::middleware(['throttle:api'])->group(function () {
         */
         Route::middleware(['role:0'])->group(function () {
             Route::apiResource('agent-broker', BrokerAgentController::class);
+            Route::post('updateRole/{id}', [BrokerAgentController::class, 'updateRole']);
             Route::post('upload/image', [ImageUploadController::class, 'upload']);  
             Route::put('editLicense/{id}', [BrokerAgentController::class, 'editLicense']);
             Route::put('editType/{id}', [BrokerAgentController::class, 'editType']);
@@ -63,7 +65,19 @@ Route::middleware(['throttle:api'])->group(function () {
             Route::apiResource('sales-encoding', SalesEncodingController::class);
             Route::apiResource('developers', DeveloperController::class);
             Route::apiResource('property-listings', PropertyListingController::class);
-            Route::post('admin/addProject', [DeveloperController::class, 'addProjects']);    
+            Route::post('admin/addProject', [DeveloperController::class, 'addProjects']); 
+           
+        });
+
+
+         /*
+        |--------------------------------------------------------------------------
+        | Agent & Broker Routes
+        |--------------------------------------------------------------------------
+        | Routes accessible only to users with the 'agent/broker' role (role = [1,2]).
+        */
+        Route::middleware(['role:1'])->group(function () {
+            Route::apiResource('user/agent-broker', UserController::class);
         });
     });
 });
