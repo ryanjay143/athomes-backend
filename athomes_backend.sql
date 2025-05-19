@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2025 at 12:33 AM
+-- Generation Time: May 19, 2025 at 02:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,10 +38,32 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('93aYkhaj7izoo9eK', 's:7:\"forever\";', 2060395462),
-('Lu78OsykogzPSzAx', 's:7:\"forever\";', 2060389622),
-('M4yUfaUY8KYISdzC', 's:7:\"forever\";', 2060367972),
-('xI2fOeRxoAmSzX9E', 's:7:\"forever\";', 2060390213);
+('2b2f18bb79bcb74744e7c8bcdfac0d57', 'i:1;', 1747460587),
+('2b2f18bb79bcb74744e7c8bcdfac0d57:timer', 'i:1747460587;', 1747460587),
+('3OGm74ckwyzueSgp', 's:7:\"forever\";', 2062381408),
+('6be3b7554e87809766d1fb5c5526fc46', 'i:1;', 1747447045),
+('6be3b7554e87809766d1fb5c5526fc46:timer', 'i:1747447045;', 1747447045),
+('7c2150d7106073168321f39ec452420d', 'i:3;', 1747492804),
+('7c2150d7106073168321f39ec452420d:timer', 'i:1747492804;', 1747492804),
+('9opZlLnY56B9Lw1D', 's:7:\"forever\";', 2062381383),
+('aJLvTmCbFlEP8bhK', 's:7:\"forever\";', 2062388046),
+('b37e2b0b86a8368405df02e0b66d0b39', 'i:3;', 1747493170),
+('b37e2b0b86a8368405df02e0b66d0b39:timer', 'i:1747493170;', 1747493170),
+('c2cdce04d4e11e11f0c054d165dd51a8', 'i:1;', 1747493170),
+('c2cdce04d4e11e11f0c054d165dd51a8:timer', 'i:1747493170;', 1747493170),
+('DarMvcWKilS90GnC', 's:7:\"forever\";', 2062381111),
+('dxlUe8mpVwrNcKvz', 's:7:\"forever\";', 2062380187),
+('e7cf66797159dc3cd3e85f72e15bb551', 'i:21;', 1747493000),
+('e7cf66797159dc3cd3e85f72e15bb551:timer', 'i:1747493000;', 1747493000),
+('e9b6cc1432541b9ceebf113eee05eeba', 'i:5;', 1747456680),
+('e9b6cc1432541b9ceebf113eee05eeba:timer', 'i:1747456680;', 1747456680),
+('mrSvWbo3lYyV4KIr', 's:7:\"forever\";', 2062377618),
+('N0e24z1fmLAIfRqt', 's:7:\"forever\";', 2062387990),
+('oXtuGXP7oTpc9tTm', 's:7:\"forever\";', 2062377320),
+('Pfs6RwNYItL6WB3B', 's:7:\"forever\";', 2062377867),
+('SUVVA8JwgDsmIxZT', 's:7:\"forever\";', 2062387511),
+('vFxvIm6di466Syeg', 's:7:\"forever\";', 2062381142),
+('yX5gWvdSswYKtSmt', 's:7:\"forever\";', 2062380866);
 
 -- --------------------------------------------------------
 
@@ -67,7 +89,7 @@ CREATE TABLE `developer` (
   `dev_email` varchar(255) NOT NULL,
   `dev_phone` varchar(255) NOT NULL,
   `dev_location` varchar(255) NOT NULL,
-  `image` varchar(200) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0 COMMENT '0 = active 1 = Inactive',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -78,30 +100,9 @@ CREATE TABLE `developer` (
 --
 
 INSERT INTO `developer` (`id`, `dev_name`, `dev_email`, `dev_phone`, `dev_location`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'John Doe', 'john.doe@example.com', '1234567890', '123 Main Street', '', 0, '2025-03-26 10:23:16', '2025-03-26 10:23:16'),
-(2, 'John Doe', 'john.doe@example12345.com', '1234567890', '123 Main Street', '', 0, '2025-03-28 23:11:59', '2025-03-28 23:11:59'),
-(3, 'John Doe', 'john.doe@example1234567892424.com', '1234567890', '123 Main Street', '', 0, '2025-03-30 04:59:06', '2025-03-30 04:59:06'),
-(4, 'John Doe', 'john.doe@example12345678924246868.com', '1234567890', '123 Main Street', '', 0, '2025-03-30 05:02:54', '2025-03-30 05:02:54'),
-(5, 'John Doe', 'john.doe@example1112345678924246868.com', '1234567890', '123 Main Street', '', 0, '2025-03-31 17:12:01', '2025-03-31 17:12:01'),
-(6, 'John Doe', 'john.0123doe@example1112345678924246868.com', '1234567890', '123 Main Street', '', 0, '2025-03-31 18:55:09', '2025-03-31 18:55:09'),
-(7, 'John Doe', 'john.12310123doe@example1112345678924246868.com', '1234567890', '123 Main Street', '', 0, '2025-03-31 18:55:33', '2025-03-31 18:55:33'),
-(8, 'JohnDorf', 'john@gmail.com.ph', '09876543212', 'CDO', 'images/Y2kCSGkytFEoXLkFnd7txl63xO0vZVCI8IQlcQd7.jpg', 0, '2025-04-03 04:43:37', '2025-04-03 04:43:37'),
-(9, 'Johndorf', 'john123@gmail.com', '09358554398', 'CDO', 'images/ihCM7bVMltHit34Vzm6jJ1TyPVuWiSPlil9mJygB.jpg', 0, '2025-04-03 05:03:28', '2025-04-03 05:03:28'),
-(10, 'johndorf', 'john12345@gmail.com.ph', '09358554398', 'CDO', 'images/yJLKX6dbPaJFvJqc7xRyhEVA9GCmx7j3VINjbOBP.jpg', 0, '2025-04-03 05:17:33', '2025-04-03 05:17:33'),
-(11, 'johndorf', 'john123456@gmail.com.ph', '09358554398', 'CDO', 'images/FC4FuRUTeEJFf8PjbRAviu2a80csi7zVRsvagbih.jpg', 0, '2025-04-03 05:19:55', '2025-04-03 05:19:55'),
-(12, 'johndorf', 'john0123456@gmail.com.ph', '09358554398', 'CDO', 'images/kGRKytOrrD83ck0AGDueu4NL6sZZ6XUNNS5UKx5v.jpg', 0, '2025-04-03 05:21:01', '2025-04-03 05:21:01'),
-(13, 'JohnDorf', 'johndvdvdv@gmail.com.ph', '09876543212', 'CDO', 'images/PJbK22XJf2ZMeQ62NQP7o1wvPSfop4U5vcPUXmSc.jpg', 0, '2025-04-03 05:21:46', '2025-04-03 05:21:46'),
-(14, 'johndorf', 'kjwbdjshbh@gmail.com', '09358554398', 'CDO', 'images/Hv6jsCzFVmCdSnOwCGwOnWfKFDHgtaAeIBfct3vk.jpg', 0, '2025-04-03 05:26:54', '2025-04-03 05:26:54'),
-(15, 'johndorf', 'kjwbrvrvdjshbh@gmail.com', '09358554398', 'CDO', 'images/02iD1fHOzQYZK0Hach45FtygS0TyY3Modtn8L1TD.jpg', 0, '2025-04-03 05:29:34', '2025-04-03 05:29:34'),
-(16, 'johndorf', 'kjwbrvrvdjbgbgbshbh@gmail.com', '09358554398', 'CDO', 'images/XOAlzegikJvNhI1VsYtnqHwgfTonEXOIuyIvGkLp.jpg', 0, '2025-04-03 05:31:36', '2025-04-03 05:31:36'),
-(17, 'johndorf', 'ryanjaytagolimotreyes@gmail.com', '09358554398', 'CDO', 'images/vU10xeHnL8zojvcWu7w7xq9Ow81YdbaZgdslxkYd.jpg', 0, '2025-04-03 05:32:52', '2025-04-03 05:32:52'),
-(18, 'johndorf', 'ryanjaydvdvdtagolimotreyes@gmail.com', '09358554398', 'CDO', 'images/oDLVcX3rBeAydMxvCU1c3zOBQQ9nAyJoT2yk9HuU.jpg', 0, '2025-04-03 05:35:17', '2025-04-03 05:35:17'),
-(19, 'ddvdv', 'vdvd@gmail.com', '09358554398', 'CDO', 'images/DGW4JxS5rCerwKt75McPbmL6V52HXyQDlfmUWjha.jpg', 0, '2025-04-03 05:36:03', '2025-04-03 05:36:03'),
-(20, 'johndorf', 'vdvcsc@gmail.com', '09876543212', 'CDO', 'images/qOm3VeoeMoEXXKVkE8k9P9LNTe7YQJgqMpYUZay5.jpg', 0, '2025-04-03 05:47:50', '2025-04-03 05:47:50'),
-(21, 'Camella', 'camella@gmail.com', '09358554398', 'CDO', 'images/f6bJtNiWQ2aSGQJFGsNdfaUqnKWmiuMqH77JHkEU.png', 0, '2025-04-03 05:52:54', '2025-04-03 05:52:54'),
-(22, 'vdvdv', 'fbf@gmail.com', 'bfb', 'scsfce', 'images/ZjGbUgiWBb0c6F9XXjcoC8Wn7iagm8EnU9Y0bnLv.png', 0, '2025-04-03 07:35:27', '2025-04-03 07:35:27'),
-(23, 'Camella', 'camella123@gmail.com.ph', '09358554398', 'CDO', 'images/Pz8Rf6d8UVyRog6sU2XzvdY8ncPXJIMlEprPgH0H.png', 0, '2025-04-03 21:24:07', '2025-04-03 21:24:07'),
-(24, 'camella 2', 'camella2@gmail.com', '09358554398', 'CDO', 'images/UUwuTtKjjP6bvNMbVlE6yeOIF3ITKzKnlFAv9wVE.jpg', 0, '2025-04-03 21:25:51', '2025-04-03 21:25:51');
+(1, 'Johndorf', 'johndord@gmail.com', '09358554308', 'CDO', 'developer_images/1747444983_303024585_534311655163745_6742593555067438817_n.jpg', 0, '2025-05-08 05:44:17', '2025-05-16 17:23:03'),
+(2, 'Avida land corporation', 'avidaland@gmail.com', '09263351414', 'Cagayan de Oro', 'developer_images/1747448944_fae38dc4-c8dc-4c8e-ae62-d659d5d19ec5.jpg', 0, '2025-05-11 19:02:41', '2025-05-16 18:29:04'),
+(3, 'Camella homes', 'camella@gmail.com', '09358554398', 'Cagayan de Oro', 'developer_images/1747449467_IMG_5329.jpeg', 0, '2025-05-16 18:33:06', '2025-05-16 18:37:47');
 
 -- --------------------------------------------------------
 
@@ -141,24 +142,23 @@ CREATE TABLE `identity_details` (
 --
 
 INSERT INTO `identity_details` (`id`, `user_id`, `prc_liscence_number`, `dhsud_registration_number`, `validation_date`, `last_school_att`, `created_at`, `updated_at`) VALUES
-(1, 5, '', '', '09-06-1998', 'XYZ University', '2025-03-19 23:24:29', '2025-03-19 23:24:29'),
-(2, 6, '', '', NULL, 'Southern Philippines College', '2025-03-19 23:32:10', '2025-03-19 23:32:10'),
-(3, 7, '', '', NULL, 'Southern Philippines College', '2025-03-19 23:56:36', '2025-03-19 23:56:36'),
-(4, 8, '', '', '21-03-2025', 'Southern Philippines College', '2025-03-20 00:09:49', '2025-03-20 00:09:49'),
-(5, 9, '', '', '21-03-2025', 'Southern Philippines College', '2025-03-20 00:15:25', '2025-03-20 00:15:25'),
-(6, 10, '', '', '09-06-1998', 'XYZ University', '2025-03-20 00:17:07', '2025-03-20 00:17:07'),
+(2, 6, 'Trfjjgc-12345', 'Ndjfj-8373636', '2025-05-31', 'Southern Philippines College', '2025-03-19 23:32:10', '2025-05-09 09:09:52'),
+(3, 7, 'djcfbhsjh4754567', '353535trefv5465', '2025-05-31', 'Southern Philippines College', '2025-03-19 23:56:36', '2025-05-11 18:46:10'),
+(4, 8, 'efee4t4grg5ysdcsc', 'scsw-575675757fbrfscscsc', '2025-03-29', 'Southern Philippines College', '2025-03-20 00:09:49', '2025-05-16 18:24:59'),
+(5, 9, 'efee4t-sdfs21324', 'grgr4t5464-scsf43646', '2025-03-21', 'Southern Philippines College', '2025-03-20 00:15:25', '2025-05-09 08:52:24'),
 (7, 11, 'wfe-3435-eff', '2422e', '09-06-1998', 'XYZ University', '2025-03-20 00:18:45', '2025-03-20 00:18:45'),
-(8, 12, 'wfe-3435-eff', '2422e', '09-06-1998', 'XYZ University', '2025-03-20 00:22:30', '2025-03-20 00:22:30'),
 (9, 13, 'efee4t4grg5y', 'grgr4t54645654trg', '28-03-2025', 'Southern Philippines College', '2025-03-20 00:24:15', '2025-03-20 00:24:15'),
-(10, 14, 'efee4t4grg5y', 'grgr4t54645654trg', '27-03-2025', 'Southern Philippines College', '2025-03-20 00:45:12', '2025-03-20 00:45:12'),
 (11, 15, 'efee4t4grg5y', 'grgr4t54645654trg', '27-03-2025', 'Southern Philippines College', '2025-03-20 00:51:28', '2025-03-20 00:51:28'),
-(12, 16, '', '', NULL, 'Southern Philippines College', '2025-03-20 07:02:45', '2025-03-20 07:02:45'),
+(12, 16, 'efee4t-5757', 'grgr4t546-dg46467', '2025-05-31', 'Southern Philippines College', '2025-03-20 07:02:45', '2025-05-09 08:48:06'),
 (13, 17, 'efee4t4grg5y', 'grgr4t54645654trg', '28-03-2025', 'Southern Philippines College', '2025-03-20 07:05:14', '2025-03-20 07:05:14'),
-(14, 18, '', '', NULL, 'Southern Philippines College', '2025-03-20 07:08:32', '2025-03-20 07:08:32'),
-(15, 19, '', '', NULL, 'Southern Philippines College', '2025-03-20 07:17:12', '2025-03-20 07:17:12'),
+(14, 18, 'dbvfb-546573f', 'grgr4t54-dgr5575675', '2025-05-24', 'Southern Philippines College', '2025-03-20 07:08:32', '2025-05-09 08:39:48'),
+(15, 19, 'efft4t4-grg5y', 'scsw-575675757fbrf', '2025-05-23', 'Southern Philippines College', '2025-03-20 07:17:12', '2025-05-09 08:39:16'),
 (16, 20, '', '', NULL, 'Southern Philippines College', '2025-03-23 05:08:21', '2025-03-23 05:08:21'),
 (17, 21, 'efee4t4grg5y', 'grgr4t54645654trg', '25-03-2025', 'Southern Philippines College', '2025-03-23 20:33:22', '2025-03-23 20:33:22'),
-(18, 22, '', '', NULL, 'Southern Philippines College', '2025-03-31 19:21:50', '2025-03-31 19:21:50');
+(18, 22, 'efee4-dgve4646', 'grgr4t5464-545vd46', '2025-05-31', 'Southern Philippines College', '2025-03-31 19:21:50', '2025-05-09 08:40:36'),
+(19, 23, 'rgrgrgrgr-547657', 'adadawdfe-13354', '21-03-2025', 'Xavier Universitry', '2025-05-08 06:34:59', '2025-05-09 08:20:27'),
+(20, 24, 'efee4-dgve4789', 'grgr4t546-dg46789', '31-05-2025', 'Southern Philippines College', '2025-05-10 04:21:49', '2025-05-10 04:21:49'),
+(21, 25, '1234', '1234', '12-05-2028', 'Tagoloan Comminity College', '2025-05-11 18:39:06', '2025-05-11 18:39:06');
 
 -- --------------------------------------------------------
 
@@ -221,12 +221,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (29, '2025_01_31_063854_create_personal_access_tokens_table', 4),
 (30, '2025_01_31_131021_create_developer_housing_table', 4),
 (31, '2025_02_08_043459_create_personal_access_tokens_table', 5),
-(32, '2025_03_26_163357_create_developer_table', 5),
-(33, '2025_03_26_164320_create_project_details_table', 6),
 (34, '2025_04_01_022743_create_developer_images_table', 7),
-(35, '2025_04_17_043139_create_sales_encodings_table', 8),
-(36, '2025_04_18_135213_create_property_listings_table', 9),
-(37, '2025_04_18_135912_create_property_images_table', 10);
+(45, '2025_04_17_043139_create_sales_encodings_table', 18),
+(48, '2025_03_26_164320_create_project_details_table', 21),
+(49, '2025_03_26_163357_create_developer_table', 22),
+(52, '2025_05_14_044614_create_personal_access_tokens_table', 25),
+(54, '2025_04_18_135213_create_property_listings_table', 27),
+(55, '2025_04_18_135912_create_property_images_table', 28);
 
 -- --------------------------------------------------------
 
@@ -240,6 +241,75 @@ CREATE TABLE `password_reset_tokens` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_reset_tokens`
+--
+
+INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
+('aldin@gmail.com', '$2y$12$1tFoqPax32XQN2gH7ksf4e1WxNVe6mRgDxLcIb3mELvjh1bRBoAIy', '2025-05-13 07:19:36'),
+('ryan.reyes@dict.gov.ph', '$2y$12$H0EqE/IXG/E.UJt468vSp.qzEVsce0eUOFWd8vmG3mZIBnrfeNbs6', '2025-05-13 07:17:27'),
+('ryanjaytagolimotreyes@gmail.com', '$2y$12$o.LWNqbpQEgTrAzI/s4En.zgpobg5Hpxywl8tFNEJblNvgzX2n.iS', '2025-05-16 17:44:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
+(6, 'App\\Models\\User', 2, 'auth_token', '409ae12365449a27eac163a820ef8bd9e06c41d2081e2050a364aa0c812f5990', '[\"*\"]', '2025-05-16 19:16:45', NULL, '2025-05-16 17:40:02', '2025-05-16 19:16:45'),
+(13, 'App\\Models\\User', 7, 'auth_token', 'e9db26e205e019d0e27a26b24bdbde5158df1df4440a7e21ade38108c22aeca8', '[\"*\"]', '2025-05-16 22:08:34', NULL, '2025-05-16 20:21:55', '2025-05-16 22:08:34'),
+(18, 'App\\Models\\User', 6, 'auth_token', 'c58e004ca34583f350adc203f68b2bf767f22e099cda59f9170d7181e661bee6', '[\"*\"]', '2025-05-16 21:17:37', NULL, '2025-05-16 21:14:06', '2025-05-16 21:17:37'),
+(19, 'App\\Models\\User', 6, 'auth_token', 'a8dba76e38f4e953a190a80e0a7a04088389f8ca9cc80d81d4b5dd9a6302a098', '[\"*\"]', NULL, NULL, '2025-05-16 21:14:15', '2025-05-16 21:14:15'),
+(20, 'App\\Models\\User', 6, 'auth_token', '8894b368927d3dbc7bef6a345fecd9ca6bebc0c1bff6faf349199566a9412dea', '[\"*\"]', NULL, NULL, '2025-05-16 21:15:18', '2025-05-16 21:15:18'),
+(22, 'App\\Models\\User', 6, 'auth_token', '70b44801644e69ca4d59152a3891c7a03240dcd32e1b39c8b70417106f9d412c', '[\"*\"]', '2025-05-16 21:22:30', NULL, '2025-05-16 21:22:22', '2025-05-16 21:22:30'),
+(23, 'App\\Models\\User', 6, 'auth_token', '54fcdbfac86348f44fad30dc24a6201dbdcb8cb86aafbb7d2f9b0fc23192465a', '[\"*\"]', '2025-05-16 21:22:52', NULL, '2025-05-16 21:22:30', '2025-05-16 21:22:52'),
+(24, 'App\\Models\\User', 6, 'auth_token', 'a584b6c3e7bff96648ae1abf3e23eb4729b976b9f5c20c5d91a90d739fbf6e6a', '[\"*\"]', '2025-05-16 21:22:54', NULL, '2025-05-16 21:22:52', '2025-05-16 21:22:54'),
+(25, 'App\\Models\\User', 6, 'auth_token', '74672bd956e76e38869d511a0987b0dc1db43aabc7be1073fe992d009f50dae0', '[\"*\"]', '2025-05-16 21:23:08', NULL, '2025-05-16 21:22:54', '2025-05-16 21:23:08'),
+(26, 'App\\Models\\User', 6, 'auth_token', '2f34374bb28b44f927b3ae30d58410da1f5cee65fe016662663e6792296b1045', '[\"*\"]', '2025-05-16 21:24:15', NULL, '2025-05-16 21:23:08', '2025-05-16 21:24:15'),
+(27, 'App\\Models\\User', 6, 'auth_token', '96deda72d4635dedf4a5f92d0dc1a50480cd4c4f5c41255cd4646f1679a01294', '[\"*\"]', '2025-05-16 21:24:27', NULL, '2025-05-16 21:24:15', '2025-05-16 21:24:27'),
+(30, 'App\\Models\\User', 6, 'auth_token', '5c428de90261c3792a62f69e3d058c8fe759f96baa78abeeafe89dfb36f91f3c', '[\"*\"]', '2025-05-16 21:29:36', NULL, '2025-05-16 21:29:25', '2025-05-16 21:29:36'),
+(38, 'App\\Models\\User', 6, 'auth_token', '39df9ffa31f1deffbb221bf77fd110ed2e1210725f8793729a2ca0130ce3c263', '[\"*\"]', '2025-05-16 22:01:07', NULL, '2025-05-16 21:39:50', '2025-05-16 22:01:07'),
+(39, 'App\\Models\\User', 6, 'auth_token', '8f750b3ebbbc43294ca1838b36325366fb7fd5e270f1ac89228d78cff9d69b84', '[\"*\"]', '2025-05-16 21:48:05', NULL, '2025-05-16 21:42:07', '2025-05-16 21:48:05'),
+(40, 'App\\Models\\User', 6, 'auth_token', '63987b95540515831b4c02d58c7e1e90eb75ca8bd69634f5225bc0669b392ce1', '[\"*\"]', '2025-05-16 22:01:31', NULL, '2025-05-16 22:01:23', '2025-05-16 22:01:31'),
+(41, 'App\\Models\\User', 7, 'auth_token', '00eaebbaa121386b9563ec5fdb27697e17cbfbd0fca933b4cff80f247cb7e73c', '[\"*\"]', '2025-05-16 22:01:43', NULL, '2025-05-16 22:01:39', '2025-05-16 22:01:43'),
+(42, 'App\\Models\\User', 8, 'auth_token', 'a0f6bfc7d7fbeb9f229e2805d8aeeb0cb258d2a01fb3404d54738f29d3320348', '[\"*\"]', '2025-05-16 22:04:32', NULL, '2025-05-16 22:02:03', '2025-05-16 22:04:32'),
+(43, 'App\\Models\\User', 8, 'auth_token', 'adf440a7a06d4f5626730f051e5a59d71e0090d40c89b74572ab2c8c2b795b89', '[\"*\"]', '2025-05-16 22:06:02', NULL, '2025-05-16 22:04:52', '2025-05-16 22:06:02'),
+(44, 'App\\Models\\User', 6, 'auth_token', '23065f68d38f6f5fa489f886ff085e08b8311cf504d2070ef7419f04d3833eeb', '[\"*\"]', '2025-05-16 22:06:18', NULL, '2025-05-16 22:06:14', '2025-05-16 22:06:18'),
+(45, 'App\\Models\\User', 6, 'auth_token', '2852b006ee387b372202afd703c322a066fc34e6fc6e3e6ad81f1ae515c9c90e', '[\"*\"]', '2025-05-16 22:06:46', NULL, '2025-05-16 22:06:31', '2025-05-16 22:06:46'),
+(47, 'App\\Models\\User', 7, 'auth_token', '6629c895769bb59e0ce82d3fee85ccbcd32c96c28ace35d9cb433e20d5c47c30', '[\"*\"]', '2025-05-16 22:10:39', NULL, '2025-05-16 22:08:43', '2025-05-16 22:10:39'),
+(48, 'App\\Models\\User', 8, 'auth_token', 'bba625981a6293c137d25efe24a4ff160219f8b08023a1909277d74711b0e80f', '[\"*\"]', '2025-05-16 22:12:36', NULL, '2025-05-16 22:10:54', '2025-05-16 22:12:36'),
+(49, 'App\\Models\\User', 6, 'auth_token', '0ceb2689fd3934c085a1d0470dfc7576bbb568019efa181b7109548ea03b8e09', '[\"*\"]', '2025-05-16 22:15:49', NULL, '2025-05-16 22:12:49', '2025-05-16 22:15:49'),
+(50, 'App\\Models\\User', 7, 'auth_token', '87442662a4762258fd53cb1c49604a755a1d5487344d8190f4c229fdc8ea1100', '[\"*\"]', '2025-05-16 22:17:37', NULL, '2025-05-16 22:16:02', '2025-05-16 22:17:37'),
+(51, 'App\\Models\\User', 8, 'auth_token', '684fcf7c797b7f40995405e2fb1a8208cfd7e78c879423bf926885e27dc87b9a', '[\"*\"]', '2025-05-16 22:18:08', NULL, '2025-05-16 22:17:48', '2025-05-16 22:18:08'),
+(66, 'App\\Models\\User', 7, 'auth_token', '1d4914eeb615183a6a4841367b7865d8d462ef5ffcc3e3a430b8d109aea6c3d0', '[\"*\"]', '2025-05-17 06:31:32', NULL, '2025-05-17 06:28:03', '2025-05-17 06:31:32'),
+(67, 'App\\Models\\User', 6, 'auth_token', '2992f2c33e5d070adc563b86bc2cfc2b92c6c596c4fd0c2426c4f11d96234d8d', '[\"*\"]', '2025-05-17 06:42:52', NULL, '2025-05-17 06:29:25', '2025-05-17 06:42:52'),
+(68, 'App\\Models\\User', 8, 'auth_token', '71a8b820778390afb4c1b43c18472b07bf7cbcce8df463c9834c6861a31502d1', '[\"*\"]', '2025-05-17 06:35:22', NULL, '2025-05-17 06:29:52', '2025-05-17 06:35:22'),
+(69, 'App\\Models\\User', 6, 'auth_token', 'b73962a62380d63f8b17d215a56af46e0d79d73bb6efe4531f8a6708ac95a410', '[\"*\"]', '2025-05-17 06:30:44', NULL, '2025-05-17 06:30:40', '2025-05-17 06:30:44'),
+(70, 'App\\Models\\User', 7, 'auth_token', '182000e7fef488b2879484bf36b7a0e5715bba5c5ff5b776a66ff240d4f45378', '[\"*\"]', '2025-05-17 06:31:43', NULL, '2025-05-17 06:31:42', '2025-05-17 06:31:43'),
+(71, 'App\\Models\\User', 7, 'auth_token', '9195c97d614dbddc36ef9fe8fa20cb3874da1793b13c76c633d16c72b19622a2', '[\"*\"]', '2025-05-17 06:38:52', NULL, '2025-05-17 06:37:27', '2025-05-17 06:38:52'),
+(72, 'App\\Models\\User', 8, 'auth_token', 'fdf63d0a86ac8a4da9d11ceef738681bf9028880844d57723badf38d26c45d51', '[\"*\"]', '2025-05-17 06:39:14', NULL, '2025-05-17 06:39:03', '2025-05-17 06:39:14'),
+(73, 'App\\Models\\User', 7, 'auth_token', '38c1338fec69be514132ab2ececb20ff315556874d3bdad0e1c0157a7aeaaf8b', '[\"*\"]', '2025-05-17 06:41:47', NULL, '2025-05-17 06:40:00', '2025-05-17 06:41:47'),
+(74, 'App\\Models\\User', 6, 'auth_token', '5e6bca47c9aeed897466cc032632666259041e715e5d6418755e3d14bbe15fdc', '[\"*\"]', '2025-05-17 06:42:26', NULL, '2025-05-17 06:41:17', '2025-05-17 06:42:26'),
+(75, 'App\\Models\\User', 7, 'auth_token', '3e740ed657f50cf0e4ea08d5bb1e223885608608c9f8b71ea6e05c1813045522', '[\"*\"]', '2025-05-17 06:45:38', NULL, '2025-05-17 06:45:10', '2025-05-17 06:45:38');
+
 -- --------------------------------------------------------
 
 --
@@ -248,10 +318,13 @@ CREATE TABLE `password_reset_tokens` (
 
 CREATE TABLE `project_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `developer_id` bigint(20) UNSIGNED NOT NULL,
   `project_name` varchar(255) NOT NULL,
   `project_location` varchar(255) NOT NULL,
-  `project_contact_person` varchar(255) NOT NULL,
-  `developer_id` bigint(20) UNSIGNED NOT NULL,
+  `project_category` varchar(255) NOT NULL,
+  `total_units` int(11) NOT NULL,
+  `available_units` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -260,54 +333,10 @@ CREATE TABLE `project_details` (
 -- Dumping data for table `project_details`
 --
 
-INSERT INTO `project_details` (`id`, `project_name`, `project_location`, `project_contact_person`, `developer_id`, `created_at`, `updated_at`) VALUES
-(1, 'Project Alpha', 'Location Alpha', 'Alice', 1, '2025-03-26 10:23:16', '2025-03-26 10:23:16'),
-(2, 'Project Beta', 'Location Beta', 'Bob', 1, '2025-03-26 10:23:16', '2025-03-26 10:23:16'),
-(3, 'Project Alpha', 'Location Alpha', 'Alice', 2, '2025-03-28 23:11:59', '2025-03-28 23:11:59'),
-(4, 'Project Beta', 'Location Beta', 'Bob', 2, '2025-03-28 23:11:59', '2025-03-28 23:11:59'),
-(5, 'Project Alpha', 'Location Alpha', 'Alice', 3, '2025-03-30 04:59:06', '2025-03-30 04:59:06'),
-(6, 'Project Beta', 'Location Beta', 'Bob', 3, '2025-03-30 04:59:06', '2025-03-30 04:59:06'),
-(7, 'Project Alpha', 'Location Alpha', 'Alice', 4, '2025-03-30 05:02:54', '2025-03-30 05:02:54'),
-(8, 'Project Beta', 'Location Beta', 'Bob', 4, '2025-03-30 05:02:54', '2025-03-30 05:02:54'),
-(9, 'Project Alpha', 'Location Alpha', 'Alice', 5, '2025-03-31 17:12:01', '2025-03-31 17:12:01'),
-(10, 'Project Beta', 'Location Beta', 'Bob', 5, '2025-03-31 17:12:01', '2025-03-31 17:12:01'),
-(11, 'Project Alpha', 'Location Alpha', 'Alice', 6, '2025-03-31 18:55:09', '2025-03-31 18:55:09'),
-(12, 'Project Beta', 'Location Beta', 'Bob', 6, '2025-03-31 18:55:09', '2025-03-31 18:55:09'),
-(13, 'Project Alpha', 'Location Alpha', 'Alice', 7, '2025-03-31 18:55:33', '2025-03-31 18:55:33'),
-(14, 'Project Beta', 'Location Beta', 'Bob', 7, '2025-03-31 18:55:33', '2025-03-31 18:55:33'),
-(15, 'Project 1', 'Tagoloan', 'Ryan Reyes', 8, '2025-04-03 04:43:37', '2025-04-03 04:43:37'),
-(16, 'Project 2', 'Tagoloan', 'Aldin Tagolimot', 8, '2025-04-03 04:43:37', '2025-04-03 04:43:37'),
-(17, 'Project 2', 'Villanueva', 'Aldin Tagolimot', 9, '2025-04-03 05:03:28', '2025-04-03 05:03:28'),
-(18, 'project 2', 'Villanueva', 'Aldin Tagolimot', 10, '2025-04-03 05:17:33', '2025-04-03 05:17:33'),
-(19, 'project 2', 'Villanueva', 'Aldin Tagolimot', 11, '2025-04-03 05:19:55', '2025-04-03 05:19:55'),
-(20, 'project 2', 'Villanueva', 'Aldin Tagolimot', 12, '2025-04-03 05:21:01', '2025-04-03 05:21:01'),
-(21, 'Project 1', 'Tagoloan', 'Ryan Reyes', 13, '2025-04-03 05:21:46', '2025-04-03 05:21:46'),
-(22, 'Project 2', 'Tagoloan', 'Aldin Tagolimot', 13, '2025-04-03 05:21:46', '2025-04-03 05:21:46'),
-(23, 'project 2', 'Villanueva', 'Aldin Tagolimot', 14, '2025-04-03 05:26:54', '2025-04-03 05:26:54'),
-(24, 'project 2', 'Villanueva', 'Aldin Tagolimot', 15, '2025-04-03 05:29:34', '2025-04-03 05:29:34'),
-(25, 'project 1', 'CDO', 'Ryan Jay Tagolimot Reyes', 15, '2025-04-03 05:29:34', '2025-04-03 05:29:34'),
-(26, 'project 1', 'CDO', 'Ryan Jay Tagolimot Reyes', 16, '2025-04-03 05:31:36', '2025-04-03 05:31:36'),
-(27, 'project 2', 'Villanueva', 'Aldin Tagolimot', 16, '2025-04-03 05:31:36', '2025-04-03 05:31:36'),
-(28, 'project 1', 'CDO', 'Ryan Jay Tagolimot Reyes', 16, '2025-04-03 05:31:36', '2025-04-03 05:31:36'),
-(29, 'project 1', 'Tagoloan', 'Ryan Jay Tagolimot Reyes', 17, '2025-04-03 05:32:52', '2025-04-03 05:32:52'),
-(30, 'project 2', 'Villanueva', 'Aldin Tagolimot', 17, '2025-04-03 05:32:52', '2025-04-03 05:32:52'),
-(31, 'project 1', 'Tagoloan', 'Ryan Jay Tagolimot Reyes', 18, '2025-04-03 05:35:17', '2025-04-03 05:35:17'),
-(32, 'project 2', 'Villanueva', 'Aldin Tagolimot', 18, '2025-04-03 05:35:17', '2025-04-03 05:35:17'),
-(33, 'hmnhm', 'jmj', 'Ryan Jay Tagolimot Reyes', 19, '2025-04-03 05:36:03', '2025-04-03 05:36:03'),
-(34, 'jmj', 'fngng', 'jmjm', 19, '2025-04-03 05:36:03', '2025-04-03 05:36:03'),
-(35, 'dvdvdw', 'dcvee', 'eceve', 20, '2025-04-03 05:47:50', '2025-04-03 05:47:50'),
-(36, 'vrver', 'rvrvf', 'vrrr', 20, '2025-04-03 05:47:50', '2025-04-03 05:47:50'),
-(37, 'Greta Model House', 'CDO', 'Ryan Jay Tagolimot Reyes', 21, '2025-04-03 05:52:54', '2025-04-03 05:52:54'),
-(38, 'Freya Model House', 'Tagoloan', 'Aldin Tagolimot', 21, '2025-04-03 05:52:54', '2025-04-03 05:52:54'),
-(39, 'Ella Model House', 'Villanueva', 'Venus Reyes', 21, '2025-04-03 05:52:54', '2025-04-03 05:52:54'),
-(40, 'Dana Model House', 'Jasaan', 'Veronica Padera', 21, '2025-04-03 05:52:54', '2025-04-03 05:52:54'),
-(41, 'Dani Model House', 'Opol', 'Rey Bakaka', 21, '2025-04-03 05:52:54', '2025-04-03 05:52:54'),
-(42, 'fsedv', 'csc', 'scs', 22, '2025-04-03 07:35:27', '2025-04-03 07:35:27'),
-(43, 'scvs', 'svsv', 'svsv', 22, '2025-04-03 07:35:27', '2025-04-03 07:35:27'),
-(44, 'camella 1', 'CDO', 'Ryan Jay Tagolimot Reyes', 23, '2025-04-03 21:24:07', '2025-04-03 21:24:07'),
-(45, 'camella 2', 'Tagoloan', 'Aldin Tagolimot', 23, '2025-04-03 21:24:07', '2025-04-03 21:24:07'),
-(46, 'camella 3', 'CDO', 'Ryan Jay Tagolimot Reyes', 24, '2025-04-03 21:25:51', '2025-04-03 21:25:51'),
-(47, 'camella 4', 'Tagoloan', 'Aldin Tagolimot', 24, '2025-04-03 21:25:51', '2025-04-03 21:25:51');
+INSERT INTO `project_details` (`id`, `developer_id`, `project_name`, `project_location`, `project_category`, `total_units`, `available_units`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Bellevue', 'Upper Carmen, Cagayan de Oro', 'House and lot', 100, 100, 'Planning', '2025-05-11 18:28:27', '2025-05-11 18:28:27'),
+(2, 1, 'Golden Glow Village', 'Upper Carmen, Cagayan de Oro', 'Condominium/Apartment', 50, 50, 'Pre-Development', '2025-05-11 18:28:27', '2025-05-11 18:28:27'),
+(3, 2, 'Aspira Tower', 'Cagayan de Oro', 'Condominium/Apartment', 300, 300, 'Ready for Occupancy', '2025-05-11 19:04:09', '2025-05-11 19:04:09');
 
 -- --------------------------------------------------------
 
@@ -328,46 +357,11 @@ CREATE TABLE `property_images` (
 --
 
 INSERT INTO `property_images` (`id`, `property_id`, `images`, `created_at`, `updated_at`) VALUES
-(1, 1, 'property_images/KB2X6ILZmZc7YOUnpJrwtck3czLREuoDxep9dgKE.png', '2025-04-18 06:26:58', '2025-04-18 06:26:58'),
-(2, 1, 'property_images/T5DnicpGDBMva6loRLXE930KxcOLsvxqK8SEYjIw.webp', '2025-04-18 06:26:58', '2025-04-18 06:26:58'),
-(3, 1, 'property_images/6qVZXjUboY91L3cICGRncCd5sdM441BRWlNBX8vr.jpg', '2025-04-18 06:26:58', '2025-04-18 06:26:58'),
-(4, 2, 'property_images/kZx67buFVbTlysp4N4Lj9SxS9yacJDqVNXZX8lrN.png', '2025-04-18 06:40:40', '2025-04-18 06:40:40'),
-(5, 2, 'property_images/yHu9uGd8eQi2LycaHQcnsoNXPVunbqBmbd8paWmb.webp', '2025-04-18 06:40:40', '2025-04-18 06:40:40'),
-(6, 2, 'property_images/eI2zs845jcMaHEW2HmiNaYfkCgrMZI54llZq6Snw.jpg', '2025-04-18 06:40:40', '2025-04-18 06:40:40'),
-(7, 3, 'property_images/5he6jMkq8TaBGImrIomsmbf6mhhiZPndmp2uxzqz.jpg', '2025-04-18 06:50:27', '2025-04-18 06:50:27'),
-(8, 3, 'property_images/ABRC2R0DKDWbJUvKSOWNngHlZLOTwLSfQLfRFHys.png', '2025-04-18 06:50:27', '2025-04-18 06:50:27'),
-(9, 3, 'property_images/882n7NsKn40izsECttYhAGUAob8yBm3H7Q1Bgy0z.jpg', '2025-04-18 06:50:27', '2025-04-18 06:50:27'),
-(10, 4, 'property_images/g4zl3uk5FM2YBPC9eel6Q3SngAb2jDIQLNMBuyCG.jpg', '2025-04-18 06:52:44', '2025-04-18 06:52:44'),
-(11, 4, 'property_images/Lo8xUctVJrd472bEeX0U51HVU7zklFZWaAfU3ERU.jpg', '2025-04-18 06:52:44', '2025-04-18 06:52:44'),
-(15, 6, 'property_images/odALYqa2MhDpJ0Gc3z9GvBWKg8PuElzyc6GwH8vs.png', '2025-04-18 07:13:49', '2025-04-18 07:13:49'),
-(16, 6, 'property_images/ohoGCEFIc6cKzprJgTE1WNXWnaUq0SdAxROi8gYl.png', '2025-04-18 07:13:49', '2025-04-18 07:13:49'),
-(17, 7, 'property_images/Dg5Qnthp5ahHrlqHyvKEgmblwCaby065eX2cLYf1.jpg', '2025-04-18 07:15:01', '2025-04-18 07:15:01'),
-(18, 7, 'property_images/b5nTQy1J45p2fqkScxCiaTvsQHIxYuqDBfJ1e4xV.webp', '2025-04-18 07:15:01', '2025-04-18 07:15:01'),
-(19, 8, 'property_images/NKH8A2RhcwQnc0EoeDl94142D80Ir1QTQiWsiOd5.jpg', '2025-04-18 07:49:30', '2025-04-18 07:49:30'),
-(20, 8, 'property_images/dG62FpvsZ2TvthQ90qJF1CEWUHKap9fjRMomqkau.jpg', '2025-04-18 07:49:30', '2025-04-18 07:49:30'),
-(21, 8, 'property_images/ji2wm9CdnmdMWfZFJUtqUlFJcseZghKvJTUaUlIx.jpg', '2025-04-18 07:49:30', '2025-04-18 07:49:30'),
-(25, 11, 'property_images/RHSruV1t8yDemgJ4HfWd5zpEJYhYrLRWMnaHeMh8.jpg', '2025-04-18 09:09:29', '2025-04-18 09:09:29'),
-(26, 12, 'property_images/Yi7nSkUlSXd8TIBfrK7vLOsNmT5JldimY1CCq2YZ.png', '2025-04-18 09:17:30', '2025-04-18 09:17:30'),
-(81, 5, 'property_images/OMiBBW7cMRQOuSV41g5RAtFVTKwA8LVAyw7ACRRj.jpg', '2025-04-18 11:43:00', '2025-04-18 11:43:00'),
-(82, 5, 'property_images/3YkBZI5fSN2nWMCJnMRzWNOVOIn1CSx5afJS6pvJ.jpg', '2025-04-18 11:43:00', '2025-04-18 11:43:00'),
-(83, 5, 'property_images/uQlUV92jTYr88gsVC2YPT3SfKdb8puHnyQedk8q8.jpg', '2025-04-18 11:43:00', '2025-04-18 11:43:00'),
-(118, 9, 'property_images/vkHGapupfgcs9cH36EeU3fxENIMsUDcVggVYZweX.jpg', '2025-04-18 12:17:23', '2025-04-18 12:17:23'),
-(131, 13, 'property_images/inc3k0jsngYnrCFn5atTIa4qjNZ4PHmuHGYew8Jn.jpg', '2025-04-18 12:22:13', '2025-04-18 12:22:13'),
-(150, 14, 'property_images/vHrVMA8h9kIxfuTnjcqZoT8H54oIMAyv6y5POeqk.jpg', '2025-04-18 18:17:24', '2025-04-18 18:17:24'),
-(156, 10, 'property_images/BFagdwteHPaxnVFfpf1buHkOOF1ntrUuoDLJy3Xb.jpg', '2025-04-18 18:47:55', '2025-04-18 18:47:55'),
-(157, 10, 'property_images/J4f0bj1Ml268zcipD0Ho8NiknuqavAszU175RtfV.png', '2025-04-18 18:47:55', '2025-04-18 18:47:55'),
-(159, 5, 'property_images/l5pcq8bPMjlMb36xIWL0OuVKnoYkF38GXBuODHPt.jpg', '2025-04-18 18:52:41', '2025-04-18 18:52:41'),
-(160, 5, 'property_images/ja8keEXWfTx9hHwPJVYrp67yZvQLyIeUaiA4u3Zt.png', '2025-04-18 18:52:41', '2025-04-18 18:52:41'),
-(162, 9, 'property_images/SN7qbtca7mKiGTAFlawsvkevLJ0iHzIkL5eXA0GG.jpg', '2025-04-18 19:11:24', '2025-04-18 19:11:24'),
-(163, 9, 'property_images/08Smea5L0DIjGjvJJRTARWEhKX4pFFv8MjngSMnY.jpg', '2025-04-18 19:11:24', '2025-04-18 19:11:24'),
-(164, 9, 'property_images/ulpwydstHVfyZiUMmmii5FeUSrpPA7MhzTndR8VU.jpg', '2025-04-18 19:11:24', '2025-04-18 19:11:24'),
-(165, 15, 'property_images/X4ucjvecVqCYxmlwMgcSOanQtJsAClGtbGLQEaV3.jpg', '2025-04-18 19:16:35', '2025-04-18 19:16:35'),
-(166, 13, 'property_images/CKAUKXmVw2Rfib7BrMMC70x723YOaIf1FCUjAkD6.jpg', '2025-04-18 19:28:55', '2025-04-18 19:28:55'),
-(167, 13, 'property_images/YxlVZwed49dudlofFyv77uPeTMiZrqI5fBXlrLA1.png', '2025-04-18 19:28:56', '2025-04-18 19:28:56'),
-(168, 13, 'property_images/U5RX8kVA8ghFEfmOeg9mEoTlFUV2D1TDrZ2ff06g.jpg', '2025-04-18 19:28:56', '2025-04-18 19:28:56'),
-(169, 6, 'property_images/ndxqJb5A8hYR3ZWXYcG25OaA3HCMdF1mYwl65JGE.jpg', '2025-04-18 19:31:25', '2025-04-18 19:31:25'),
-(170, 6, 'property_images/7Utli5BVYf546LNE9RXdEI1kAaNSHJhNrfvMffCO.jpg', '2025-04-18 19:31:25', '2025-04-18 19:31:25'),
-(171, 6, 'property_images/2fuo0mNawe3RTeLivCKKWa47zrQTpSTq947DVRF0.jpg', '2025-04-18 19:31:25', '2025-04-18 19:31:25');
+(1, 1, 'property_images/1747443938_494325365_639397615770086_542534334084126404_n.jpg', '2025-05-16 17:05:38', '2025-05-16 17:05:38'),
+(2, 1, 'property_images/1747443938_494814485_9766862713428573_2094112077946730909_n.jpg', '2025-05-16 17:05:38', '2025-05-16 17:05:38'),
+(3, 1, 'property_images/1747443938_494817128_1193053808647490_2498692346832905686_n.jpg', '2025-05-16 17:05:38', '2025-05-16 17:05:38'),
+(4, 2, 'property_images/1747444860_f6061bfd-e60d-49e9-a9c5-a8987208e14e.jpg', '2025-05-16 17:21:00', '2025-05-16 17:21:00'),
+(5, 2, 'property_images/1747444860_484590799_1802454960520174_7462654808448639264_n.jpg', '2025-05-16 17:21:00', '2025-05-16 17:21:00');
 
 -- --------------------------------------------------------
 
@@ -378,6 +372,7 @@ INSERT INTO `property_images` (`id`, `property_id`, `images`, `created_at`, `upd
 CREATE TABLE `property_listings` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category` varchar(255) NOT NULL,
+  `price_and_rate` double DEFAULT NULL,
   `date_listed` date NOT NULL,
   `lot_area` varchar(255) NOT NULL,
   `floor_area` varchar(255) NOT NULL,
@@ -393,22 +388,9 @@ CREATE TABLE `property_listings` (
 -- Dumping data for table `property_listings`
 --
 
-INSERT INTO `property_listings` (`id`, `category`, `date_listed`, `lot_area`, `floor_area`, `details`, `location`, `type_of_listing`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'House and lot', '2025-04-18', '100', '100', '2 Bedrooms, 2 Bathrooms, Carport', 'CDO', 'Exclusive', 'Sold', '2025-04-18 06:26:58', '2025-04-18 06:26:58'),
-(2, 'Lot only', '2025-04-18', '100', '100', '2 Bedrooms, 2 Bathrooms, Carport', 'CDO', 'Non-Exclusive', 'Not Sold', '2025-04-18 06:40:40', '2025-04-18 06:40:40'),
-(3, 'Lot only', '2025-04-18', '100', '100', '2 Bedrooms, 2 Bathrooms, Carport', 'CDO', 'Exclusive', 'Sold', '2025-04-18 06:50:27', '2025-04-18 06:50:27'),
-(4, 'Condominium/Apartment', '2025-04-18', '200', '200', 'Sample details', 'Tagoloan', 'Exclusive', 'Not Sold', '2025-04-18 06:52:44', '2025-04-18 06:52:44'),
-(5, 'Commercial Properties', '2025-04-18', '300', '150', '2 Bedrooms, 2 Bathrooms, Carport', 'Villanueva', 'Exclusive', 'Not Sold', '2025-04-18 06:55:08', '2025-04-18 06:55:08'),
-(6, 'Rental Properties', '2025-04-18', '250', '120', 'Sample Details', 'Claveria', 'Non-Exclusive', 'Not Sold', '2025-04-18 07:13:48', '2025-04-18 07:13:48'),
-(7, 'Farm Lot', '2025-04-18', '150', '100', '2 Bedrooms, 2 Bathrooms, Carport', 'CDO', 'Exclusive', 'Not Sold', '2025-04-18 07:15:01', '2025-04-18 07:15:01'),
-(8, 'Rental Properties', '2025-04-18', '145', '136', 'Sample details', 'CDO', 'Non-Exclusive', 'Sold', '2025-04-18 07:49:30', '2025-04-18 07:49:30'),
-(9, 'Commercial Properties', '2025-04-19', '125', '105', '3 bedrom', 'Villanueva', 'Exclusive', 'Sold', '2025-04-18 07:52:31', '2025-04-18 11:43:51'),
-(10, 'House and lot', '2025-04-18', '146', '135', '2 bedrooms, 1 CR,', 'CDO', 'Non-Exclusive', 'Not Sold', '2025-04-18 09:07:49', '2025-04-18 09:07:49'),
-(11, 'Condominium/Apartment', '2025-04-18', '178', '45', '2 bedroom, 1 CR, and 1 extra room', 'CDO', 'Exclusive', 'Not Sold', '2025-04-18 09:09:29', '2025-04-18 09:09:29'),
-(12, 'Commercial Properties', '2025-04-18', '123', '143', '2 bedroom, 1 CR, 1 swimming pool', 'Claveria', 'Exclusive', 'Not Sold', '2025-04-18 09:17:30', '2025-04-18 09:17:30'),
-(13, 'Commercial Properties', '2025-04-18', '125', '105', '3 bedrom', 'Villanueva, Misamis Oriental', 'Exclusive', 'Not Sold', '2025-04-18 09:18:49', '2025-04-18 18:51:16'),
-(14, 'House and lot', '2025-04-19', '400', '100', '2 bedrooms,', 'Bugo, Cagayan de Oro', 'Exclusive', 'Pre-Selling', '2025-04-18 18:17:24', '2025-04-18 19:22:43'),
-(15, 'Commercial Properties', '2025-04-19', '748', '145', '2 bedroom', 'Cagayan de Oro', 'Non-Exclusive', 'RFO', '2025-04-18 19:16:35', '2025-04-18 19:32:08');
+INSERT INTO `property_listings` (`id`, `category`, `price_and_rate`, `date_listed`, `lot_area`, `floor_area`, `details`, `location`, `type_of_listing`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Commercial Properties', 12000, '2025-05-17', '100', '100', '2 CR\r\n1 Bathroom', 'Cagayan de Oro', 'Exclusive', 'Not Sold', '2025-05-16 17:05:38', '2025-05-16 17:05:38'),
+(2, 'Rental Properties', 10000, '2025-05-17', '200', '100', '1 CR', 'Cagayan de Oro', 'Exclusive', 'Not Sold', '2025-05-16 17:21:00', '2025-05-16 17:21:00');
 
 -- --------------------------------------------------------
 
@@ -453,7 +435,10 @@ INSERT INTO `p_info` (`id`, `user_id`, `first_name`, `middle_name`, `last_name`,
 (15, 19, 'Giselle Jane', 'Tagolimot', 'Reyes', '', '09358554398', 'female', 'Zone 1, Santa Ana', '', '2025-03-20 07:17:12', '2025-03-20 07:17:12'),
 (16, 20, 'Lyzil', 'Tagolimot', 'Padera', '', '09358554398', 'female', 'Zone 1, Santa Ana', '', '2025-03-23 05:08:21', '2025-03-23 05:08:21'),
 (17, 21, 'Tadoy', 'Tagolimot', 'Reyes', 'Jr.', '09358554398', 'male', 'Zone 1, Santa Ana', '', '2025-03-23 20:33:22', '2025-03-23 20:33:22'),
-(18, 22, 'Lyzil', 'Tagolimot', 'Padera', '', '09358554398', 'female', 'Zone 1, Santa Ana', '', '2025-03-31 19:21:50', '2025-03-31 19:21:50');
+(18, 22, 'Lyzil', 'Tagolimot', 'Padera', '', '09358554398', 'female', 'Zone 1, Santa Ana', '', '2025-03-31 19:21:50', '2025-03-31 19:21:50'),
+(19, 23, 'Reyson', '', 'Benedicto', '', '09876543212', 'male', 'Cagayan de Oro City', '', '2025-05-08 06:34:59', '2025-05-08 06:34:59'),
+(20, 24, 'Jason', 'Tagolimot', 'Llanes', 'Jr.', '09358554398', 'male', 'Zone 1, Santa Ana Tagoloan Misamis Oriental', '', '2025-05-10 04:21:49', '2025-05-10 04:21:49'),
+(21, 25, 'Bato', '', 'Dela Rose', '', '09156274213', 'male', 'Cagayan de Oro', '', '2025-05-11 18:39:06', '2025-05-11 18:39:06');
 
 -- --------------------------------------------------------
 
@@ -464,8 +449,8 @@ INSERT INTO `p_info` (`id`, `user_id`, `first_name`, `middle_name`, `last_name`,
 CREATE TABLE `sales_encodings` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `agent_id` bigint(20) UNSIGNED NOT NULL,
-  `client_name` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
+  `client_name` varchar(255) NOT NULL,
   `date_on_sale` date NOT NULL,
   `amount` decimal(10,2) NOT NULL,
   `location` varchar(255) NOT NULL,
@@ -479,23 +464,11 @@ CREATE TABLE `sales_encodings` (
 -- Dumping data for table `sales_encodings`
 --
 
-INSERT INTO `sales_encodings` (`id`, `agent_id`, `client_name`, `category`, `date_on_sale`, `amount`, `location`, `remarks`, `image`, `created_at`, `updated_at`) VALUES
-(2, 18, 'Ryan Reyes', 'House and lot', '2025-04-20', 1000.00, 'opol misamis oriental', 'Full Payment', 'images/hCyUrrHWyvKROdMGTRMcqtMYyLbhxMghhx4nSXpy.png', '2025-04-16 22:49:59', '2025-04-16 22:49:59'),
-(3, 18, 'Ryan Reyes', 'Rental Properties', '2025-04-29', 1000.00, 'Lumia CDO', 'Partial Payment', 'images/RTn9Z65EWJ6PaQRwNLQJrKePuENsrF4tkTK4d9CB.png', '2025-04-16 22:59:31', '2025-04-16 22:59:31'),
-(4, 18, 'Ryan Reyes', 'House and lot', '2025-04-17', 1000.00, 'Lumia CDO', 'Partial Payment', 'images/krIGVysULzkSwC4i4MkDvU02UbCf51u6jxaeTLi7.png', '2025-04-16 23:14:24', '2025-04-16 23:14:24'),
-(5, 18, 'Ryan Reyes', 'Farm Lot', '2025-04-17', 1000.00, 'Lumia CDO', 'Full Payment', 'images/vkT80EJuPKanh2yc3KP6qjVTOlXwLx3IMQCZZPGH.png', '2025-04-16 23:19:35', '2025-04-16 23:19:35'),
-(6, 18, 'Ryan Reyes', 'Farm Lot', '2025-04-17', 1000.00, 'Lumia CDO', 'Full Payment', 'images/8t6gQh5cqwzSEDNRhH7PsEfZK1Poub81BkGPFnpO.png', '2025-04-16 23:21:42', '2025-04-16 23:21:42'),
-(7, 18, 'Ryan Reyes', 'Farm Lot', '2025-04-17', 1000.00, 'Lumia CDO', 'Full Payment', 'images/w2uJOieBefj7xyuipq0gC1dwMXXsBziJbP3S5nil.png', '2025-04-16 23:21:49', '2025-04-16 23:21:49'),
-(8, 18, 'Ryan Reyes', 'Farm Lot', '2025-04-17', 1000.00, 'Lumia CDO', 'Full Payment', 'images/9n1RSDf03b7yU3HO1vCn8ZHnQPcKnaAh1vbhh8FS.png', '2025-04-16 23:22:34', '2025-04-16 23:22:34'),
-(9, 18, 'Ryan Reyes', 'Condominium/Apartment', '2025-04-17', 1000.00, 'Lumbia CDO', 'Full Payment', 'images/NCIH1dMpsba9zQdhWWN4tK4j4WmylSSsPtFMeN5f.png', '2025-04-16 23:25:46', '2025-04-16 23:25:46'),
-(10, 18, 'Ryan Reyes', 'Rental Properties', '2025-04-17', 1000.00, 'Lumbia CDO', 'Full Payment', 'images/OfkHPkWrHQ5gGiO4DpJwVMp7YBZfKjvLSVAYPg4v.png', '2025-04-17 00:20:15', '2025-04-17 00:20:15'),
-(11, 18, 'Ryan Reyes', 'Commercial Properties', '2025-04-17', 1000.00, 'Lumbia CDO', 'Partial Payment', 'images/9LlclrFmN6WoURTgUuD19aicuGfZfVHunqeZwSod.png', '2025-04-17 00:24:09', '2025-04-17 00:24:09'),
-(12, 18, 'Ryan Reyes', 'Lot only', '2025-04-17', 1000.00, 'Lumbia CDO', 'Partial Payment', 'images/hYEvRLQLu2AUIwpQHdEwI3vpDrWwi8Whs7G8z5QV.png', '2025-04-17 00:24:50', '2025-04-17 00:24:50'),
-(14, 18, 'Ryan Reyes', 'House and lot', '2025-04-17', 1000.00, 'Opol misamis oriental', 'Full Payment', 'images/VzxO6UrH94lBqlI43v9gSFRV4Sg12VXVddW5LXGU.jpg', '2025-04-17 02:44:22', '2025-04-17 21:09:54'),
-(22, 18, 'Ryan Reyes', 'House and lot', '2025-04-18', 2200000.00, 'Tagoloan', 'Partial Payment', 'images/MC2qs2NCHcCVVX7XAtnSfAckgpcDcPLZUOZeuLyB.png', '2025-04-18 03:38:03', '2025-04-18 03:38:03'),
-(23, 1, 'Ryan Reyes 143', 'Condominium/Apartment', '2025-04-17', 3000.00, 'Opol misamis oriental', 'Full Payment', 'images/VtT0pWQ1Orgad66pXg5Gcf98iOTfg6MXE9bHYam9.jpg', '2025-04-18 04:54:42', '2025-04-18 05:18:51'),
-(24, 1, 'Paula\'s Hotel', 'Condominium/Apartment', '2025-04-19', 5000000.00, 'cagayan de  oro', 'Full Payment', 'images/7UbHaAIX955FiRhvFjJPekAyMk5JJJDK7nwHqYhB.jpg', '2025-04-18 18:32:01', '2025-04-18 20:03:20'),
-(25, 18, 'Paulas', 'Condominium/Apartment', '2025-04-19', 10000000.00, 'Opol misamis oriental', 'Partial Payment', 'images/zxkMxME7lnUQ8VnK2skByoNiNLAadsg808DM1YfW.jpg', '2025-04-18 19:45:05', '2025-04-18 20:01:45');
+INSERT INTO `sales_encodings` (`id`, `agent_id`, `category`, `client_name`, `date_on_sale`, `amount`, `location`, `remarks`, `image`, `created_at`, `updated_at`) VALUES
+(3, 18, 'Lot only', 'Paulas Zayas', '2025-05-12', 10000000.00, 'Tagoloan Misamis oriental', 'Not Sold', 'images/1746863986_496009673_122228909648233789_6735027208606461891_n.jpg', '2025-05-09 23:27:29', '2025-05-09 23:59:46'),
+(4, 21, 'House and lot', 'Maria de La rosa', '2025-05-13', 2200000.00, 'TierraNava Tagoloan', 'Pre-Selling', 'images/1747018247_0a390f58-8834-417e-b439-2aba8a8b8721.jpg', '2025-05-11 18:50:17', '2025-05-11 18:50:47'),
+(5, 19, 'Lot only', 'Jason Llanes', '2025-05-13', 10000000.00, 'Opol Misamis Oriental', 'Sold', 'images/1747147855_494815671_694279916320128_5392280086772437047_n.jpg', '2025-05-13 06:50:55', '2025-05-13 06:50:55'),
+(6, 20, 'House and lot', 'Maya Onho', '2025-05-17', 10000000.00, 'Cagayan se Oro', 'Not Sold', 'images/1747449112_IMG_5329.jpeg', '2025-05-16 18:31:25', '2025-05-16 18:31:52');
 
 -- --------------------------------------------------------
 
@@ -517,10 +490,16 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('2SLXnFl6d99uW3MQjpoMdDZNBjTLWwk9fXR3QRZK', NULL, '192.168.254.104', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOFR4Rjh4aUVLclVCOWJEYTdtRjhtWDFXZnB5dDl4N05LWFFFTTZ5eCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xOTIuMTY4LjI1NC4xMDQ6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1746859316),
+('9O1Rmvj8RoFvPrwSGMSEHSQV45d5LmY2CG9i4AX1', NULL, '192.168.254.109', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiY01hZ1Z4dUhCcURjU0x5N0d6RFYxYXg0R1IzdEJaNU9XYkpob29leCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1747453113),
 ('eTT8NAe68xDrAjCa1aPuHFiZM8va1texrbhd5aQl', NULL, '192.168.254.108', 'PostmanRuntime/7.43.3', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicDFJTzExOWFxYU1MTm94SEgxT0ZEMnJCU3ZLeWJSWWR2dVlidU1pSiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xOTIuMTY4LjI1NC4xMDg6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1744899828),
 ('GbT2CK67jKBHma1C2fqiFliWoOtCwOhbfKxW2syc', NULL, '192.168.18.12', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSUtqM2JhNWtkSlNNbjJVdlM3WnJXSDBxRGlMWUhvbTI0UFVWV3F0NCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjU6Imh0dHA6Ly8xOTIuMTY4LjE4LjEyOjgwMDAiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1743746756),
+('kujMxiu4UaQrompA8ugMYDYuferrwdDTUXfMdtmj', NULL, '192.168.254.109', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSFFyVHlyZXZRUHhTRGhZTlhXV1FqYjhGYXJHYUc3UU9NU1M0TlY5VyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly8xOTIuMTY4LjI1NC4xMDk6ODAwMC9zYW5jdHVtL2NzcmYtY29va2llIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1747453170),
 ('tScZTYewsYfpQiu5ybyGAqEb9lgJL8AN2iaaEpZB', NULL, '192.168.18.130', 'PostmanRuntime/7.43.2', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRFhOQmRNOHJNZG1aQ1R6NjJpcmVFSjhtWXFXbm93MmpINVY2ZENpaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xOTIuMTY4LjE4LjEzMDo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1742455307),
-('vJeR2yZsSfj8gSjya1N2u3ybREKD8gUY5NWfVUGZ', NULL, '192.168.254.111', 'PostmanRuntime/7.43.3', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ1NXVE5DaGJ6NjlNbkpSTkJ5ajFybmU4b21XZ3BPYW56M2pwVXZ0UiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xOTIuMTY4LjI1NC4xMTE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1743339047);
+('UzTmG6RKEgaEVe9GJOoOtyIbkNDMlTs31fPQDGqq', NULL, '192.168.254.109', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTjhveG1CNHNsOG5tVjMyVnJKeUk4NG9ncWpaMTBiWjVZTjVaUjhXbSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly8xOTIuMTY4LjI1NC4xMDk6ODAwMC9zYW5jdHVtL2NzcmYtY29va2llIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1747452741),
+('vJeR2yZsSfj8gSjya1N2u3ybREKD8gUY5NWfVUGZ', NULL, '192.168.254.111', 'PostmanRuntime/7.43.3', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ1NXVE5DaGJ6NjlNbkpSTkJ5ajFybmU4b21XZ3BPYW56M2pwVXZ0UiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xOTIuMTY4LjI1NC4xMTE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1743339047),
+('wlA6ekU78rEBXf2G8VBrqHBqiAYUh410JWQeQwcD', NULL, '192.168.254.109', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiaU1WdWZlQnBjb2pXV3Jod3JkVTEzd1RtTDF4M2hQYTRHMXBKTkUzQiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1747453170),
+('WsET0A3yClYLynTkZnubAR75H8YGgIQU9IvP2ySy', NULL, '192.168.254.109', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibjVCc09RUmdHcWtoQUpQdXVRVVIxYVpmQk42NzVZRTlwT2N6QmM1SCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly8xOTIuMTY4LjI1NC4xMDk6ODAwMC9zYW5jdHVtL2NzcmYtY29va2llIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1747453113);
 
 -- --------------------------------------------------------
 
@@ -547,25 +526,27 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `acct_number`, `email_verified_at`, `password`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'ryanreyes143', 'ryan.reyes@dict.gov.ph', 'Acc-022ZZ1WZ1', NULL, '$2y$12$LD1GXzvpjU9i9DDsDVFIc.a6g6/Ffr3XzqXgk11XI9NbUVHkY9Oo.', 0, 0, NULL, '2025-03-19 22:59:06', '2025-03-19 22:59:06'),
-(5, 'john_doe', 'john.doe12345@example.com', 'Acc-mwdwmk2ee', NULL, '$2y$12$1gVHDiUnh1VkcLB/O3QKt.as/Uj1kjD1i3Suv2YdZcvxepmJCTNKu', 1, 0, NULL, '2025-03-19 23:24:29', '2025-03-19 23:24:29'),
-(6, 'sample_123', 'ryanjaytagolimotreyes@gmail.com', 'Acc-3ABY7FBZ2', NULL, '$2y$12$zBS4P3VbEmVwGWq6neY/guU6ymTSInNCHU66aXW2pivOj3NYWrJXG', 1, 1, NULL, '2025-03-19 23:32:10', '2025-03-19 23:32:10'),
-(7, 'venus123', 'venus@gmail.com', 'Acc-HLSVI8350', NULL, '$2y$12$j1HZcZOgOTP3pNZkzriEcu1pPT3UJG9ZrjyHZnBj64Fjm/caD8icS', 1, 1, NULL, '2025-03-19 23:56:36', '2025-03-19 23:56:36'),
-(8, 'aldin123', 'aldin@gmail.com', 'Acc-XATMH48PY', NULL, '$2y$12$1tYNQ6cOX9vIrnvruP6qL.NPdZvaLxReDNLVwhgjFFoeT4KjL6j3a', 1, 1, NULL, '2025-03-20 00:09:49', '2025-03-20 00:09:49'),
-(9, 'riki123', 'riki@gmail.com', 'Acc-BYO0VTU86', NULL, '$2y$12$dZzbXtebVZLQ/dQzEPZIz.JiRDIOYECoJa3R4RYJ02fRwGw8oHmAG', 1, 1, NULL, '2025-03-20 00:15:25', '2025-03-20 00:15:25'),
+(5, 'john_doe', 'john.doe12345@example.com', 'Acc-mwdwmk2ee', NULL, '$2y$12$1gVHDiUnh1VkcLB/O3QKt.as/Uj1kjD1i3Suv2YdZcvxepmJCTNKu', 1, 1, NULL, '2025-03-19 23:24:29', '2025-03-19 23:24:29'),
+(6, 'ryanreyes143', 'ryanjaytagolimotreyes@gmail.com', 'Acc-3ABY7FBZ2', NULL, '$2y$12$zBS4P3VbEmVwGWq6neY/guU6ymTSInNCHU66aXW2pivOj3NYWrJXG', 0, 0, NULL, '2025-03-19 23:32:10', '2025-05-16 21:29:36'),
+(7, 'venus123', 'venus@gmail.com', 'Acc-HLSVI8350', NULL, '$2y$12$j1HZcZOgOTP3pNZkzriEcu1pPT3UJG9ZrjyHZnBj64Fjm/caD8icS', 1, 0, NULL, '2025-03-19 23:56:36', '2025-05-16 17:25:43'),
+(8, 'aldin123', 'aldin@gmail.com', 'Acc-XATMH48PY', NULL, '$2y$12$1tYNQ6cOX9vIrnvruP6qL.NPdZvaLxReDNLVwhgjFFoeT4KjL6j3a', 2, 0, NULL, '2025-03-20 00:09:49', '2025-05-08 07:10:46'),
+(9, 'riki123', 'riki@gmail.com', 'Acc-BYO0VTU86', NULL, '$2y$12$dZzbXtebVZLQ/dQzEPZIz.JiRDIOYECoJa3R4RYJ02fRwGw8oHmAG', 1, 0, NULL, '2025-03-20 00:15:25', '2025-05-08 07:21:10'),
 (10, 'john_doe', 'john.doe12345678@example.com', 'Acc-mwdwmk2ee', NULL, '$2y$12$MX949SneZtYSsYJ4fa.9ROqdEqvg9BBTo6bwW/rb2.OaMh2.o1zkO', 1, 1, NULL, '2025-03-20 00:17:07', '2025-03-20 00:17:07'),
-(11, 'john_doe', 'john.doe123456798@example.com', 'Acc-mwdwmk2ee', NULL, '$2y$12$yIk7GvsG.ZsAZleY1qSgiejxXWUuiCgkuEU3GiauoHWReC1/FSEB2', 1, 1, NULL, '2025-03-20 00:18:45', '2025-03-20 00:18:45'),
+(11, 'john_doe', 'john.doe123456798@example.com', 'Acc-mwdwmk2ee', NULL, '$2y$12$yIk7GvsG.ZsAZleY1qSgiejxXWUuiCgkuEU3GiauoHWReC1/FSEB2', 1, 0, NULL, '2025-03-20 00:18:45', '2025-05-08 07:21:16'),
 (12, 'john_doe', 'john.doe123456796668@example.com', 'Acc-mwdwmk2ee', NULL, '$2y$12$FtUWi.Ps6MqUyMzzhz4EsO7bSOZJXefgcPKwDlVC5nzWCok/xgbG.', 1, 1, NULL, '2025-03-20 00:22:30', '2025-03-20 00:22:30'),
-(13, 'ian123', 'ian@gmail.com', 'Acc-Q0LOC0YSE', NULL, '$2y$12$1bFMMz6S/lewEnESSP7CGOLPOV0EjTyrtQjiomZqRwwyDpK3LUTmW', 1, 1, NULL, '2025-03-20 00:24:15', '2025-03-20 00:24:15'),
-(14, 'jason123', 'jason@gmail.com', 'Acc-6YP7CKCLY', NULL, '$2y$12$7MMvtFzmbHo7Rxz/8IccpO8Xb.qAkTHXCBLNnzToeGM..5gGqcIPK', 1, 1, NULL, '2025-03-20 00:45:12', '2025-03-20 00:45:12'),
-(15, 'sample_123', 'sample123@gmail.com', 'Acc-RI5AE1JB1', NULL, '$2y$12$lKIPmXuI5FQ8w5vTOzzuQezcygwD9e.nCihGo86KZlUCiLcxbLeCS', 1, 1, NULL, '2025-03-20 00:51:28', '2025-03-20 00:51:28'),
-(16, 'renly123', 'renly@gmail.com', 'Acc-RP390C5IB', NULL, '$2y$12$sv6xmzrla6sa3.gMHd4nKesKZSt0JiFbP8cojzDZy2ZaIJK9/o2tu', 1, 1, NULL, '2025-03-20 07:02:45', '2025-03-20 07:02:45'),
-(17, 'ricky123', 'ricky@gmail.com', 'Acc-1U6L2HSKM', NULL, '$2y$12$XWciRwpNuo7cUQXSThqhSOXoo00qf/Nf8gFz9ms3WfcCFWgqXuCxe', 1, 1, NULL, '2025-03-20 07:05:14', '2025-03-20 07:05:14'),
-(18, 'gina123', 'gina@gmail.com', 'Acc-3XBATUUF2', NULL, '$2y$12$wPgg0eo.YJHreTyrt.0P4.yUwnBNAbfepAILp60ATWnSetmjV4RqS', 1, 1, NULL, '2025-03-20 07:08:32', '2025-03-20 07:08:32'),
-(19, 'titil123', 'titil@gmail.com', 'Acc-7VNUN2T7E', NULL, '$2y$12$6ZvaGDT0Dp3EFBvaMGVQL.Tz9b/GTEsvDuGoxWWXe08wnJQtPolPe', 1, 1, NULL, '2025-03-20 07:17:12', '2025-03-20 07:17:12'),
-(20, 'lyzil123', 'lyzil@gmail.com', 'Acc-OMOUTQX0U', NULL, '$2y$12$wsDLhK30.OxNAKTZxoIYCegADZyRr5n8r2slWr7anNR3nJ5qM76yi', 1, 1, NULL, '2025-03-23 05:08:21', '2025-03-23 05:08:21'),
-(21, 'tadoy123', 'tadoy@gmail.com', 'Acc-NM2URL63G', NULL, '$2y$12$cxTXclggp5Lp8AtCkgEbqeCCN42YDE0V/8MSWbKDNzG88ckUwd0AS', 2, 1, NULL, '2025-03-23 20:33:22', '2025-03-23 20:33:22'),
-(22, 'lyzil1234', 'lyzil123@gmail.com', 'Acc-ZQQFCG080', NULL, '$2y$12$RLTp.8eqSDAce7P2YecCAObeXenflLLP4Z8yJswo2.aqheKvf8e7K', 1, 0, NULL, '2025-03-31 19:21:50', '2025-03-31 19:21:50');
+(13, 'ian123', 'ian@gmail.com', 'Acc-Q0LOC0YSE', NULL, '$2y$12$1bFMMz6S/lewEnESSP7CGOLPOV0EjTyrtQjiomZqRwwyDpK3LUTmW', 1, 0, NULL, '2025-03-20 00:24:15', '2025-05-08 07:21:02'),
+(14, 'jason123', 'jason@gmail.com', 'Acc-6YP7CKCLY', NULL, '$2y$12$7MMvtFzmbHo7Rxz/8IccpO8Xb.qAkTHXCBLNnzToeGM..5gGqcIPK', 1, 0, NULL, '2025-03-20 00:45:12', '2025-05-08 07:18:13'),
+(15, 'sample_123', 'sample123@gmail.com', 'Acc-RI5AE1JB1', NULL, '$2y$12$lKIPmXuI5FQ8w5vTOzzuQezcygwD9e.nCihGo86KZlUCiLcxbLeCS', 1, 0, NULL, '2025-03-20 00:51:28', '2025-05-08 07:18:07'),
+(16, 'renly123', 'renly@gmail.com', 'Acc-RP390C5IB', NULL, '$2y$12$sv6xmzrla6sa3.gMHd4nKesKZSt0JiFbP8cojzDZy2ZaIJK9/o2tu', 2, 0, NULL, '2025-03-20 07:02:45', '2025-05-09 08:48:05'),
+(17, 'ricky123', 'ricky@gmail.com', 'Acc-1U6L2HSKM', NULL, '$2y$12$XWciRwpNuo7cUQXSThqhSOXoo00qf/Nf8gFz9ms3WfcCFWgqXuCxe', 1, 0, NULL, '2025-03-20 07:05:14', '2025-05-08 07:17:23'),
+(18, 'gina123', 'gina@gmail.com', 'Acc-3XBATUUF2', NULL, '$2y$12$wPgg0eo.YJHreTyrt.0P4.yUwnBNAbfepAILp60ATWnSetmjV4RqS', 1, 0, NULL, '2025-03-20 07:08:32', '2025-05-08 07:16:55'),
+(19, 'titil123', 'titil@gmail.com', 'Acc-7VNUN2T7E', NULL, '$2y$12$6ZvaGDT0Dp3EFBvaMGVQL.Tz9b/GTEsvDuGoxWWXe08wnJQtPolPe', 1, 0, NULL, '2025-03-20 07:17:12', '2025-05-08 07:16:50'),
+(20, 'lyzil123', 'lyzil@gmail.com', 'Acc-OMOUTQX0U', NULL, '$2y$12$wsDLhK30.OxNAKTZxoIYCegADZyRr5n8r2slWr7anNR3nJ5qM76yi', 1, 0, NULL, '2025-03-23 05:08:21', '2025-05-08 07:10:08'),
+(21, 'tadoy123', 'tadoy@gmail.com', 'Acc-NM2URL63G', NULL, '$2y$12$cxTXclggp5Lp8AtCkgEbqeCCN42YDE0V/8MSWbKDNzG88ckUwd0AS', 2, 0, NULL, '2025-03-23 20:33:22', '2025-05-08 07:14:36'),
+(22, 'lyzil1234', 'lyzil123@gmail.com', 'Acc-ZQQFCG080', NULL, '$2y$12$RLTp.8eqSDAce7P2YecCAObeXenflLLP4Z8yJswo2.aqheKvf8e7K', 2, 0, NULL, '2025-03-31 19:21:50', '2025-05-09 08:40:36'),
+(23, 'reyson@athomes', 'reyson@gmail.com', 'Acc-431PDQ9VH', NULL, '$2y$12$Y6ChrvCINOKM8hHJAd78Ie0TH/X2kW75ZnN6w3F.YDnXAVAnntPLa', 2, 0, NULL, '2025-05-08 06:34:59', '2025-05-08 07:11:36'),
+(24, 'jason123', 'jason123@gmail.com', 'Acc-RFT3QLR89', NULL, '$2y$12$RXgOOtaXCVxvCJzTwAx90OsRCOIjWOsCmT9llM2Wgj5J2Tgqmdb0u', 2, 0, NULL, '2025-05-10 04:21:49', '2025-05-16 18:12:01'),
+(25, 'Bato23', 'batodelarosa@gmail.com', 'Acc-3MOXTVX5H', NULL, '$2y$12$bnGdX9gEEvv4jbFhw5336e1LQYoVRb6Ym4nb/Z9mI748xpNL7jC4.', 1, 0, NULL, '2025-05-11 18:39:06', '2025-05-16 18:20:32');
 
 --
 -- Indexes for dumped tables
@@ -630,11 +611,19 @@ ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
 -- Indexes for table `project_details`
 --
 ALTER TABLE `project_details`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `project_details_developer_id_foreign` (`developer_id`);
+  ADD KEY `developer_id` (`developer_id`);
 
 --
 -- Indexes for table `property_images`
@@ -686,7 +675,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `developer`
 --
 ALTER TABLE `developer`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -698,7 +687,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `identity_details`
 --
 ALTER TABLE `identity_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -710,43 +699,49 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `project_details`
 --
 ALTER TABLE `project_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `property_images`
 --
 ALTER TABLE `property_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `property_listings`
 --
 ALTER TABLE `property_listings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `p_info`
 --
 ALTER TABLE `p_info`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `sales_encodings`
 --
 ALTER TABLE `sales_encodings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
@@ -762,7 +757,7 @@ ALTER TABLE `identity_details`
 -- Constraints for table `project_details`
 --
 ALTER TABLE `project_details`
-  ADD CONSTRAINT `project_details_developer_id_foreign` FOREIGN KEY (`developer_id`) REFERENCES `developer` (`id`);
+  ADD CONSTRAINT `project_details_ibfk_1` FOREIGN KEY (`developer_id`) REFERENCES `developer` (`id`);
 
 --
 -- Constraints for table `property_images`
