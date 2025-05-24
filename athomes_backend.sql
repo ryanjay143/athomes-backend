@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2025 at 02:07 AM
+-- Generation Time: May 24, 2025 at 04:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,20 +41,30 @@ INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
 ('2b2f18bb79bcb74744e7c8bcdfac0d57', 'i:1;', 1747460587),
 ('2b2f18bb79bcb74744e7c8bcdfac0d57:timer', 'i:1747460587;', 1747460587),
 ('3OGm74ckwyzueSgp', 's:7:\"forever\";', 2062381408),
+('5106d9e900fea72d67ac6144b1e9087b', 'i:3;', 1747790530),
+('5106d9e900fea72d67ac6144b1e9087b:timer', 'i:1747790530;', 1747790530),
 ('6be3b7554e87809766d1fb5c5526fc46', 'i:1;', 1747447045),
 ('6be3b7554e87809766d1fb5c5526fc46:timer', 'i:1747447045;', 1747447045),
-('7c2150d7106073168321f39ec452420d', 'i:3;', 1747492804),
-('7c2150d7106073168321f39ec452420d:timer', 'i:1747492804;', 1747492804),
+('7c2150d7106073168321f39ec452420d', 'i:2;', 1747897948),
+('7c2150d7106073168321f39ec452420d:timer', 'i:1747897948;', 1747897948),
+('85b37bf281c1bd108007d9bfa273144f', 'i:2;', 1747895590),
+('85b37bf281c1bd108007d9bfa273144f:timer', 'i:1747895590;', 1747895590),
+('88d742c0f23af84aad10b04cc67c3aa9', 'i:1;', 1747961854),
+('88d742c0f23af84aad10b04cc67c3aa9:timer', 'i:1747961854;', 1747961854),
+('939abff055cdfde6a8672e5e935b00a9', 'i:2;', 1747816252),
+('939abff055cdfde6a8672e5e935b00a9:timer', 'i:1747816252;', 1747816252),
 ('9opZlLnY56B9Lw1D', 's:7:\"forever\";', 2062381383),
 ('aJLvTmCbFlEP8bhK', 's:7:\"forever\";', 2062388046),
-('b37e2b0b86a8368405df02e0b66d0b39', 'i:3;', 1747493170),
-('b37e2b0b86a8368405df02e0b66d0b39:timer', 'i:1747493170;', 1747493170),
+('b37e2b0b86a8368405df02e0b66d0b39', 'i:2;', 1747983998),
+('b37e2b0b86a8368405df02e0b66d0b39:timer', 'i:1747983998;', 1747983998),
 ('c2cdce04d4e11e11f0c054d165dd51a8', 'i:1;', 1747493170),
 ('c2cdce04d4e11e11f0c054d165dd51a8:timer', 'i:1747493170;', 1747493170),
 ('DarMvcWKilS90GnC', 's:7:\"forever\";', 2062381111),
+('db7f84b2743acf6dfb00d829b77a7cfc', 'i:1;', 1747629794),
+('db7f84b2743acf6dfb00d829b77a7cfc:timer', 'i:1747629794;', 1747629794),
 ('dxlUe8mpVwrNcKvz', 's:7:\"forever\";', 2062380187),
-('e7cf66797159dc3cd3e85f72e15bb551', 'i:21;', 1747493000),
-('e7cf66797159dc3cd3e85f72e15bb551:timer', 'i:1747493000;', 1747493000),
+('e7cf66797159dc3cd3e85f72e15bb551', 'i:8;', 1747990397),
+('e7cf66797159dc3cd3e85f72e15bb551:timer', 'i:1747990397;', 1747990397),
 ('e9b6cc1432541b9ceebf113eee05eeba', 'i:5;', 1747456680),
 ('e9b6cc1432541b9ceebf113eee05eeba:timer', 'i:1747456680;', 1747456680),
 ('mrSvWbo3lYyV4KIr', 's:7:\"forever\";', 2062377618),
@@ -308,7 +318,19 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (72, 'App\\Models\\User', 8, 'auth_token', 'fdf63d0a86ac8a4da9d11ceef738681bf9028880844d57723badf38d26c45d51', '[\"*\"]', '2025-05-17 06:39:14', NULL, '2025-05-17 06:39:03', '2025-05-17 06:39:14'),
 (73, 'App\\Models\\User', 7, 'auth_token', '38c1338fec69be514132ab2ececb20ff315556874d3bdad0e1c0157a7aeaaf8b', '[\"*\"]', '2025-05-17 06:41:47', NULL, '2025-05-17 06:40:00', '2025-05-17 06:41:47'),
 (74, 'App\\Models\\User', 6, 'auth_token', '5e6bca47c9aeed897466cc032632666259041e715e5d6418755e3d14bbe15fdc', '[\"*\"]', '2025-05-17 06:42:26', NULL, '2025-05-17 06:41:17', '2025-05-17 06:42:26'),
-(75, 'App\\Models\\User', 7, 'auth_token', '3e740ed657f50cf0e4ea08d5bb1e223885608608c9f8b71ea6e05c1813045522', '[\"*\"]', '2025-05-17 06:45:38', NULL, '2025-05-17 06:45:10', '2025-05-17 06:45:38');
+(75, 'App\\Models\\User', 7, 'auth_token', '3e740ed657f50cf0e4ea08d5bb1e223885608608c9f8b71ea6e05c1813045522', '[\"*\"]', '2025-05-17 06:45:38', NULL, '2025-05-17 06:45:10', '2025-05-17 06:45:38'),
+(76, 'App\\Models\\User', 6, 'auth_token', 'fa6c158490ffa38e2a091f61d8505dc92f735df4749506dece22dc577e5146f7', '[\"*\"]', '2025-05-21 00:56:36', NULL, '2025-05-18 20:42:17', '2025-05-21 00:56:36'),
+(77, 'App\\Models\\User', 8, 'auth_token', 'e9064bf41e4d31d140955d235694ea69c74a1ebff533b3d4a480def7dddd86bd', '[\"*\"]', '2025-05-21 00:56:51', NULL, '2025-05-20 17:21:11', '2025-05-21 00:56:51'),
+(78, 'App\\Models\\User', 7, 'auth_token', '464befbb7a72df92a7c628de4a547e0a8b4636ec33c6f3a72ebf088c34685786', '[\"*\"]', '2025-05-21 00:56:44', NULL, '2025-05-20 17:21:51', '2025-05-21 00:56:44'),
+(79, 'App\\Models\\User', 7, 'auth_token', 'e7020a0e58077fbb80c809ea83c2ff00db3641e132eaa246843d6cdaed6aa52f', '[\"*\"]', '2025-05-21 00:27:33', NULL, '2025-05-21 00:26:32', '2025-05-21 00:27:33'),
+(80, 'App\\Models\\User', 6, 'auth_token', '4e4801e8d4257b2f53c856b0039ad01c00274ce60cb48f952c9f7324ff0b90ce', '[\"*\"]', '2025-05-21 00:29:25', NULL, '2025-05-21 00:27:45', '2025-05-21 00:29:25'),
+(81, 'App\\Models\\User', 7, 'auth_token', '8c1385c81f3a5ed71498f722923e13d0f38ed573b6adaacc2e03e33d0275aad8', '[\"*\"]', '2025-05-21 00:30:26', NULL, '2025-05-21 00:29:52', '2025-05-21 00:30:26'),
+(82, 'App\\Models\\User', 6, 'auth_token', '281f9f162e43a55677c1334def714185e60cf08bfb0d51de1c04f6a65faf8110', '[\"*\"]', '2025-05-21 00:37:13', NULL, '2025-05-21 00:30:38', '2025-05-21 00:37:13'),
+(83, 'App\\Models\\User', 6, 'auth_token', 'e4cb14febfbe0d2d012e0aab226ac8af6f7ee087de2b249745a15b6c26aaa587', '[\"*\"]', '2025-05-22 00:56:04', NULL, '2025-05-21 22:20:51', '2025-05-22 00:56:04'),
+(84, 'App\\Models\\User', 6, 'auth_token', 'ebac83c45fe33f0730e61f2c6d635b8eb12eafed17a81846c0ba815135387e00', '[\"*\"]', '2025-05-21 22:31:39', NULL, '2025-05-21 22:31:30', '2025-05-21 22:31:39'),
+(85, 'App\\Models\\User', 8, 'auth_token', '18262b3125ca8e3931997f80e7db1d5249d96e52e65bbaaa4a822b770994336c', '[\"*\"]', '2025-05-21 23:11:28', NULL, '2025-05-21 22:32:10', '2025-05-21 23:11:28'),
+(86, 'App\\Models\\User', 7, 'auth_token', '31b88d98f352094f780ec67ea9b419b079b80ff505f232ef8a35ab7192b0d50b', '[\"*\"]', '2025-05-22 23:05:38', NULL, '2025-05-21 22:32:45', '2025-05-22 23:05:38'),
+(87, 'App\\Models\\User', 6, 'auth_token', '31d0ee5ce6f6182eaf9c7d53a084c363ba53a22be23d52a393be212d756510cc', '[\"*\"]', '2025-05-23 00:52:18', NULL, '2025-05-22 16:56:35', '2025-05-23 00:52:18');
 
 -- --------------------------------------------------------
 
@@ -336,7 +358,9 @@ CREATE TABLE `project_details` (
 INSERT INTO `project_details` (`id`, `developer_id`, `project_name`, `project_location`, `project_category`, `total_units`, `available_units`, `status`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Bellevue', 'Upper Carmen, Cagayan de Oro', 'House and lot', 100, 100, 'Planning', '2025-05-11 18:28:27', '2025-05-11 18:28:27'),
 (2, 1, 'Golden Glow Village', 'Upper Carmen, Cagayan de Oro', 'Condominium/Apartment', 50, 50, 'Pre-Development', '2025-05-11 18:28:27', '2025-05-11 18:28:27'),
-(3, 2, 'Aspira Tower', 'Cagayan de Oro', 'Condominium/Apartment', 300, 300, 'Ready for Occupancy', '2025-05-11 19:04:09', '2025-05-11 19:04:09');
+(3, 2, 'Aspira Tower', 'Cagayan de Oro', 'Condominium/Apartment', 300, 300, 'Ready for Occupancy', '2025-05-11 19:04:09', '2025-05-11 19:04:09'),
+(4, 3, 'Camella Ceritos', 'Uptown CDO', 'House and lot', 100, 100, 'Pre-Development', '2025-05-22 17:32:51', '2025-05-22 17:32:51'),
+(5, 3, 'Camella Greta', 'CDO Uptown', 'Condominium/Apartment', 100, 100, 'Ongoing', '2025-05-22 17:39:53', '2025-05-22 17:39:53');
 
 -- --------------------------------------------------------
 
@@ -361,7 +385,12 @@ INSERT INTO `property_images` (`id`, `property_id`, `images`, `created_at`, `upd
 (2, 1, 'property_images/1747443938_494814485_9766862713428573_2094112077946730909_n.jpg', '2025-05-16 17:05:38', '2025-05-16 17:05:38'),
 (3, 1, 'property_images/1747443938_494817128_1193053808647490_2498692346832905686_n.jpg', '2025-05-16 17:05:38', '2025-05-16 17:05:38'),
 (4, 2, 'property_images/1747444860_f6061bfd-e60d-49e9-a9c5-a8987208e14e.jpg', '2025-05-16 17:21:00', '2025-05-16 17:21:00'),
-(5, 2, 'property_images/1747444860_484590799_1802454960520174_7462654808448639264_n.jpg', '2025-05-16 17:21:00', '2025-05-16 17:21:00');
+(5, 2, 'property_images/1747444860_484590799_1802454960520174_7462654808448639264_n.jpg', '2025-05-16 17:21:00', '2025-05-16 17:21:00'),
+(6, 2, 'property_images/1747789621_494329324_724222580089626_520573923037205898_n.jpg', '2025-05-20 17:07:01', '2025-05-20 17:07:01'),
+(7, 2, 'property_images/1747789621_494341233_554798251017131_7377296996547724807_n.jpg', '2025-05-20 17:07:01', '2025-05-20 17:07:01'),
+(8, 2, 'property_images/1747789621_494330361_1870692077101598_8291018926752271468_n.jpg', '2025-05-20 17:07:01', '2025-05-20 17:07:01'),
+(9, 3, 'property_images/1747789887_494329324_724222580089626_520573923037205898_n.jpg', '2025-05-20 17:11:27', '2025-05-20 17:11:27'),
+(10, 3, 'property_images/1747789887_494341233_554798251017131_7377296996547724807_n.jpg', '2025-05-20 17:11:27', '2025-05-20 17:11:27');
 
 -- --------------------------------------------------------
 
@@ -390,7 +419,8 @@ CREATE TABLE `property_listings` (
 
 INSERT INTO `property_listings` (`id`, `category`, `price_and_rate`, `date_listed`, `lot_area`, `floor_area`, `details`, `location`, `type_of_listing`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Commercial Properties', 12000, '2025-05-17', '100', '100', '2 CR\r\n1 Bathroom', 'Cagayan de Oro', 'Exclusive', 'Not Sold', '2025-05-16 17:05:38', '2025-05-16 17:05:38'),
-(2, 'Rental Properties', 10000, '2025-05-17', '200', '100', '1 CR', 'Cagayan de Oro', 'Exclusive', 'Not Sold', '2025-05-16 17:21:00', '2025-05-16 17:21:00');
+(2, 'Rental Properties', 10000, '2025-05-17', '200', '100', '1 CR', 'Cagayan de Oro', 'Exclusive', 'Not Sold', '2025-05-16 17:21:00', '2025-05-16 17:21:00'),
+(3, 'Lot only', NULL, '2025-05-21', '100', '250', '1 mais', 'Cagayan de Oro', 'Exclusive', 'Not Sold', '2025-05-20 17:11:27', '2025-05-20 17:11:27');
 
 -- --------------------------------------------------------
 
@@ -468,7 +498,13 @@ INSERT INTO `sales_encodings` (`id`, `agent_id`, `category`, `client_name`, `dat
 (3, 18, 'Lot only', 'Paulas Zayas', '2025-05-12', 10000000.00, 'Tagoloan Misamis oriental', 'Not Sold', 'images/1746863986_496009673_122228909648233789_6735027208606461891_n.jpg', '2025-05-09 23:27:29', '2025-05-09 23:59:46'),
 (4, 21, 'House and lot', 'Maria de La rosa', '2025-05-13', 2200000.00, 'TierraNava Tagoloan', 'Pre-Selling', 'images/1747018247_0a390f58-8834-417e-b439-2aba8a8b8721.jpg', '2025-05-11 18:50:17', '2025-05-11 18:50:47'),
 (5, 19, 'Lot only', 'Jason Llanes', '2025-05-13', 10000000.00, 'Opol Misamis Oriental', 'Sold', 'images/1747147855_494815671_694279916320128_5392280086772437047_n.jpg', '2025-05-13 06:50:55', '2025-05-13 06:50:55'),
-(6, 20, 'House and lot', 'Maya Onho', '2025-05-17', 10000000.00, 'Cagayan se Oro', 'Not Sold', 'images/1747449112_IMG_5329.jpeg', '2025-05-16 18:31:25', '2025-05-16 18:31:52');
+(6, 20, 'House and lot', 'Maya Onho', '2025-05-17', 10000000.00, 'Cagayan se Oro', 'Not Sold', 'images/1747449112_IMG_5329.jpeg', '2025-05-16 18:31:25', '2025-05-16 18:31:52'),
+(7, 17, 'Condominium/Apartment', 'Paulas Zayas', '2025-05-19', 10000000.00, 'Tagoloan Misamis Oriental', 'Not Sold', 'images/1747790060_494329324_724222580089626_520573923037205898_n.jpg', '2025-05-18 20:47:08', '2025-05-20 17:14:20'),
+(8, 3, 'House and lot', 'Paulas Zayas', '2025-05-21', 10000000.00, 'Opol misamis oriental', 'Not Sold', 'images/1747794677_494329324_724222580089626_520573923037205898_n.jpg', '2025-05-20 18:31:17', '2025-05-20 18:31:17'),
+(9, 3, 'Condominium/Apartment', 'Paulas Zayas', '2025-05-21', 12000000.00, 'Lumbia CDO', 'Sold', 'images/1747795811_494328333_8389659334492080_3597666067216912070_n.jpg', '2025-05-20 18:50:11', '2025-05-20 18:50:11'),
+(10, 3, 'Rental Properties', 'Paulas Zayas', '2025-05-21', 12000000.00, 'Opol misamis oriental', 'Not Sold', 'images/1747796522_494328182_674879152078344_1284409592881419922_n.jpg', '2025-05-20 19:02:02', '2025-05-20 19:02:02'),
+(11, 3, 'Commercial Properties', 'Paulas Zayas', '2025-05-21', 14000000.00, 'Lumbia CDO', 'Not Sold', 'images/1747796648_494328130_1212467983847382_2836958540812487728_n.jpg', '2025-05-20 19:04:08', '2025-05-20 19:04:08'),
+(12, 3, 'Rental Properties', 'Paulas Zayas', '2025-05-21', 12000000.00, 'Lumbia CDO', 'Sold', 'images/1747796737_494344157_987092493495212_553199359977409574_n.jpg', '2025-05-20 19:05:37', '2025-05-20 19:05:37');
 
 -- --------------------------------------------------------
 
@@ -705,25 +741,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `project_details`
 --
 ALTER TABLE `project_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `property_images`
 --
 ALTER TABLE `property_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `property_listings`
 --
 ALTER TABLE `property_listings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `p_info`
@@ -735,7 +771,7 @@ ALTER TABLE `p_info`
 -- AUTO_INCREMENT for table `sales_encodings`
 --
 ALTER TABLE `sales_encodings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`

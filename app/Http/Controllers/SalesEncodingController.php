@@ -50,34 +50,36 @@ class SalesEncodingController extends Controller
         });
             
         $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-            ->get()
-            ->groupBy(function ($item) {
-                return $item->agent->personalInfo->first_name . ' ' .
-                       $item->agent->personalInfo->middle_name . ' ' .
-                       $item->agent->personalInfo->last_name . ' ' .
-                       $item->agent->personalInfo->extension_name;
-            })
-            ->map(function (Collection $group) {
-                return [
-                    'first_name' => $group->first()->agent->personalInfo->first_name,
-                    'middle_name' => $group->first()->agent->personalInfo->middle_name,
-                    'last_name' => $group->first()->agent->personalInfo->last_name,
-                    'extension_name' => $group->first()->agent->personalInfo->extension_name,
-                    'totalReserved' => $group->count(),
-                    'totalSales' => $group->sum('amount') // Calculate total sales for each agent
-                ];
-            })
-            ->sortByDesc('totalReserved');
+        ->get()
+        ->groupBy(function ($item) {
+            return $item->agent->personalInfo->first_name . ' ' .
+                $item->agent->personalInfo->middle_name . ' ' .
+                $item->agent->personalInfo->last_name . ' ' .
+                $item->agent->personalInfo->extension_name . ' ' .
+                $item->agent->user->role;
+        })
+        ->map(function (Collection $group) {
+            return [
+                'first_name' => $group->first()->agent->personalInfo->first_name,
+                'middle_name' => $group->first()->agent->personalInfo->middle_name,
+                'last_name' => $group->first()->agent->personalInfo->last_name,
+                'extension_name' => $group->first()->agent->personalInfo->extension_name,
+                'role' => in_array($group->first()->agent->user->role, [0, 2]) ? 'Broker' : 'Agent', // Correct role mapping
+                'totalReserved' => $group->count(),
+                'totalSales' => $group->sum('amount') // Calculate total sales for each agent
+            ];
+        })
+        ->sortByDesc('totalReserved');
 
-            return response()->json([
-                'agents' => $agents, 
-                'salesEncoding' => $salesEncoding,
-                'salesEncodingReports' => $salesEncodingReports,
-                'salesdashboard' => $mergedSales->values(),
-                'topPerformers' => $topPerformers->values()
-            
-            ], 200);
-        }
+        return response()->json([
+            'agents' => $agents, 
+            'salesEncoding' => $salesEncoding,
+            'salesEncodingReports' => $salesEncodingReports,
+            'salesdashboard' => $mergedSales->values(),
+            'topPerformers' => $topPerformers->values()
+        
+        ], 200);
+    }
 
     /**
      * Show the form for creating a new resource.
