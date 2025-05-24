@@ -101,12 +101,17 @@ class AuthController extends Controller
         // Determine if the credential is an email or username
         $fieldType = filter_var($credentials['credential'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        // Attempt to authenticate the user
-        if (!Auth::attempt([$fieldType => $credentials['credential'], 'password' => $credentials['password']])) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+        // Check if the user exists with the given email or username
+        $user = User::where($fieldType, $credentials['credential'])->first();
+
+        if (!$user) {
+            return response()->json(['message' => ucfirst($fieldType) . ' is invalid'], 401);
         }
 
-        $user = Auth::user();
+        // Check if the password is correct
+        if (!Auth::attempt([$fieldType => $credentials['credential'], 'password' => $credentials['password']])) {
+            return response()->json(['message' => 'Password is invalid'], 401);
+        }
 
         // Check if the user's status is 1 (pending approval)
         if ($user->status == 1) {

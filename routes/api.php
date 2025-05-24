@@ -73,7 +73,7 @@ Route::middleware(['throttle:api'])->group(function () {
 
          /*
         |--------------------------------------------------------------------------
-        | Agent & Broker Routes
+        | Agent Routes
         |--------------------------------------------------------------------------
         | Routes accessible only to users with the 'agent/broker' role (role = [1,2]).
         */
@@ -81,6 +81,12 @@ Route::middleware(['throttle:api'])->group(function () {
             Route::apiResource('user/agent-broker', UserController::class);
         });
 
+         /*
+        |--------------------------------------------------------------------------
+        | Broker Routes
+        |--------------------------------------------------------------------------
+        | Routes accessible only to users with the 'agent/broker' role (role = [1,2]).
+        */
         Route::middleware(['role:2'])->group(function () {
             Route::apiResource('user/broker', BrokerController::class);
         });
