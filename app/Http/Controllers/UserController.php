@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\IdentityDetailsModel;
 use App\Models\PersonalInfoModel;
 use App\Models\SalesEncoding;
+use App\Models\PropertyListing;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -41,10 +42,15 @@ class UserController extends Controller
             })
             ->sortByDesc('totalReserved');
 
-        $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+        $salesEncodingTop5 = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
             ->where('agent_id', $identityDetails->id)
             ->orderBy('created_at', 'desc')
             ->take(5)
+            ->get();
+
+            $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+            ->where('agent_id', $identityDetails->id)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         // Extract months from salesEncoding
@@ -54,6 +60,10 @@ class UserController extends Controller
 
         $totalSales = $salesEncoding->sum('amount');
 
+         $propertyListings = PropertyListing::with('propertyImages')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         return response()->json([
             'user' => $user,
             'personalInfo' => $personalInfo,
@@ -62,6 +72,8 @@ class UserController extends Controller
             'salesEncoding' => $salesEncoding,
             'totalSales' => $totalSales,
             'monthsOfSale' => $monthsOfSale, 
+            'property' => $propertyListings,
+            'salesEncodingTop5' => $salesEncodingTop5,
         ])->setStatusCode(200);
     }
 
@@ -78,7 +90,53 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request data, including multiple images
+        $validated = $request->validate([
+            'category'         => 'required|string|max:255',
+            'price_and_rate'   => 'nullable|numeric',
+            'date_listed'      => 'required|date',
+            'lot_area'         => 'required|numeric',
+            'floor_area'       => 'required|numeric',
+            'details'          => 'nullable|string',
+            'location'         => 'required|string|max:255',
+            'type_of_listing'  => 'required|string|max:255',
+            'status'           => 'required|string|max:255',
+            'images'           => 'nullable|array',
+            'images.*'         => 'file|image|max:512000', 
+        ]);
+
+        // Store the validated data (excluding images)
+        $propertyListing = PropertyListing::create([
+            'category'        => $validated['category'],
+            'price_and_rate'  => $validated['price_and_rate'],
+            'date_listed'     => $validated['date_listed'],
+            'lot_area'        => $validated['lot_area'],
+            'floor_area'      => $validated['floor_area'],
+            'details'         => $validated['details'],
+            'location'        => $validated['location'],
+            'type_of_listing' => $validated['type_of_listing'],
+            'status'          => $validated['status'],
+        ]);
+
+        // Handle images if provided (multiple file uploads)
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $imageFile) {
+                $filename = time() . '_' . $imageFile->getClientOriginalName();
+                $imageFile->move(public_path('property_images'), $filename);
+                $propertyListing->propertyImages()->create([
+                    'images' => 'property_images/' . $filename,
+                ]);
+            }
+        }
+
+        // Reload with images
+        $propertyListing->load('propertyImages');
+
+        // Return a response (JSON example)
+        return response()->json([
+            'message' => 'Property listing created successfully.',
+            'property'    => $propertyListing,
+        ], 201);
     }
 
     /**
