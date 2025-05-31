@@ -48,10 +48,15 @@ class UserController extends Controller
             ->take(5)
             ->get();
 
-            $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-            ->where('agent_id', $identityDetails->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+        ->where('agent_id', $identityDetails->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        $salesEncodingReport = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+        ->where('agent_id', $identityDetails->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
 
         // Extract months from salesEncoding
         $monthsOfSale = $salesEncoding->map(function ($item) {
@@ -74,6 +79,7 @@ class UserController extends Controller
             'monthsOfSale' => $monthsOfSale, 
             'property' => $propertyListings,
             'salesEncodingTop5' => $salesEncodingTop5,
+            'salesEncodingReport' => $salesEncodingReport,
         ])->setStatusCode(200);
     }
 

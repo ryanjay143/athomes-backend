@@ -13,6 +13,8 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\UserSalesController;
+use App\Http\Controllers\BrokerSalesController;
+
 use Illuminate\Http\Request;
 
 
@@ -92,6 +94,8 @@ Route::middleware(['throttle:api'])->group(function () {
         */
         Route::middleware(['role:2'])->group(function () {
             Route::apiResource('user/broker', BrokerController::class);
+            Route::apiResource('user/broker-sales', BrokerSalesController::class);
+            Route::post('updateSalesEncodingBroker/{id}', [BrokerSalesController::class, 'updateSalesEncodingBroker']);
         });
     });
 });
