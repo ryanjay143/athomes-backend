@@ -70,7 +70,7 @@ Route::middleware(['throttle:api'])->group(function () {
             Route::apiResource('developers', DeveloperController::class);
             Route::apiResource('property-listings', PropertyListingController::class);
             Route::post('admin/addProject', [DeveloperController::class, 'addProjects']); 
-           
+            Route::post('admin/edit-profile', [BrokerAgentController::class, 'editProfileAdmin']);
         });
 
 
@@ -82,6 +82,7 @@ Route::middleware(['throttle:api'])->group(function () {
         */
         Route::middleware(['role:1'])->group(function () {
             Route::apiResource('user/agent-broker', UserController::class);
+            Route::post('agent/edit-profile', [UserController::class, 'editProfileAgent']);
             Route::apiResource('user/agent-sales', UserSalesController::class);
             Route::post('updateSalesEncodingAgent/{id}', [UserSalesController::class, 'updateSalesEncoding']);
         });
@@ -94,6 +95,7 @@ Route::middleware(['throttle:api'])->group(function () {
         */
         Route::middleware(['role:2'])->group(function () {
             Route::apiResource('user/broker', BrokerController::class);
+            Route::post('broker/edit-profile', [BrokerController::class, 'editProfileBroker']);
             Route::apiResource('user/broker-sales', BrokerSalesController::class);
             Route::post('updateSalesEncodingBroker/{id}', [BrokerSalesController::class, 'updateSalesEncodingBroker']);
         });

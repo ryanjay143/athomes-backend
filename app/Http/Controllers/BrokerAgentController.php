@@ -126,6 +126,88 @@ class BrokerAgentController extends Controller
    
     }
 
+    public function editProfileAdmin(Request $request)
+    {
+        $validatedData = $request->validate([
+            'username' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'nullable|string|min:8|confirmed',
+            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'first_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'extension_name' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'complete_address' => 'nullable|string|max:20',
+        ]);
+
+        // Get the authenticated user
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
+
+        // Update the user fields
+        $user->username = $validatedData['username'];
+        $user->email = $validatedData['email'];
+
+        // Update the user's password if provided
+        if (!empty($validatedData['password'])) {
+            $user->password = bcrypt($validatedData['password']);
+        }
+
+        // Save the updated user information
+        $user->save();
+
+        // Find the personal info record by user ID
+        $personalInfo = PersonalInfoModel::where('user_id', $user->id)->first();
+
+        if (!$personalInfo) {
+            return response()->json(['error' => 'Personal information not found'], 404);
+        }
+
+        // Update the personal info fields
+        $personalInfo->first_name = $validatedData['first_name'];
+        $personalInfo->middle_name = $validatedData['middle_name'];
+        $personalInfo->last_name = $validatedData['last_name'];
+        $personalInfo->extension_name = $validatedData['extension_name'];
+        $personalInfo->phone = $validatedData['phone'];
+        $personalInfo->complete_address = $validatedData['complete_address'];
+
+        if ($request->hasFile('profile_pic')) {
+            // Check if there's an existing profile picture and delete it
+            if ($personalInfo->profile_pic) {
+                $oldImagePath = public_path($personalInfo->profile_pic);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath); // Delete the old image file
+                }
+            }
+
+            $file = $request->file('profile_pic');
+            $filename = time() . '_' . $file->getClientOriginalName(); // Create a unique filename
+            $destinationPath = public_path('profile_pic'); // Define the destination path in the public directory
+
+            // Move the file to the public directory
+            $file->move($destinationPath, $filename);
+
+            // Save the path to the personal info model
+            $personalInfo->profile_pic = 'profile_pic/' . $filename;
+        }
+
+        // Save the updated personal info
+        $personalInfo->save();
+
+        // Return a JSON response
+        return response()->json([
+            "user" => auth()->user(),
+            "personalInfo" => $personalInfo,
+            "message" => "Profile updated successfully"
+        ]);
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      */
