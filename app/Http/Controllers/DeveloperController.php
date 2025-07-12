@@ -126,6 +126,15 @@ class DeveloperController extends Controller
         return response()->json($properties);
     }
 
+    public function searchCategory()
+    {
+        $getProPerty = PropertyListing::pluck('category')->unique()->values();
+
+        return response()->json([
+            'Housing category' => $getProPerty,
+        ], 200);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

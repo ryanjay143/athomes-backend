@@ -73,6 +73,8 @@ Route::middleware(['throttle:api'])->group(function () {
             Route::post('admin/edit-profile', [BrokerAgentController::class, 'editProfileAdmin']);
 
             Route::post('admin/search-properties/{id}', [DeveloperController::class, 'searchProperties']);
+
+            Route::get('admin/housingCategory', [DeveloperController::class, 'searchCategory']);
         });
 
 
