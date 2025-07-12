@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DeveloperModel;
+use App\Models\PropertyListing;
 use App\Models\ProjectDetailsModel;
 use App\Models\DeveloperImage;
 use Illuminate\Support\Facades\Storage;
+
 
 class DeveloperController extends Controller
 {
@@ -93,6 +95,35 @@ class DeveloperController extends Controller
     public function show(string $id)
     {
         //
+    }
+
+    public function searchProperties(Request $request)
+    {
+        $validatedData = $request->validate([
+            'location' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'price_and_rate' => 'nullable|numeric',
+        ]);
+
+        $location = $validatedData['location'];
+        $category = $validatedData['category'];
+        $priceAndRate = $validatedData['price_and_rate'];
+
+        $query = PropertyListing::with('propertyImages')
+                                ->where('location', $location)
+                                ->where('category', $category);
+
+        if (!is_null($priceAndRate)) {
+            $query->where('price_and_rate', $priceAndRate);
+        }
+
+        $properties = $query->get();
+
+        if ($properties->isEmpty()) {
+            return response()->json(['message' => 'Property not found'], 404);
+        }
+
+        return response()->json($properties);
     }
 
     /**

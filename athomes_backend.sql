@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2025 at 03:29 AM
+-- Generation Time: Jul 12, 2025 at 03:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,6 +32,16 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('b0f98bb9a5e421fabc0d244df93be13a', 'i:2;', 1752281011),
+('b0f98bb9a5e421fabc0d244df93be13a:timer', 'i:1752281011;', 1752281011),
+('f1f70ec40aaa556905d4a030501c0ba4', 'i:1;', 1752283347),
+('f1f70ec40aaa556905d4a030501c0ba4:timer', 'i:1752283347;', 1752283347);
 
 -- --------------------------------------------------------
 
@@ -122,6 +132,13 @@ CREATE TABLE `identity_details` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `identity_details`
+--
+
+INSERT INTO `identity_details` (`id`, `user_id`, `prc_liscence_number`, `dhsud_registration_number`, `validation_date`, `last_school_att`, `created_at`, `updated_at`) VALUES
+(1, 1, 'efee4t4grg5y', 'grgr4t54645654trg', '31-07-2025', 'Tagoloan Community College', '2025-07-11 16:41:04', '2025-07-11 16:41:04');
+
 -- --------------------------------------------------------
 
 --
@@ -177,19 +194,19 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (26, '2025_01_31_050928_create_personal_access_tokens_table', 1),
 (29, '2025_01_31_063854_create_personal_access_tokens_table', 4),
 (31, '2025_02_08_043459_create_personal_access_tokens_table', 5),
-(56, '0001_01_01_000000_create_users_table', 6),
-(57, '0001_01_01_000001_create_cache_table', 6),
-(58, '0001_01_01_000002_create_jobs_table', 6),
-(59, '2025_01_31_131021_create_developer_housing_table', 6),
-(60, '2025_03_20_050947_create_p_info_table', 6),
-(61, '2025_03_20_054920_create_identity_details_table', 6),
-(62, '2025_03_26_163357_create_developer_table', 6),
-(63, '2025_03_26_164320_create_project_details_table', 6),
-(64, '2025_04_01_022743_create_developer_images_table', 6),
-(65, '2025_04_17_043139_create_sales_encodings_table', 6),
-(66, '2025_04_18_135213_create_property_listings_table', 6),
-(67, '2025_04_18_135912_create_property_images_table', 6),
-(68, '2025_05_14_044614_create_personal_access_tokens_table', 6);
+(84, '0001_01_01_000000_create_users_table', 6),
+(85, '0001_01_01_000001_create_cache_table', 6),
+(86, '0001_01_01_000002_create_jobs_table', 6),
+(87, '2025_01_31_131021_create_developer_housing_table', 6),
+(88, '2025_03_20_050947_create_p_info_table', 6),
+(89, '2025_03_20_054920_create_identity_details_table', 6),
+(90, '2025_03_26_163357_create_developer_table', 6),
+(91, '2025_03_26_164320_create_project_details_table', 6),
+(92, '2025_04_01_022743_create_developer_images_table', 6),
+(93, '2025_04_17_043139_create_sales_encodings_table', 6),
+(94, '2025_04_18_135213_create_property_listings_table', 6),
+(95, '2025_04_18_135912_create_property_images_table', 6),
+(96, '2025_05_14_044614_create_personal_access_tokens_table', 6);
 
 -- --------------------------------------------------------
 
@@ -221,6 +238,14 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\User', 1, 'auth_token', '0e8e6bc22f8e207b2ef44d0fd7cd7dbaeaf4ec8f0c210725587ce61e843c7e01', '[\"*\"]', '2025-07-11 16:42:14', NULL, '2025-07-11 16:41:50', '2025-07-11 16:42:14'),
+(2, 'App\\Models\\User', 1, 'auth_token', '4d8a1d82c97491a7bd80074f201fbe9db0f269571e4a0cc54b3b197455003d87', '[\"*\"]', '2025-07-11 17:21:27', NULL, '2025-07-11 16:42:45', '2025-07-11 17:21:27');
 
 -- --------------------------------------------------------
 
@@ -255,6 +280,17 @@ CREATE TABLE `property_images` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `property_images`
+--
+
+INSERT INTO `property_images` (`id`, `property_id`, `images`, `created_at`, `updated_at`) VALUES
+(1, 1, 'property_images/1752281367_507504614.jpg', '2025-07-11 16:49:27', '2025-07-11 16:49:27'),
+(2, 1, 'property_images/1752281367_house-and-lot-for-sale-in-laoag-city-ilocos-norte-at-camella-homes-laoag.jpg', '2025-07-11 16:49:27', '2025-07-11 16:49:27'),
+(3, 1, 'property_images/1752281367_507504641.jpg', '2025-07-11 16:49:27', '2025-07-11 16:49:27'),
+(4, 2, 'property_images/1752281869_Commercial-property-buying-guidelines-1400x700-1.webp', '2025-07-11 16:57:49', '2025-07-11 16:57:49'),
+(5, 2, 'property_images/1752281869_commercial-properties-in-ahemedabad-res-management.webp', '2025-07-11 16:57:49', '2025-07-11 16:57:49');
+
 -- --------------------------------------------------------
 
 --
@@ -276,6 +312,14 @@ CREATE TABLE `property_listings` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `property_listings`
+--
+
+INSERT INTO `property_listings` (`id`, `category`, `price_and_rate`, `date_listed`, `lot_area`, `floor_area`, `details`, `location`, `type_of_listing`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'House and lot', NULL, '2025-07-12', '100', '100', 'Camella House and Lot\r\n\r\n1 bedroom\r\n1 CR', 'Cagayan de Oro City', 'Exclusive', 'Not Sold', '2025-07-11 16:49:27', '2025-07-11 16:49:27'),
+(2, 'Commercial Properties', 2000000, '2025-07-12', '100', '200', 'Comerrcial Property\r\n\r\n1 Bedroom\r\n1 CR', 'Cagayan de Oro', 'Exclusive', 'Not Sold', '2025-07-11 16:57:49', '2025-07-11 16:57:49');
+
 -- --------------------------------------------------------
 
 --
@@ -296,6 +340,13 @@ CREATE TABLE `p_info` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `p_info`
+--
+
+INSERT INTO `p_info` (`id`, `user_id`, `first_name`, `middle_name`, `last_name`, `extension_name`, `phone`, `gender`, `complete_address`, `profile_pic`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Aldin', 'Malazarte', 'Tagolimot', '', '09358554398', 'male', 'Zone 1, Santa Ana', '', '2025-07-11 16:41:04', '2025-07-11 16:41:04');
 
 -- --------------------------------------------------------
 
@@ -351,6 +402,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `acct_number`, `email_verified_at`, `password`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin123', 'aldin@gmail.com', 'Acc-DH2E9W5JG', NULL, '$2y$12$KIsbkV4.S/.N4cHrtySYY.M7JTQf4HS6aYxOTvYt04Cx2jcgvKh3.', 0, 0, NULL, '2025-07-11 16:41:04', '2025-07-11 16:41:04');
 
 --
 -- Indexes for dumped tables
@@ -516,7 +574,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `identity_details`
 --
 ALTER TABLE `identity_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -528,13 +586,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `project_details`
@@ -546,19 +604,19 @@ ALTER TABLE `project_details`
 -- AUTO_INCREMENT for table `property_images`
 --
 ALTER TABLE `property_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `property_listings`
 --
 ALTER TABLE `property_listings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `p_info`
 --
 ALTER TABLE `p_info`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sales_encodings`
@@ -570,7 +628,7 @@ ALTER TABLE `sales_encodings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

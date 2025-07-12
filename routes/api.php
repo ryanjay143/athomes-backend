@@ -71,6 +71,8 @@ Route::middleware(['throttle:api'])->group(function () {
             Route::apiResource('property-listings', PropertyListingController::class);
             Route::post('admin/addProject', [DeveloperController::class, 'addProjects']); 
             Route::post('admin/edit-profile', [BrokerAgentController::class, 'editProfileAdmin']);
+
+            Route::post('admin/search-properties/{id}', [DeveloperController::class, 'searchProperties']);
         });
 
 
