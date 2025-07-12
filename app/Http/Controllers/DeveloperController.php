@@ -135,6 +135,15 @@ class DeveloperController extends Controller
         ], 200);
     }
 
+    public function searchLocation()
+    {
+        $getLocation = PropertyListing::pluck('location')->unique()->values();
+
+        return response()->json([
+            'Housing location' => $getLocation,
+        ], 200);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

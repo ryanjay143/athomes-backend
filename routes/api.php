@@ -75,6 +75,7 @@ Route::middleware(['throttle:api'])->group(function () {
             Route::post('admin/search-properties/{id}', [DeveloperController::class, 'searchProperties']);
 
             Route::get('admin/housingCategory', [DeveloperController::class, 'searchCategory']);
+            Route::get('admin/housingLocation', [DeveloperController::class, 'searchLocation']);
         });
 
 
