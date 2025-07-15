@@ -31,6 +31,8 @@ Route::middleware(['throttle:api'])->group(function () {
     Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
         ->middleware('guest')
         ->name('password.reset');
+
+      
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->middleware('guest')
         ->name('password.store');
