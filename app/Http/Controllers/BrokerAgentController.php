@@ -131,8 +131,8 @@ class BrokerAgentController extends Controller
         $validatedData = $request->validate([
             'username' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'password' => 'sometimes|nullable|string|min:8|confirmed', // <-- changed here
-            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'password' => 'sometimes|nullable|string|min:8|confirmed',
+            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'first_name' => 'required|string|max:255',
             'middle_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',

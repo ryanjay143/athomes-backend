@@ -91,7 +91,7 @@ class BrokerController extends Controller
             'username' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'password' => 'nullable|string|min:8|confirmed',
-            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'first_name' => 'required|string|max:255',
             'middle_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',
