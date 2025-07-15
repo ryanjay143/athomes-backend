@@ -15,7 +15,7 @@ class SalesEncodingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+     public function index()
     {
         $agents = IdentityDetailsModel::with('user', 'personalInfo')
             ->whereHas('user', function ($query) {
@@ -48,36 +48,41 @@ class SalesEncodingController extends Controller
                 'totalReserved' => $group->count() // Count the number of merged entries
             ];
         });
-            
+
+        // Only get top performers for the current month
         $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-        ->get()
-        ->groupBy(function ($item) {
-            return $item->agent->personalInfo->first_name . ' ' .
-                $item->agent->personalInfo->middle_name . ' ' .
-                $item->agent->personalInfo->last_name . ' ' .
-                $item->agent->personalInfo->extension_name . ' ' .
-                $item->agent->user->role;
-        })
-        ->map(function (Collection $group) {
-            return [
-                'first_name' => $group->first()->agent->personalInfo->first_name,
-                'middle_name' => $group->first()->agent->personalInfo->middle_name,
-                'last_name' => $group->first()->agent->personalInfo->last_name,
-                'extension_name' => $group->first()->agent->personalInfo->extension_name,
-                'role' => in_array($group->first()->agent->user->role, [0, 2]) ? 'Broker' : 'Agent', // Correct role mapping
-                'totalReserved' => $group->count(),
-                'totalSales' => $group->sum('amount') // Calculate total sales for each agent
-            ];
-        })
-        ->sortByDesc('totalReserved');
+            ->whereMonth('created_at', $currentMonth)
+            ->whereYear('created_at', $currentYear)
+            ->orderBy('amount', 'desc')
+            ->get()
+            ->groupBy(function ($item) {
+                return $item->agent->personalInfo->first_name . ' ' .
+                    $item->agent->personalInfo->middle_name . ' ' .
+                    $item->agent->personalInfo->last_name . ' ' .
+                    $item->agent->personalInfo->extension_name . ' ' .
+                    $item->agent->user->role;
+            })
+            ->map(function (Collection $group) {
+                return [
+                    'first_name' => $group->first()->agent->personalInfo->first_name,
+                    'middle_name' => $group->first()->agent->personalInfo->middle_name,
+                    'last_name' => $group->first()->agent->personalInfo->last_name,
+                    'extension_name' => $group->first()->agent->personalInfo->extension_name,
+                    'profile_pic' => $group->first()->agent->personalInfo->profile_pic,
+                    'role' => in_array($group->first()->agent->user->role, [0, 2]) ? 'Broker' : 'Agent',
+                    'totalReserved' => $group->count(),
+                    'totalSales' => $group->sum('amount')
+                ];
+            })
+            ->sortByDesc('totalReserved')
+            ->values();
 
         return response()->json([
             'agents' => $agents, 
             'salesEncoding' => $salesEncoding,
             'salesEncodingReports' => $salesEncodingReports,
             'salesdashboard' => $mergedSales->values(),
-            'topPerformers' => $topPerformers->values()
-        
+            'topPerformers' => $topPerformers // Only current month performers
         ], 200);
     }
 

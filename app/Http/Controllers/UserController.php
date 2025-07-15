@@ -95,7 +95,7 @@ class UserController extends Controller
             'last_name' => 'required|string|max:255',
             'extension_name' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:20',
-            'complete_address' => 'nullable|string|max:20',
+            'complete_address' => 'nullable|string|max:255',
         ]);
 
         // Get the authenticated user
