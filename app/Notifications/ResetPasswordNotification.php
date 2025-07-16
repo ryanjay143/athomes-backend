@@ -39,8 +39,13 @@ class ResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = env('FRONTEND_RESET_PASSWORD_URL')
-            . '?token=' . $this->token
+        // Get the base frontend URL from .env (no hash)
+        $frontendBaseUrl = env('FRONTEND_RESET_PASSWORD_URL', 'http://localhost:5000');
+
+        // Build the full reset password URL with hash fragment
+        $url = $frontendBaseUrl
+            . '/#/reset-password'
+            . '?token=' . urlencode($this->token)
             . '&email=' . urlencode($notifiable->getEmailForPasswordReset());
 
         return (new \Illuminate\Notifications\Messages\MailMessage)
