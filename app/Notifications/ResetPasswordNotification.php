@@ -40,7 +40,7 @@ class ResetPasswordNotification extends Notification
     public function toMail($notifiable)
     {
         // Get the base frontend URL from .env (no hash or fragment)
-        $frontendBaseUrl = env('FRONTEND_RESET_PASSWORD_URL', 'https://www.athomesdashboard.com/#/reset-password');
+        $frontendBaseUrl = env('FRONTEND_RESET_PASSWORD_URL', 'http://localhost:5000/#/reset-password');
 
         // Build the full reset password URL with hash fragment
         $url = rtrim($frontendBaseUrl, '/')
