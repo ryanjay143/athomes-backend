@@ -18,7 +18,11 @@
         </div>
         <p>If you did not request a password reset, no further action is required.</p>
         <br>
-        <p style="margin-top: 40px;">
+        <p style="margin-top: 40px; text-align: center;">
+            @if(isset($senderImageUrl))
+                <img src="{{ $senderImageUrl }}" alt="Sender Avatar" width="64" height="64" style="border-radius: 50%; margin-bottom: 12px;">
+                <br>
+            @endif
             Best regards,<br>
             <strong>Aldin Tagolimot</strong><br>
             Broker
