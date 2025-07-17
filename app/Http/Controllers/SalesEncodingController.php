@@ -108,7 +108,7 @@ class SalesEncodingController extends Controller
         'location' => 'required|string|max:255',
         'remarks' => 'required|string',
         'date_on_sale' => 'required|date',
-        'image' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
+        'image' => 'required|file|mimes:jpeg,png,jpg,gif|max:5120',
     ]);
 
     // Create a new SalesEncoding instance
