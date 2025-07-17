@@ -59,7 +59,7 @@ class SalesEncodingController extends Controller
 
     // Only get top performers for the selected month/year
     $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-        ->whereMonth('date_on_sale', $month)
+        ->whereBetween('date_on_sale', [$startDate, $endDate])
         ->orderBy('amount', 'desc')
         ->get()
         ->groupBy(function ($item) {
