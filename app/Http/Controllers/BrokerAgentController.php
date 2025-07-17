@@ -99,8 +99,10 @@ class BrokerAgentController extends Controller
                 $query->whereIn('role', [1, 2]);
             })
             ->where(function($query) {
-                $query->whereNull('prc_liscence_number') // Ensures the field is null
-                    ->orWhere('prc_liscence_number', ''); // Ensures the field is empty
+                $query->whereNull('prc_liscence_number')
+                    ->orWhere('prc_liscence_number', '')
+                    ->orWhereRaw('LOWER(prc_liscence_number) = ?', ['n/a'])
+                    ->orWhereRaw('LOWER(prc_liscence_number) = ?', ['na']);
             })
             ->orderBy('updated_at', 'desc')
             ->get();
@@ -113,8 +115,10 @@ class BrokerAgentController extends Controller
                 $query->whereIn('role', [1, 2]);
             })
             ->where(function($query) {
-                $query->whereNull('prc_liscence_number') // Ensures the field is null
-                    ->orWhere('prc_liscence_number', ''); // Ensures the field is empty
+                $query->whereNull('prc_liscence_number') // Field is null
+                    ->orWhere('prc_liscence_number', '') // Field is empty string
+                    ->orWhereRaw('LOWER(prc_liscence_number) = ?', ['n/a']) // Field is 'N/A' (case-insensitive)
+                    ->orWhereRaw('LOWER(prc_liscence_number) = ?', ['na']); // Field is 'NA' (case-insensitive)
             })
             ->orderBy('updated_at', 'desc')
             ->count();
