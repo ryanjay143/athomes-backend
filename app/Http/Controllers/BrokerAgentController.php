@@ -60,15 +60,20 @@ class BrokerAgentController extends Controller
         ->count();
 
         $agentsLicensed = IdentityDetailsModel::with('user', 'personalInfo')
-            ->whereHas('user', function($query) {
-                $query->where('status', 0);
-            })
-            ->whereHas('user', function($query) {
-                $query->whereIn('role', [1, 2]);
-            })
-            ->where('prc_liscence_number', '!=', '') 
-            ->orderBy('updated_at', 'desc')
-            ->get();
+    ->whereHas('user', function($query) {
+        $query->where('status', 0);
+    })
+    ->whereHas('user', function($query) {
+        $query->whereIn('role', [1, 2]);
+    })
+    ->where(function($query) {
+        $query->whereNotNull('prc_liscence_number')
+            ->where('prc_liscence_number', '!=', '')
+            ->whereRaw('LOWER(prc_liscence_number) != ?', ['n/a'])
+            ->whereRaw('LOWER(prc_liscence_number) != ?', ['na']);
+    })
+    ->orderBy('updated_at', 'desc')
+    ->get();
 
         $agentsLicensedCount = IdentityDetailsModel::with('user', 'personalInfo')
             ->whereHas('user', function($query) {
@@ -77,7 +82,12 @@ class BrokerAgentController extends Controller
             ->whereHas('user', function($query) {
                 $query->whereIn('role', [1, 2]);
             })
-            ->where('prc_liscence_number', '!=', '') 
+            ->where(function($query) {
+                $query->whereNotNull('prc_liscence_number')
+                    ->where('prc_liscence_number', '!=', '')
+                    ->whereRaw('LOWER(prc_liscence_number) != ?', ['n/a'])
+                    ->whereRaw('LOWER(prc_liscence_number) != ?', ['na']);
+            })
             ->orderBy('updated_at', 'desc')
             ->count();
 
