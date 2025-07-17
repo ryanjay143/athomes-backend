@@ -38,7 +38,7 @@ class SalesEncodingController extends Controller
         ->get();
 
         $salesEncodingAdmin = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-        ->whereBetween('date_on_sale', [$startDate, $endDate])
+        // ->whereBetween('date_on_sale', [$startDate, $endDate])
         ->orderBy('date_on_sale', 'desc')
         ->get();
 
