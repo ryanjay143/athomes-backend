@@ -15,77 +15,83 @@ class SalesEncodingController extends Controller
     /**
      * Display a listing of the resource.
      */
-     public function index()
-    {
-        $agents = IdentityDetailsModel::with('user', 'personalInfo')
-            ->whereHas('user', function ($query) {
-                $query->where('status', 0)->whereIn('role', [0, 1,2]);
-            })
-            ->orderBy('created_at', 'desc')
-            ->get();
+     public function index(Request $request)
+{
+    // Get month/year from query params, default to current
+    $month = $request->query('month', Carbon::now()->month);
+    $year = $request->query('year', Carbon::now()->year);
 
-        $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+    $agents = IdentityDetailsModel::with('user', 'personalInfo')
+        ->whereHas('user', function ($query) {
+            $query->where('status', 0)->whereIn('role', [0, 1, 2]);
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        $salesEncodingReports = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-            ->orderBy('created_at', 'asc')
-            ->get();
+    $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+        ->whereMonth('created_at', $month)
+        ->whereYear('created_at', $year)
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        $currentMonth = Carbon::now()->month;
-        $currentYear = Carbon::now()->year;
+    $salesEncodingReports = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+        ->whereMonth('created_at', $month)
+        ->whereYear('created_at', $year)
+        ->orderBy('created_at', 'asc')
+        ->get();
 
-        $salesdashboard = SalesEncoding::select('id', 'category', 'created_at')
-            ->whereMonth('created_at', $currentMonth)
-            ->whereYear('created_at', $currentYear)
-            ->orderBy('created_at', 'asc')
-            ->get();
+    $salesdashboard = SalesEncoding::select('id', 'category', 'created_at')
+        ->whereMonth('created_at', $month)
+        ->whereYear('created_at', $year)
+        ->orderBy('created_at', 'asc')
+        ->get();
 
-        // Group by category and merge entries
-        $mergedSales = $salesdashboard->groupBy('category')->map(function (Collection $group) {
+    // Group by category and merge entries
+    $mergedSales = $salesdashboard->groupBy('category')->map(function (Collection $group) {
+        return [
+            'category' => $group->first()->category,
+            'totalReserved' => $group->count()
+        ];
+    });
+
+    // Only get top performers for the selected month/year
+    $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+        ->whereMonth('created_at', $month)
+        ->whereYear('created_at', $year)
+        ->orderBy('amount', 'desc')
+        ->get()
+        ->groupBy(function ($item) {
+            return $item->agent->personalInfo->first_name . ' ' .
+                $item->agent->personalInfo->middle_name . ' ' .
+                $item->agent->personalInfo->last_name . ' ' .
+                $item->agent->personalInfo->extension_name . ' ' .
+                $item->agent->user->role;
+        })
+        ->map(function (Collection $group) {
             return [
-                'category' => $group->first()->category,
-                'totalReserved' => $group->count() // Count the number of merged entries
+                'first_name' => $group->first()->agent->personalInfo->first_name,
+                'middle_name' => $group->first()->agent->personalInfo->middle_name,
+                'last_name' => $group->first()->agent->personalInfo->last_name,
+                'extension_name' => $group->first()->agent->personalInfo->extension_name,
+                'profile_pic' => $group->first()->agent->personalInfo->profile_pic,
+                'role' => in_array($group->first()->agent->user->role, [0, 2]) ? 'Broker' : 'Agent',
+                'totalReserved' => $group->count(),
+                'totalSales' => $group->sum('amount')
             ];
-        });
+        })
+        ->sortByDesc('totalSales')
+        ->values();
 
-        // Only get top performers for the current month
-        $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-            ->whereMonth('created_at', $currentMonth)
-            ->whereYear('created_at', $currentYear)
-            ->orderBy('amount', 'desc')
-            ->get()
-            ->groupBy(function ($item) {
-                return $item->agent->personalInfo->first_name . ' ' .
-                    $item->agent->personalInfo->middle_name . ' ' .
-                    $item->agent->personalInfo->last_name . ' ' .
-                    $item->agent->personalInfo->extension_name . ' ' .
-                    $item->agent->user->role;
-            })
-            ->map(function (Collection $group) {
-                return [
-                    'first_name' => $group->first()->agent->personalInfo->first_name,
-                    'middle_name' => $group->first()->agent->personalInfo->middle_name,
-                    'last_name' => $group->first()->agent->personalInfo->last_name,
-                    'extension_name' => $group->first()->agent->personalInfo->extension_name,
-                    'profile_pic' => $group->first()->agent->personalInfo->profile_pic,
-                    'role' => in_array($group->first()->agent->user->role, [0, 2]) ? 'Broker' : 'Agent',
-                    'totalReserved' => $group->count(),
-                    'totalSales' => $group->sum('amount')
-                ];
-            })
-            ->sortByDesc('totalSales')
-            ->values();
-
-        return response()->json([
-            'agents' => $agents, 
-            'salesEncoding' => $salesEncoding,
-            'salesEncodingReports' => $salesEncodingReports,
-            'salesdashboard' => $mergedSales->values(),
-            'topPerformers' => $topPerformers // Only current month performers
-        ], 200);
-    }
-
+    return response()->json([
+        'agents' => $agents,
+        'salesEncoding' => $salesEncoding,
+        'salesEncodingReports' => $salesEncodingReports,
+        'salesdashboard' => $mergedSales->values(),
+        'topPerformers' => $topPerformers,
+        'selectedMonth' => $month,
+        'selectedYear' => $year
+    ], 200);
+}
     /**
      * Show the form for creating a new resource.
      */
