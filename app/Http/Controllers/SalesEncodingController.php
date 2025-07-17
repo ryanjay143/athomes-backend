@@ -19,7 +19,7 @@ class SalesEncodingController extends Controller
     {
         $agents = IdentityDetailsModel::with('user', 'personalInfo')
             ->whereHas('user', function ($query) {
-                $query->where('status', 0)->whereIn('role', [1,2]);
+                $query->where('status', 0)->whereIn('role', [0, 1,2]);
             })
             ->orderBy('created_at', 'desc')
             ->get();
