@@ -33,20 +33,20 @@ class SalesEncodingController extends Controller
         ->get();
 
     $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-        ->whereMonth('created_at', $month)
-        ->whereYear('created_at', $year)
-        ->whereBetween('created_at', [$startDate, $endDate])
-        ->orderBy('created_at', 'desc')
+        ->whereMonth('date_on_sale', $month)
+        ->whereYear('date_on_sale', $year)
+        ->whereBetween('date_on_sale', [$startDate, $endDate])
+        ->orderBy('date_on_sale', 'desc')
         ->get();
 
     $salesEncodingReports = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-        ->whereBetween('created_at', [$startDate, $endDate])
-        ->orderBy('created_at', 'asc')
+        ->whereBetween('date_on_sale', [$startDate, $endDate])
+        ->orderBy('date_on_sale', 'asc')
         ->get();
 
-    $salesdashboard = SalesEncoding::select('id', 'category', 'created_at')
-        ->whereMonth('created_at', $month)
-        ->orderBy('created_at', 'asc')
+    $salesdashboard = SalesEncoding::select('id', 'category', 'date_on_sale')
+        ->whereMonth('date_on_sale', $month)
+        ->orderBy('date_on_sale', 'asc')
         ->get();
 
     // Group by category and merge entries
@@ -59,7 +59,7 @@ class SalesEncodingController extends Controller
 
     // Only get top performers for the selected month/year
     $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-        ->whereMonth('created_at', $month)
+        ->whereMonth('date_on_sale', $month)
         ->orderBy('amount', 'desc')
         ->get()
         ->groupBy(function ($item) {
