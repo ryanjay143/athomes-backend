@@ -37,6 +37,11 @@ class SalesEncodingController extends Controller
         ->orderBy('date_on_sale', 'desc')
         ->get();
 
+        $salesEncodingAdmin = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+        ->whereBetween('date_on_sale', [$startDate, $endDate])
+        ->orderBy('date_on_sale', 'desc')
+        ->get();
+
     $salesEncodingReports = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
         // ->whereBetween('date_on_sale', [$startDate, $endDate])
         ->orderBy('created_at', 'asc')
@@ -89,7 +94,8 @@ class SalesEncodingController extends Controller
         'salesdashboard' => $mergedSales->values(),
         'topPerformers' => $topPerformers,
         'selectedMonth' => $month,
-        'selectedYear' => $year
+        'selectedYear' => $year,
+        'salesEncodingAdmin' => $salesEncodingAdmin
     ], 200);
 }    /**
      * Show the form for creating a new resource.
