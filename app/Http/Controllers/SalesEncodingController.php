@@ -74,7 +74,7 @@ class SalesEncodingController extends Controller
                     'totalSales' => $group->sum('amount')
                 ];
             })
-            ->sortByDesc('totalReserved')
+            ->sortByDesc('totalSales')
             ->values();
 
         return response()->json([
