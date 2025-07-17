@@ -33,9 +33,7 @@ class SalesEncodingController extends Controller
         ->get();
 
     $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-        ->whereMonth('date_on_sale', $month)
-        ->whereYear('date_on_sale', $year)
-        ->whereBetween('date_on_sale', [$startDate, $endDate])
+        >whereBetween('date_on_sale', [$startDate, $endDate])
         ->orderBy('date_on_sale', 'desc')
         ->get();
 
@@ -45,7 +43,7 @@ class SalesEncodingController extends Controller
         ->get();
 
     $salesdashboard = SalesEncoding::select('id', 'category', 'date_on_sale')
-        ->whereMonth('date_on_sale', $month)
+        >whereBetween('date_on_sale', [$startDate, $endDate])
         ->orderBy('date_on_sale', 'asc')
         ->get();
 
