@@ -21,6 +21,10 @@ class SalesEncodingController extends Controller
     $month = $request->query('month', Carbon::now()->month);
     $year = $request->query('year', Carbon::now()->year);
 
+    // Calculate start and end of the selected month
+    $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth()->startOfDay();
+    $endDate = Carbon::createFromDate($year, $month, 1)->endOfMonth()->endOfDay();
+
     $agents = IdentityDetailsModel::with('user', 'personalInfo')
         ->whereHas('user', function ($query) {
             $query->where('status', 0)->whereIn('role', [0, 1, 2]);
@@ -31,18 +35,17 @@ class SalesEncodingController extends Controller
     $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
         ->whereMonth('created_at', $month)
         ->whereYear('created_at', $year)
+        ->whereBetween('created_at', [$startDate, $endDate])
         ->orderBy('created_at', 'desc')
         ->get();
 
     $salesEncodingReports = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-        ->whereMonth('created_at', $month)
-        ->whereYear('created_at', $year)
+        ->whereBetween('created_at', [$startDate, $endDate])
         ->orderBy('created_at', 'asc')
         ->get();
 
     $salesdashboard = SalesEncoding::select('id', 'category', 'created_at')
         ->whereMonth('created_at', $month)
-        ->whereYear('created_at', $year)
         ->orderBy('created_at', 'asc')
         ->get();
 
@@ -57,7 +60,6 @@ class SalesEncodingController extends Controller
     // Only get top performers for the selected month/year
     $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
         ->whereMonth('created_at', $month)
-        ->whereYear('created_at', $year)
         ->orderBy('amount', 'desc')
         ->get()
         ->groupBy(function ($item) {
@@ -91,8 +93,7 @@ class SalesEncodingController extends Controller
         'selectedMonth' => $month,
         'selectedYear' => $year
     ], 200);
-}
-    /**
+}    /**
      * Show the form for creating a new resource.
      */
     public function create()
