@@ -25,40 +25,48 @@ class BrokerController extends Controller
         $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth()->startOfDay();
         $endDate = Carbon::createFromDate($year, $month, 1)->endOfMonth()->endOfDay();
 
+        $startDateYearly = Carbon::createFromDate($year, 1, 1)->startOfYear()->startOfDay();
+        $endDateYearly = Carbon::createFromDate($year, 12, 31)->endOfYear()->endOfDay();
 
         $user = auth()->user();
         $personalInfo = PersonalInfoModel::where('user_id', $user->id)->first();
         $identityDetails = IdentityDetailsModel::where('user_id', $user->id)->first();
         
         $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-        ->whereBetween('date_on_sale', [$startDate, $endDate])
-            ->get()
-            ->groupBy(function ($item) {
-                return $item->agent->personalInfo->first_name . ' ' .
-                    $item->agent->personalInfo->middle_name . ' ' .
-                    $item->agent->personalInfo->last_name . ' ' .
-                    $item->agent->personalInfo->extension_name . ' ' .
-                    $item->agent->user->role;
-            })
-            ->map(function ($group) {
-                return [
-                    'first_name' => $group->first()->agent->personalInfo->first_name,
-                    'middle_name' => $group->first()->agent->personalInfo->middle_name,
-                    'last_name' => $group->first()->agent->personalInfo->last_name,
-                    'extension_name' => $group->first()->agent->personalInfo->extension_name,
-                    'role' => in_array($group->first()->agent->user->role, [0, 2]) ? 'Broker' : 'Agent',
-                    'totalReserved' => $group->count(),
-                    'totalSales' => $group->sum('amount') 
-                ];
-            })
-            ->sortByDesc('totalReserved');
+    ->whereBetween('date_on_sale', [$startDate, $endDate])
+    ->get()
+    ->groupBy(function ($item) {
+        return $item->agent->personalInfo->first_name . ' ' .
+            $item->agent->personalInfo->middle_name . ' ' .
+            $item->agent->personalInfo->last_name . ' ' .
+            $item->agent->personalInfo->extension_name . ' ' .
+            $item->agent->user->role;
+    })
+    ->map(function ($group) {
+        return [
+            'first_name' => $group->first()->agent->personalInfo->first_name,
+            'middle_name' => $group->first()->agent->personalInfo->middle_name,
+            'last_name' => $group->first()->agent->personalInfo->last_name,
+            'extension_name' => $group->first()->agent->personalInfo->extension_name,
+            'profile_pic' => $group->first()->agent->personalInfo->profile_pic, // <-- Added line
+            'role' => in_array($group->first()->agent->user->role, [0, 2]) ? 'Broker' : 'Agent',
+            'totalReserved' => $group->count(),
+            'totalSales' => $group->sum('amount') 
+        ];
+    })
+    ->sortByDesc('totalReserved');
 
         $salesEncodingTop5 = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
             ->where('agent_id', $identityDetails->id)
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
-
+            
+         $salesEncodingDashboardYearly = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+        ->whereBetween('date_on_sale', [$startDateYearly, $endDateYearly])
+         ->where('agent_id', $identityDetails->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
         $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
         ->where('agent_id', $identityDetails->id)
         ->orderBy('created_at', 'desc')
@@ -91,6 +99,7 @@ class BrokerController extends Controller
             'property' => $propertyListings,
             'salesEncodingTop5' => $salesEncodingTop5,
             'salesEncodingReport' => $salesEncodingReport,
+            'salesEncodingDashboardYearly' => $salesEncodingDashboardYearly,
         ])->setStatusCode(200);
     }
 

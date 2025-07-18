@@ -29,27 +29,28 @@ class UserController extends Controller
         $identityDetails = IdentityDetailsModel::where('user_id', $user->id)->first();
         
         $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
-        ->whereBetween('date_on_sale', [$startDate, $endDate])
-            ->get()
-            ->groupBy(function ($item) {
-                return $item->agent->personalInfo->first_name . ' ' .
-                    $item->agent->personalInfo->middle_name . ' ' .
-                    $item->agent->personalInfo->last_name . ' ' .
-                    $item->agent->personalInfo->extension_name . ' ' .
-                    $item->agent->user->role;
-            })
-            ->map(function ($group) {
-                return [
-                    'first_name' => $group->first()->agent->personalInfo->first_name,
-                    'middle_name' => $group->first()->agent->personalInfo->middle_name,
-                    'last_name' => $group->first()->agent->personalInfo->last_name,
-                    'extension_name' => $group->first()->agent->personalInfo->extension_name,
-                    'role' => in_array($group->first()->agent->user->role, [0, 2]) ? 'Broker' : 'Agent',
-                    'totalReserved' => $group->count(),
-                    'totalSales' => $group->sum('amount') 
-                ];
-            })
-            ->sortByDesc('totalReserved');
+    ->whereBetween('date_on_sale', [$startDate, $endDate])
+    ->get()
+    ->groupBy(function ($item) {
+        return $item->agent->personalInfo->first_name . ' ' .
+            $item->agent->personalInfo->middle_name . ' ' .
+            $item->agent->personalInfo->last_name . ' ' .
+            $item->agent->personalInfo->extension_name . ' ' .
+            $item->agent->user->role;
+    })
+    ->map(function ($group) {
+        return [
+            'first_name' => $group->first()->agent->personalInfo->first_name,
+            'middle_name' => $group->first()->agent->personalInfo->middle_name,
+            'last_name' => $group->first()->agent->personalInfo->last_name,
+            'extension_name' => $group->first()->agent->personalInfo->extension_name,
+            'profile_pic' => $group->first()->agent->personalInfo->profile_pic, // <-- Added line
+            'role' => in_array($group->first()->agent->user->role, [0, 2]) ? 'Broker' : 'Agent',
+            'totalReserved' => $group->count(),
+            'totalSales' => $group->sum('amount') 
+        ];
+    })
+    ->sortByDesc('totalReserved');
 
         $salesEncodingTop5 = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
             ->whereBetween('date_on_sale', [$startDate, $endDate])

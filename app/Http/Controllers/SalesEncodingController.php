@@ -25,6 +25,9 @@ class SalesEncodingController extends Controller
     $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth()->startOfDay();
     $endDate = Carbon::createFromDate($year, $month, 1)->endOfMonth()->endOfDay();
 
+    $startDateYearly = Carbon::createFromDate($year, 1, 1)->startOfYear()->startOfDay();
+    $endDateYearly = Carbon::createFromDate($year, 12, 31)->endOfYear()->endOfDay();
+
     $agents = IdentityDetailsModel::with('user', 'personalInfo')
         ->whereHas('user', function ($query) {
             $query->where('status', 0)->whereIn('role', [0, 1, 2]);
@@ -34,6 +37,11 @@ class SalesEncodingController extends Controller
 
     $salesEncoding = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
         ->whereBetween('date_on_sale', [$startDate, $endDate])
+        ->orderBy('date_on_sale', 'desc')
+        ->get();
+
+    $salesEncodingDashboardYearly = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+        ->whereBetween('date_on_sale', [$startDateYearly, $endDateYearly])
         ->orderBy('date_on_sale', 'desc')
         ->get();
 
@@ -95,7 +103,8 @@ class SalesEncodingController extends Controller
         'topPerformers' => $topPerformers,
         'selectedMonth' => $month,
         'selectedYear' => $year,
-        'salesEncodingAdmin' => $salesEncodingAdmin
+        'salesEncodingAdmin' => $salesEncodingAdmin,
+        'salesEncodingDashboardYearly' => $salesEncodingDashboardYearly
     ], 200);
 }    /**
      * Show the form for creating a new resource.
