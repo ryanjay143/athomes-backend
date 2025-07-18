@@ -16,13 +16,22 @@ class BrokerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $month = $request->query('month', Carbon::now()->month);
+        $year = $request->query('year', Carbon::now()->year);
+
+        // Calculate start and end of the selected month
+        $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth()->startOfDay();
+        $endDate = Carbon::createFromDate($year, $month, 1)->endOfMonth()->endOfDay();
+
+
         $user = auth()->user();
         $personalInfo = PersonalInfoModel::where('user_id', $user->id)->first();
         $identityDetails = IdentityDetailsModel::where('user_id', $user->id)->first();
         
         $topPerformers = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
+        ->whereBetween('date_on_sale', [$startDate, $endDate])
             ->get()
             ->groupBy(function ($item) {
                 return $item->agent->personalInfo->first_name . ' ' .

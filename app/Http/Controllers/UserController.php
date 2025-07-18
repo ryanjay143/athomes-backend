@@ -14,7 +14,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $month = $request->query('month', Carbon::now()->month);
         $year = $request->query('year', Carbon::now()->year);
