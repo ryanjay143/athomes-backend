@@ -48,8 +48,8 @@ class PropertyListingController extends Controller
             'location'         => 'required|string|max:255',
             'type_of_listing'  => 'required|string|max:255',
             'status'           => 'required|string|max:255',
-            'images'           => 'nullable|array',
-            'images.*'         => 'file|image|max:512000', 
+            'images'   => 'nullable|array',
+            'images.*' => 'file|image|mimes:jpg,jpeg,png|max:512000',
         ]);
 
         // Store the validated data (excluding images)
@@ -122,8 +122,8 @@ class PropertyListingController extends Controller
             'location'         => 'required|string|max:255',
             'type_of_listing'  => 'required|string|max:255',
             'status'           => 'required|string|max:255',
-            'images'           => 'nullable|array',
-            'images.*'         => 'file|image|max:512000',
+            'images'   => 'nullable|array',
+            'images.*' => 'file|image|mimes:jpg,jpeg,png|max:512000',
         ]);
 
         // Find the property listing
