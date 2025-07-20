@@ -94,7 +94,7 @@ class BrokerSalesController extends Controller
                 'client_name' => 'required|string',
                 'remarks' => 'nullable|string',
                 'agent_id' => 'required|exists:identity_details,id',
-                'image' => 'nullable|image|max:5120',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             ]);
 
             // Find the SalesEncoding record or fail

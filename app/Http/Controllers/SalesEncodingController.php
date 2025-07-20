@@ -128,7 +128,7 @@ class SalesEncodingController extends Controller
         'location' => 'required|string|max:255',
         'remarks' => 'required|string',
         'date_on_sale' => 'required|date',
-        'image' => 'required|file|mimes:jpeg,png,jpg,gif|max:5120',
+        'image' => 'required|file|mimes:jpeg,png,jpg|max:5120',
     ]);
 
     // Create a new SalesEncoding instance
@@ -190,7 +190,7 @@ class SalesEncodingController extends Controller
                 'client_name' => 'required|string',
                 'remarks' => 'nullable|string',
                 'agent_id' => 'required|exists:identity_details,id',
-                'image' => 'nullable|image|max:5120',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             ]);
 
             // Find the SalesEncoding record or fail

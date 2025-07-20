@@ -49,7 +49,7 @@ class PropertyListingController extends Controller
             'type_of_listing'  => 'required|string|max:255',
             'status'           => 'required|string|max:255',
             'images'   => 'nullable|array',
-            'images.*' => 'file|image|mimes:jpg,jpeg,png|max:512000',
+            'images.*' => 'file|image|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         // Store the validated data (excluding images)
@@ -123,7 +123,7 @@ class PropertyListingController extends Controller
             'type_of_listing'  => 'required|string|max:255',
             'status'           => 'required|string|max:255',
             'images'   => 'nullable|array',
-            'images.*' => 'file|image|mimes:jpg,jpeg,png|max:512000',
+            'images.*' => 'file|image|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         // Find the property listing
@@ -173,14 +173,19 @@ class PropertyListingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+   public function destroy(string $id)
     {
-        $propertyImage = PropertyImages::findOrFail($id);
-        $propertyImage->delete();
+        // Find the property listing
+        $propertyListing = PropertyListing::findOrFail($id);
+
+        // Delete the associated images
+        $propertyListing->propertyImages()->delete();
+
+        // Delete the property listing itself
+        $propertyListing->delete();
 
         return response()->json([
-            'message' => 'Property listing deleted successfully.',
-            'property' => $propertyImage,
+            'message' => 'Property listing and associated images deleted successfully.',
         ], 200);
     }
 }

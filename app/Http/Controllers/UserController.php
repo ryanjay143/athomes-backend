@@ -50,7 +50,7 @@ class UserController extends Controller
             'totalSales' => $group->sum('amount') 
         ];
     })
-    ->sortByDesc('totalReserved');
+    ->sortByDesc('totalSales');
 
         $salesEncodingTop5 = SalesEncoding::with(['agent.user', 'agent.personalInfo'])
             ->whereBetween('date_on_sale', [$startDate, $endDate])
@@ -199,7 +199,7 @@ class UserController extends Controller
             'type_of_listing'  => 'required|string|max:255',
             'status'           => 'required|string|max:255',
             'images'   => 'nullable|array',
-            'images.*' => 'file|image|mimes:jpg,jpeg,png|max:512000',
+            'images.*' => 'file|image|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         // Store the validated data (excluding images)
