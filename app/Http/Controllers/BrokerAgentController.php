@@ -305,7 +305,7 @@ class BrokerAgentController extends Controller
     public function editType(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'role' => 'required|in:1,2',
+            'role' => 'required|in:0,1,2',
         ]);
 
         // Find the user by ID

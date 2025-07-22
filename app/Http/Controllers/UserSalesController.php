@@ -33,6 +33,7 @@ class UserSalesController extends Controller
         $validatedData = $request->validate([
             'agent_id' => 'required|integer',
             'client_name' => 'required|string|max:255',
+            'block_and_lot' => 'nullable|string|max:255',
             'category' => 'required|string|max:255',
             'amount' => 'required|numeric',
             'location' => 'required|string|max:255',
@@ -46,6 +47,7 @@ class UserSalesController extends Controller
         $salesEncoding->fill([
             'agent_id' => $validatedData['agent_id'],
             'client_name' => $validatedData['client_name'],
+            'block_and_lot' => $validatedData['block_and_lot'],
             'category' => $validatedData['category'],
             'amount' => $validatedData['amount'],
             'location' => $validatedData['location'],
@@ -103,6 +105,7 @@ class UserSalesController extends Controller
                 'location' => 'required|string',
                 'date_on_sale' => 'required|date',
                 'client_name' => 'required|string',
+                'block_and_lot' => 'nullable|string|max:255',
                 'remarks' => 'nullable|string',
                 'agent_id' => 'required|exists:identity_details,id',
                 'image' => 'nullable|image|max:5120',

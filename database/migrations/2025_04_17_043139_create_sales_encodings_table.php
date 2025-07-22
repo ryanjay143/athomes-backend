@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('agent_id')->constrained('identity_details');
             $table->string('category');
             $table->string('client_name');
+            $table->string('block_and_lot')->nullable();
             $table->date('date_on_sale');
             $table->decimal('amount', 10, 2);
             $table->string('location');

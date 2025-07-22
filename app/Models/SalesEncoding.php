@@ -18,6 +18,7 @@ class SalesEncoding extends Model
         'date_on_sale',
         'remarks',
         'image',
+        'block_and_lot'
     ];
 
     
