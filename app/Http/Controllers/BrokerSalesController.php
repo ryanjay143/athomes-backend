@@ -33,48 +33,48 @@ class BrokerSalesController extends Controller
      * Store a newly created resource in storage.
      */
      public function store(Request $request)
-    {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'agent_id' => 'required|integer',
-            'client_name' => 'required|string|max:255',
-            'block_and_lot' => 'nullable|string|max:255',
-            'category' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'location' => 'required|string|max:255',
-            'remarks' => 'required|string',
-            'date_on_sale' => 'required|date',
-            'image' => 'required|file|mimes:jpeg,png,jpg,gif|max:5120',
-        ]);
+{
+    // Validate the request data
+    $validatedData = $request->validate([
+        'agent_id' => 'required|integer',
+        'client_name' => 'required|string|max:255',
+        'block_and_lot' => 'nullable|string|max:255',
+        'category' => 'required|string|max:255',
+        'amount' => 'required|numeric',
+        'location' => 'required|string|max:255',
+        'remarks' => 'required|string',
+        'date_on_sale' => 'required|date',
+        'image' => 'required|file|mimes:jpeg,png,jpg,gif|max:5120',
+    ]);
 
-        // Create a new SalesEncoding instance
-        $salesEncoding = new SalesEncoding();
-        $salesEncoding->fill([
-            'agent_id' => $validatedData['agent_id'],
-            'client_name' => $validatedData['client_name'],
-            'block_and_lot' => $validatedData['block_and_lot'],
-            'category' => $validatedData['category'],
-            'amount' => $validatedData['amount'],
-            'location' => $validatedData['location'],
-            'date_on_sale' => $validatedData['date_on_sale'],
-            'remarks' => $validatedData['remarks'],
-        ]);
+    // Create a new SalesEncoding instance
+    $salesEncoding = new SalesEncoding();
+    $salesEncoding->fill([
+        'agent_id' => $validatedData['agent_id'],
+        'client_name' => $validatedData['client_name'],
+        'block_and_lot' => $validatedData['block_and_lot'] ?? null,
+        'category' => $validatedData['category'],
+        'amount' => $validatedData['amount'],
+        'location' => $validatedData['location'],
+        'date_on_sale' => $validatedData['date_on_sale'],
+        'remarks' => $validatedData['remarks'],
+    ]);
 
-        // Handle the image upload
-        $image = $request->file('image');
-        $imageName = time() . '_' . $image->getClientOriginalName();
-        $image->move(public_path('images'), $imageName);
-        $salesEncoding->image = 'images/' . $imageName;
+    // Handle the image upload
+    $image = $request->file('image');
+    $imageName = time() . '_' . $image->getClientOriginalName();
+    $image->move(public_path('images'), $imageName);
+    $salesEncoding->image = 'images/' . $imageName;
 
-        // Save the SalesEncoding record
-        $salesEncoding->save();
+    // Save the SalesEncoding record
+    $salesEncoding->save();
 
-        // Return a JSON response
-        return response()->json(
-            ['message' => 'Sales encoding created successfully', 'data' => $salesEncoding],
-            201
-        );
-    }
+    // Return a JSON response
+    return response()->json(
+        ['message' => 'Sales encoding created successfully', 'data' => $salesEncoding],
+        201
+    );
+}
 
     /**
      * Display the specified resource.
